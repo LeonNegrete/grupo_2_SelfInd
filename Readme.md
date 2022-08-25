@@ -11,5 +11,5 @@ Somos un equipo conformado por 4 humanos localizados en distintos paises de lati
 
 ## Sitios de inspiracion
 
-* [flashcookie.com](Flashcookie)
-* [url](tituloDePagina)
+* [FlashCookie](flashcookie.com)
+* [TituloDePagina](url)
