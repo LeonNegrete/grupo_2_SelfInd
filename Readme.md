@@ -8,3 +8,8 @@ Destinado a resolver la sensacion dada por la falta del estilo propio, **empoder
 
 ## Sobre nosotros
 Somos un equipo conformado por 4 humanos localizados en distintos paises de latinoamerica, estudiantes y trabajadores con la ambicion de un desarrollo individual a travez de la cooperacion colectiva, mediante los recursos de la virtualidad compartiendo conocimientos *y fundamentalmente unidos por el codigo*  
+
+## Sitios de inspiracion
+
+* [flashcookie.com](Flashcookie)
+* [url](tituloDePagina)
