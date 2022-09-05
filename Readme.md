@@ -12,8 +12,11 @@ Somos un equipo conformado por 4 humanos localizados en distintos paises de lati
 ## Sitios de inspiracion
 
 * [FlashCookie](https://flashcookie.com)
+
 Se trata de la primera plataforma de merchandising de artistas independientes de Argentina. Dicho negocio se encarga de la producción y logística de las prendas, su plataforma le permite al artista subir un diseño, acomodarlo virtualmente en la prenda y una vez confirmado ellos se encargan de el estampado y el envio.
 * [Nike](https://nike.com) 
+
 La reconocida marca nike exime presentacion, fue particularmente una fuente de inspiracion dado que recientemente en su pagina de USA empezaron a ofrecer la posibilidad a los usuarios de personalizar zapatillas eligiendo diseños y colores en una interesante interfaz 3D.
 * [Enlighted](https://www.enlighted.com.ar/)
+
 Enlighted nos presenta un diseño web audaz y distinto, no apuntamos a un diseño parecido dado que no ofrece la interfaz mas user friendly de todas, pero de igual manera lo vemos como un elemento de inspiracion en el marco creativo del diseño de SelfInd
