@@ -1,0 +1,163 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+
+/* /////////////HEADER/////////////// */
+
+header{
+    background-color: #ffffff;
+    border-bottom:solid black 2px;
+    height: 10vh;
+    max-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top:0;
+    z-index: 2;
+}
+
+.logo-div{
+    position: absolute;
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#logo{
+    height: 70%;
+}
+
+.cart-div{
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#cart{
+    margin-right: 7%;
+}
+
+.burguer-div{
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+#burguer{
+    font-weight: bolder;
+    margin-left: 7%;
+}
+
+
+
+/* //////////////////main////////////////////// */
+    /* Carrousel */
+
+main{
+    z-index: 1;
+}
+
+.carrousel-padre{
+    background-color: #533483;
+        background-color: #ffffff;
+    height: 90vh;
+    width: 100vw;
+    object-fit:cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+
+}
+.imagenes{
+    height: 90vh;
+    text-align: center;
+    color:white;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+.imagenes .text-image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#img-1{
+    height: 100%;
+    margin-right: 20px;
+
+}
+#img-vacia{
+    display: none;
+}
+
+.puntos-padre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.puntos{
+    width: 100vw;
+    display: flex;
+    padding-left: 0px;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+}
+.punto{
+    margin:5px;
+    padding: 0px;
+}
+
+    /* Catalogo */
+
+
+
+.productos h4{
+    align-self: flex-start;
+    font-family:Helvetica;               /*  Titulares de categorias */
+    margin-left: 3vw;
+    margin-top: 3vw;
+}
+.productos{
+    background-color: #E94560;
+        background-color: white;       /* Contenedor de categorias */   
+    height: 500vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nuevo,.vendidos{
+    background-color: #0F3460 ;        /* Categorias  */
+        background-color: white;
+    width: 93vw;
+    height: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.articulo{
+width: 50vh;
+height: 50vh;
+background-color: #ffffff;         /* Articulos */
+margin: 4vw;
+box-shadow: inset;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+object-fit: cover;
+}
+.img-articulo{
+    width: 100%;                         /* imagen de producto */
+}
+
