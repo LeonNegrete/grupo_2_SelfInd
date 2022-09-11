@@ -23,4 +23,6 @@ Enlighted nos presenta un diseño web audaz y distinto, no apuntamos a un diseñ
 * [Better With Age](https://betterwithage.co/)
 
 Durante el desarrollo del html y css, buscamos mas paginas para orientar mejor el diseño, better with age tenia un layout igualito al maquetado que estamos desarrollando, de manera que nos da una buena pauta de que vamos por unos de los tantos caminos correctos.
+* [Unfinished Legacy](https://unfinishedlegacy.co/)
 
+Al igual que better with age, Unfinished Legacy nos demuestra el clasico layout con un nav bar donde el logo se encuentra centrado y encontramos el carrito en el extremo derecho y el burguer menu en el izquierdo. Debajo de este encontramos un carrousel y debajo del mismo el catalogo.
