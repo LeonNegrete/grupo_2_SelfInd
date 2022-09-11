@@ -2,19 +2,25 @@
 ## *Temario*
 
 1. Balance del ultimo sprint.
+
     1. Comenzar a hacer.       
         - Trabajar de forma estandarizada.
         - Reservar Trello para la division y declaracion del estado de las tareas
+
     2. Hacer más.              
         - Contribuir al GitHub, hablar en el grupo 
+
     3. Continuar haciendo.     
         - Reuniones semanales
+
     4. Hacer menos.            
         - Usar Trello en lugar de github 
+        
     5. Dejar de hacer. 
         - Trabajos que rompen con la linea del proyecto, 
         - Tomar responsabilidades que no se van a cumplir   
-    - #### Concluir en el RETRO.MD como playground lo pide.        
+
+    - ###### Concluir en el RETRO.MD como playground lo pide.        
 
 2. Evaluacion del proceso del /home
 
