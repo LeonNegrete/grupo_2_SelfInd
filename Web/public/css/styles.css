@@ -145,6 +145,10 @@ main{
     flex-wrap: wrap;
 }
 
+.productos h5{
+    margin:2px
+}
+
 .articulo{
 width: 50vh;
 height: 50vh;
