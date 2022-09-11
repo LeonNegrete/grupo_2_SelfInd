@@ -20,3 +20,7 @@ La reconocida marca nike exime presentacion, fue particularmente una fuente de i
 * [Enlighted](https://www.enlighted.com.ar/)
 
 Enlighted nos presenta un diseño web audaz y distinto, no apuntamos a un diseño parecido dado que no ofrece la interfaz mas user friendly de todas, pero de igual manera lo vemos como un elemento de inspiracion en el marco creativo del diseño de SelfInd
+*[Better With Age](https://betterwithage.co/)
+
+Durante el desarrollo del html y css, buscamos mas paginas para orientar mejor el diseño, better with age tenia un layout igualito al maquetado que estamos desarrollando, de manera que nos da una buena pauta de que vamos por unos de los tantos caminos correctos.
+
