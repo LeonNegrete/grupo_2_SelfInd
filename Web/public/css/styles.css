@@ -5,6 +5,11 @@
 
 }
 
+.header-nav-credentials,.header-nav-text{
+    display: none;
+}
+
+
 /* /////////////HEADER/////////////// */
 body{
     overflow: visible;
@@ -41,6 +46,9 @@ header{
     justify-content: flex-end;
     align-items: center;
 }
+.material-symbols-outlined{
+    margin-right:7% ;
+}
 #cart{
     margin-right: 7%;
 }
@@ -68,9 +76,9 @@ main{
 
 .carrousel-padre{
     background-color: #533483;
-        background-color: #ffffff;
-    height: 90vh;
+    background-color: #ffffff;
     width: 100vw;
+    height: 100vh;
     object-fit:cover;
     display: flex;
     flex-direction: column;
@@ -80,7 +88,8 @@ main{
 
 }
 .imagenes{
-    height: 90vh;
+    width: 100%;
+    height: 100%;
     text-align: center;
     color:white;
     position: relative;
@@ -93,7 +102,7 @@ main{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#img-1{
+.imagenes img{
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -132,20 +141,24 @@ main{
     margin-top: 3vw;
 }
 .productos{
-    background-color: #E94560;
-        background-color: white;       /* Contenedor de categorias */   
-    height: 500vh;
+    /* lo unico que hace es centrar el section .nuevo  ,vendidos en columna */
+    background-color: white;       /* Contenedor de categorias */   
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    justify-content: center;
 }
 .nuevo,.vendidos{
-    background-color: #0F3460 ;        /* Categorias  */
-        background-color: white;
-    width: 93vw;
-    height: 50%;
+       /* Categorias  */
+    background-color: white;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+}
+h4{
+    width: 100%;
 }
 
 .productos h5{
@@ -187,7 +200,92 @@ object-fit: cover;
 } */
 
 
-@media screen {
+@media(min-width: 361px){
+    .articulo{
+        width: 41%;
+        height: auto;
+    }
+    .productos h4{
+        align-self: center;
+        text-align: center;
+        margin: 0px;
+    }
+    
+    .nuevo,.vendidos{
+        align-content: center;
+        margin-top: 3%;
+    }
+
+
+
+
+/*     .carrousel-padre{
+        width: 100vw;
+    }
+    .imagenes{
+        width:100%;
+    }
+    .imagenes img{
+        width: 100%;
+    } */
     
 }
 
+@media(min-width: 769px){
+    ul, a{
+        text-decoration: none;
+        font-style: normal;
+        color: black;
+        font-family:'Roboto', sans-serif;   
+
+
+    }
+
+    .logo-div{
+    justify-content: flex-start;
+    margin-left:5% ;
+    }
+
+
+
+
+
+
+    .articulo{
+        width: 16%;
+        height: auto;
+    }
+    header{
+        position: static;
+    }
+    .header-nav-text{
+        display: block;
+        width: 90%;
+    }
+    .header-nav-text ul{
+        margin-left: 10%;
+        display: flex;
+        list-style: none;
+        justify-content: space-around;
+    }
+    .header-nav-credentials{
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .cart-div{
+        width: fit-content;
+        margin: 0px 3%;
+    }
+    .credenciales{
+        display: flex;
+        list-style: none;
+        justify-content: space-between;
+        width: 25%;
+    }
+
+    .burguer-div{
+        display: none;
+    }
+
+}
