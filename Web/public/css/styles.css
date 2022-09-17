@@ -95,7 +95,8 @@ main{
 }
 #img-1{
     height: 100%;
-    margin-right: 20px;
+    width: 100%;
+    object-fit: cover;
 
 }
 #img-vacia{
