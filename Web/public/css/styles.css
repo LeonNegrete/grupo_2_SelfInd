@@ -279,6 +279,10 @@ footer a{
 
     }
 
+    .carousel-item img{
+        object-position: 0px 5%;
+    }
+
     .logo-div {
         justify-content: flex-start;
         margin-left: 5%;
