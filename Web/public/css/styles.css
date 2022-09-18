@@ -82,6 +82,11 @@ main {
     z-index: 1;
 }
 
+.carousel-item img{
+    height: 90vh;
+    object-fit:cover;
+}
+
 .carrousel-padre {
     background-color: #533483;
     background-color: #ffffff;
@@ -280,10 +285,6 @@ footer a{
     }
 
 
-
-
-
-
     .articulo {
         width: 16%;
         height: auto;
@@ -303,14 +304,16 @@ footer a{
         display: flex;
         list-style: none;
         justify-content: space-around;
+        margin-bottom:0px ; /* debido a bootstrap */
     }
 
     .header-nav-credentials {
         display: flex;
+        height: 100%;
         width: 100%;
         justify-content: flex-end;
+        align-items: center;
     }
-
     .cart-div {
         width: fit-content;
         margin: 0px 3%;
@@ -321,6 +324,7 @@ footer a{
         list-style: none;
         justify-content: space-between;
         width: 25%;
+        margin:0px; /* debido a bootstrap */
     }
 
     .burguer-div {
