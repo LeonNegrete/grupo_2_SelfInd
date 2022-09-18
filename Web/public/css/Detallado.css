@@ -1,0 +1,31 @@
+:root {
+    --main-emphasis: #731963;
+    --main-emphasis-filter: invert(13%) sepia(29%) saturate(7453%) hue-rotate(294deg) brightness(96%) contrast(92%);
+    /* equivalencia para pngs obtenida a travez de https://codepen.io/sosuke/pen/Pjoqqp */
+
+}
+::selection {
+    color: white;
+    background: var(--main-emphasis);
+  }
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+
+body {
+    overflow: visible;
+    font-family: 'Roboto', sans-serif;
+}
+
+a{
+    /* reiniciando etiqueta a (bootstrap) */
+    color: black;
+    text-decoration: none;
+}
+
+
+
