@@ -22,7 +22,7 @@ header {
     background-color: #ffffff;
     border-bottom: solid black 2px;
     height: 10vh;
-    max-width: 100vw;
+    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,8 +185,8 @@ h4 {
 }
 
 .articulo {
-    width: 50vh;
-    height: 50vh;
+    width: 50%;
+    height: 50%;
     background-color: #ffffff;
     /* Articulos */
     margin: 4vw;
@@ -203,12 +203,31 @@ h4 {
     /* imagen de producto */
 }
 
+.titulo{
+    text-align: center;
+}
+
 .productos h5 {
     margin: 2px;
     font-family: 'Roboto', sans-serif;
 }
 
+.make-btn{
+    color: #ffffff !important;
+    background-color:#533483 !important;
+    border: solid 1px #533483 !important;
+}
+.make-btn:hover{
+    color:#533483 !important;
+    border: solid 1px #533483 !important;
+    background-color: #ffffff !important;
+}
+
+
 /* /////////////FOOTER/////////////// */
+footer{
+    margin-top: 4vw
+}
 .bloque{
     display: flex;
     flex-direction: row;
@@ -220,14 +239,26 @@ h4 {
     background-color: black;
     color: #ffffff;
 }
+p{
+margin-bottom: 0px;
+
+}
+.redes, .copyright{
+    font-size: 3vw;
+}  
+
 .redes{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 15%;
+    justify-content: flex-end;
+    width: 50%;
+    align-items: center;
 }
 footer a{
     color: #ffffff;
+}
+.elemento-redes{
+    margin-left:3%
 }
 
 
@@ -250,21 +281,9 @@ footer a{
         align-content: center;
         margin-top: 3%;
     }
-
-
-
-
-    /*     .carrousel-padre{
-        width: 100vw;
+    .redes, .copyright{
+        font-size: 14px;
     }
-    .imagenes{
-        width:100%;
-    }
-    .imagenes img{
-        width: 100%;
-    } */
-
-
 }
 
 @media(min-width: 769px) {
