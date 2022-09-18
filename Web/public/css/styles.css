@@ -21,6 +21,12 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+a{
+    /* reiniciando etiqueta a (bootstrap) */
+    color: black;
+    text-decoration: none;
+}
+
 /* /////////////HEADER/////////////// */
 header {
     background-color: #ffffff;
@@ -80,8 +86,6 @@ header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color: black;
-    text-decoration: none;
 }
 
 .material-symbols-outlined {
@@ -143,8 +147,7 @@ main {
 }
 
 .articulo {
-    width: 50%;
-    height: 50%;
+    width: 75%;
     background-color: #ffffff;
     /* Articulos */
     margin: 4vw;
@@ -154,6 +157,11 @@ main {
     align-items: center;
     justify-content: center;
     object-fit: cover;
+}
+.articulo .articulo{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
 }
 
 .img-articulo {
