@@ -20,7 +20,7 @@ body {
 
 header {
     background-color: #ffffff;
-    border-bottom: solid black 2px;
+    border-bottom: solid black 0.5px;
     height: 10vh;
     max-width: 100%;
     display: flex;
@@ -28,7 +28,7 @@ header {
     align-items: center;
     position: sticky;
     top: 0px;
-    z-index: 2;
+    z-index: 99;
 }
 
 .burguer-div {
@@ -46,9 +46,7 @@ header {
 
 
 .logo-div {
-    position: absolute;
-    height: 10vh;
-    width: 100vw;
+    height: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,7 +228,7 @@ footer{
 }
 .bloque{
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     justify-content: space-between;
     padding: 2vw;
     align-items: center;
@@ -250,8 +248,8 @@ margin-bottom: 0px;
 .redes{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    width: 50%;
+    justify-content: space-around;
+    width: 25%;
     align-items: center;
 }
 footer a{
@@ -282,11 +280,21 @@ footer a{
         margin-top: 3%;
     }
     .redes, .copyright{
-        font-size: 14px;
+        font-size: 2.5vw;
     }
 }
 
 @media(min-width: 769px) {
+    .bloque{
+        flex-direction: row;
+    }
+
+    .redes{
+        font-size: 2vw;
+    }
+    .copyright{
+        font-size: 1.5vw;
+    }
 
     ul,
     a {
@@ -294,6 +302,7 @@ footer a{
         font-style: normal;
         color: black;
         font-family: 'Roboto', sans-serif;
+        width: 100%;
 
 
     }
@@ -303,8 +312,7 @@ footer a{
     }
 
     .logo-div {
-        justify-content: flex-start;
-        margin-left: 5%;
+        margin-left: 3%;
     }
 
 
@@ -317,26 +325,26 @@ footer a{
         position: static;
     }
 
-    .header-nav-text {
-        display: block;
-        width: 90%;
-    }
 
     .header-nav-text ul {
-        margin-left: 10%;
         display: flex;
         list-style: none;
-        justify-content: space-around;
         margin-bottom:0px ; /* debido a bootstrap */
+        width: 100%;
     }
 
     .header-nav-credentials {
         display: flex;
         height: 100%;
-        width: 100%;
+        width: 70%;
         justify-content: flex-end;
         align-items: center;
     }
+
+    .nav-text-element{
+        margin: 0px 3%;
+    }
+
     .cart-div {
         width: fit-content;
         margin: 0px 3%;
@@ -345,13 +353,23 @@ footer a{
     .credenciales {
         display: flex;
         list-style: none;
-        justify-content: space-between;
-        width: 25%;
+        justify-content: flex-end;
+        width: 100%;
         margin:0px; /* debido a bootstrap */
     }
 
     .burguer-div {
         display: none;
     }
+
+    .header-nav-text {
+        display: block;
+        width: 100%;
+    }
+
+    .nav-text{
+        width: 100%;
+    }
+
 
 }
