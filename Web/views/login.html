@@ -18,8 +18,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- Hoja de estilos local -->
-    <link rel="stylesheet" href="../css/carrito-style.css">
-
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/login.css">
     <title>SelfInd</title>
 </head>
 
@@ -29,56 +29,49 @@
             <span id="burguer">☰</span>
         </div>
         <div class="logo-div">
-            <img id="logo" src="../images/logo.png">
+            <a class="logo-div" href="/home"><img id="logo" src="../images/logo.png"></a>
         </div>
         <div class="header-nav-text">
-            <ul class="nav-text">
+            <ul>
                 <li class="nav-text-element"><a href="">Home</a></li>
                 <li class="nav-text-element"><a href="">About</a></li>
                 <li class="nav-text-element"><a href="">Contact</a></li>
-                <li class="nav-text-element"><a href="">Make your own!</a></li>
+                <li class="nav-text-element"><a href="/design">Make your own!</a></li>
             </ul>
         </div>
         <div class="header-nav-credentials">
-            <ul class="credenciales">
+            <ul>
                 <li class="nav-text-element"><a href="">Log in</a></li>
                 <li class="nav-text-element"><a href="">Sing in</a></li>
             </ul>
         </div>
         <div class="cart-div">
-            <span class="material-symbols-outlined">
-                shopping_cart
-            </span>
-        </div>
+            <a href="/cart" class="cart-div">
+                <span class="material-symbols-outlined">
+                    shopping_cart
+                </span>
+            </a>
+            <div>
     </header>
 
-    <main id="carrito">
-        <section class="carrito">
-            <div class="header-car">
-                <h3 class="titulo-car">Shopping Cart</h3>
-                <h5 class="remove-all">Remove all</h5>
-            </div>
+    <main>
+        <div class="card">
+            <form action="POST">
+                <h1 class="elemento-form">Iniciar Sesion</h1>
 
-            <div class="car-articles">
-                <div class="preview-article">
-                    <img id="img-preview" src="../images/Remeras/argentina-rem2.webp" />
+                <div class="div-email">
+                    <label id="label-email" class="label" for="email">E-mail</label>
+                    <input id="email" name="id" class="elemento-form" type="email" required>
                 </div>
-                <div class="description">
-                    <h1 class="articulo-name">Camisa X</h1>
-                    <h3 class="talla">Talla X</h3>
-                </div>
-                <div class="cantidad">
-                    <div class="contador">
-                        <div class="buttom-mas-menos">+</div>
-                        <div class="cuenta">X</div>
-                        <div class="buttom-mas-menos">-</div>
-                    </div>
-                </div>
-                <div class="precios"></div>
-            </div>
 
-        </section>
-
+                <div class="div-contrasena">
+                    <label for="contraseña" class="label">Contraseña</label>
+                    <input id="contraseña" name="contraseña " class="elemento-form" type="text" required>
+                </div>
+                <button class="elemento-form">Ingresar</button>
+                <a class="elemento-form" href="#">¿Olvidaste tu contraseña?</a>
+            </form>
+        </div>
     </main>
 
     <footer>
@@ -97,6 +90,9 @@
     </footer>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -21,3 +21,19 @@ app.get('/detalle', (req, res)=>{
 app.get('/design', (req, res)=>{
     res.sendFile(path.join(__dirname, '/views/design.html'))
 })
+
+app.get('/cart', (req, res)=>{
+    res.sendFile(path.join(__dirname, '/views/shop-car.html'))
+})
+
+app.get('/login', (req, res)=>{
+    res.sendFile(path.join(__dirname, '/views/login.html'))
+})
+
+app.get('/register', (req, res)=>{
+    res.sendFile(path.join(__dirname, '/views/register.html'))
+})
+
+app.get('/prueba', (req, res)=>{
+    res.sendFile(path.join(__dirname, '/prueba.html'))
+})
