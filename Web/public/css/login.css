@@ -1,0 +1,190 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+:root {
+    --main-emphasis: #731963;
+    --main-emphasis-filter: invert(13%) sepia(29%) saturate(7453%) hue-rotate(294deg) brightness(96%) contrast(92%);
+    /* equivalencia para pngs obtenida a travez de https://codepen.io/sosuke/pen/Pjoqqp */
+
+}
+
+
+
+header{
+    width: 100vw;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    height: 100vh;
+    width: 100vw;
+    border:solid 1px #731963;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    height: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px
+}
+form input{
+    position: relative;
+    outline: none;
+   height: 2.5rem;
+   width: 20%;
+   transition: all 0.5s; 
+   padding: 1.5rem;   
+}
+form input:focus{
+    border: solid 0.125rem #731963;
+    border-radius: 12px;
+}
+form input:invalid{
+    border: solid 0.125rem red
+}
+
+button{
+    width: 65%;
+    padding: 0.7rem;  
+    border-radius: 15px;
+    background-color: #731963;
+    color: white;
+    border: none;
+}
+
+.elemento-form{
+    margin: 8px;
+}
+
+
+
+.div-email, .div-contrasena{
+    position: relative;
+}
+
+#contraseña, #email{
+    width: 100%;
+    
+}
+
+.label{
+    position: absolute;
+    z-index: 2;
+    top: 9%;
+    left: 7%;
+    transform: translateY(1rem);
+    pointer-events: none;
+    transition: 500ms ease;
+}
+
+.div-contrasena:hover > label, 
+.div-email:hover > .label
+{
+    transform: translateY(-30%) scale(0.8);
+    background-color: white;
+    padding: 1%;
+}
+
+
+
+
+
+@media(min-width: 361px){
+
+}
+
+@media(min-width: 769px){
+    main{
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card{
+        height: 70%;
+        width: 30%;
+        border:solid 1px #731963;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    form{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 5px
+    }
+    form input{
+        position: relative;
+        outline: none;
+       height: 2.5rem;
+       width: 20%;
+       transition: all 0.5s; 
+       padding: 1.5rem;   
+    }
+    form input:focus{
+        border: solid 0.125rem #731963;
+        border-radius: 12px;
+    }
+    
+    
+    button{
+        width: 65%;
+        padding: 0.7rem;  
+        border-radius: 15px;
+        background-color: #731963;
+        color: white;
+        border: none;
+    }
+    
+    .elemento-form{
+        margin: 8px;
+    }
+    
+    
+    
+    .div-email, .div-contrasena{
+        position: relative;
+    }
+    
+    #contraseña, #email{
+        width: 100%;
+        
+    }
+    
+    .label{
+        position: absolute;
+        z-index: 2;
+        top: 9%;
+        left: 7%;
+        transform: translateY(1rem);
+        pointer-events: none;
+        transition: 500ms ease;
+    }
+    
+    .div-contrasena:hover > label, 
+    .div-email:hover > .label
+    {
+        transform: translateY(-30%) scale(0.8);
+        background-color: white;
+        padding: 1%;
+    }
+    
+}
