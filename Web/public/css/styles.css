@@ -191,6 +191,10 @@ main {
     border: solid 1px var(--main-emphasis) !important;
 }
 
+.make-btn a{
+    color:#ffffff
+}
+
 .make-btn:hover {
     color: var(--main-emphasis) !important;
     border: solid 1px var(--main-emphasis) !important;

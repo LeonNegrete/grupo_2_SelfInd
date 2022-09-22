@@ -1,0 +1,48 @@
+main{
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+main h1{
+  margin-top: 5%;
+}
+main input{
+  margin-top: 5%;
+}
+
+main .remera-div{
+  margin-top: 10%;
+  height: 50%;
+  position: relative;
+  z-index: 2;
+}
+main .remera-div img{
+  height: 100%;
+  filter: drop-shadow(10px 5px 50px black);
+  z-index: 2;
+
+}
+
+.mover-diseno-div{
+  height: 40%;
+  width: 50%;
+  position: absolute;
+  top: 15%;
+  right: 0%;
+  left: 25%;
+  bottom: 0%;
+  mix-blend-mode:multiply;
+  opacity: 90%;
+}
+.diseno-div{
+  
+  height: 100%;
+  width:  100%;
+  background-position:center;
+  background-size:100% ;
+  background-repeat: no-repeat;
+  z-index: 3;
+}
