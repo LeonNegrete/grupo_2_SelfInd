@@ -9,12 +9,13 @@ main#carrito {
     align-items: center;
 }
 
-.carrito {
+.carrito{
     width: 80%;
     height: 80%;
     background-color: #ffffff;
     border-radius: 20px;
-    box-shadow: 0px 25px 70px #731963;
+    border: solid 2px black;
+    box-shadow: 5px 8px #731963;
     margin: 10px;
 }
 
@@ -23,11 +24,12 @@ main#carrito {
     height: 100%;
     background-color: #ffffff;
     border-radius: 20px;
-    box-shadow: 0px 25px 70px #731963;
+    border: solid 2px black;
+    box-shadow: 5px 8px #731963;
     margin: 10px;
 }
 
-.header-car {
+.header-boxes {/*Header de las boxes en la pagina carrito*/
     margin: auto;
     width: 90%;
     height: 60px;
@@ -35,14 +37,13 @@ main#carrito {
     justify-content: space-between;
     align-items: center;
 }
-
-.titulo-car {
+.titulos-boxes {/*Formato de titulos para boxes*/
     font-size: 20px;
     font-weight: 700;
     color: #2F3841;
 }
 
-.remove-all {
+.remove-all {/*Boton remover todo*/
     font-size: 10px;
     font-weight: bold;
     color: #E44C4C;
@@ -52,7 +53,8 @@ main#carrito {
     padding: 5px;
 }
 
-.car-articles {
+/*ARTICULO DEL CARRITO*/
+.box-car-articles {/*Disposición de cada articulo*/
     margin: auto;
     width: 90%;
     height: 30%;
@@ -62,8 +64,7 @@ main#carrito {
     align-items: center;
 }
 
-/*ARTICULO DEL CARRITO*/
-article#car-article{
+article#car-article{/*Disposición de secciones de 1 articulo*/
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -73,55 +74,116 @@ article#car-article{
     height: 160px;
 }
 
-.header-article{
+.header-article{ /*Sección header para nombre del articulo del carrito*/
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     height: 20px;
     margin-bottom: 5px;
     background-color: #ffffff;
-    
+    border-top: solid 2px #731963;
+}
+.title-prod{/*Nombre del articulo*/
+    color: #731963;
+    font-weight: bold;
+    font-size: 15px;
+}
+.btn-del-article{
+    color:  #731963;
 }
 
-.preview-article{
+.preview-article{/*Sección preview del preview*/
     width: 100%;
     height: 75px;
     display: flex;
     justify-content: center;
 }
-
-.img-article {
+.img-article {/*Formato del preview (imagen)*/
     width: 75px;
     height: 100%;
 }
 
-.detail-article{
+.detail-article{/*Disposición de 1 sección del articulo*/
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     width: 22%;
     margin-bottom: 5px;
 }
-
-.title-prod{
-    color: #731963;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.title-detail{
+.title-detail{ /*Titulo sección del articulo*/
     font-size: 12px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
-
-.data-detail{
+.data-detail{/*Datos de la sección del articulo*/
     font-size: 10px;
 }
-
-div.cuantity-article select{
+div.cuantity-article select{/*Formato menu desplegable (sección del articulo)*/
     width: 35px;
 }
 
+/*PAGO FINAL*/
 
-@media(min-width: 473px) {
+.box-buy-sections{/*Disposición de cada sección para el pago*/
+    margin: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+article#buy-section{/*Disposición de secciones del pago*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.fa-tag{
+    color: #731963;
+}
+.buy-title{
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.buy-detail{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.payment{
+    border-top: solid 2px #731963;
+    padding-top: 5px;
+}
+.payment-buton{
+    border-radius: 20px;
+    background-color: #731963;
+    border: transparent;
+    color: white;
+    width: 40%;
+    height: 20px;
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+.code-input{
+    border-radius: 20px;
+    border: solid 1px #731963;
+    width: 90%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+@media(min-width: 460px) {
     main#carrito{
         flex-direction: row;
     }
