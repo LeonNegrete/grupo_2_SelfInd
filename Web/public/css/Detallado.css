@@ -32,10 +32,14 @@ main{
     flex-direction: column;
     align-items: center;
 }
+.carousel-boot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #carouselExampleIndicators{
     height: 100% ;
-    margin-left: 10%;
 }
 
 .carousel-item img {
@@ -44,7 +48,7 @@ main{
 }
 
 .detalle-producto{
-    margin: 10%;
+   margin:10%;
 }
 .precio-producto{
     font-weight: bold;
@@ -69,12 +73,20 @@ main{
     border: none;
 }
 
+
 @media(min-width: 361px){
 
 }
 
 @media(min-width: 769px){
-
+    .carousel-boot{
+        width: 50%;
+    }
+    .detalle-producto{
+        width: 50%;
+        margin: 0%;
+        padding-right: 5%;
+     }
     main{
         flex-direction: row;
     }
