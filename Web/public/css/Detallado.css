@@ -15,17 +15,79 @@
     box-sizing: border-box;
 
 }
-
-body {
-    overflow: visible;
-    font-family: 'Roboto', sans-serif;
-}
-
 a{
     /* reiniciando etiqueta a (bootstrap) */
     color: black;
     text-decoration: none;
 }
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    font-family: 'Roboto', sans-serif;
+}
 
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+#carouselExampleIndicators{
+    height: 100% ;
+    margin-left: 10%;
+}
+
+.carousel-item img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.detalle-producto{
+    margin: 10%;
+}
+.precio-producto{
+    font-weight: bold;
+    color: black;
+    margin-bottom: 5%;
+}
+.descripcion-producto{
+    margin-bottom: 5%;
+}
+.envios-div{
+    margin-bottom: 2%;
+    margin-left: 5%;
+}
+.envios-talle{
+    display: flex;
+}
+.botones button{
+    padding: 0.7rem;  
+    border-radius: 15px;
+    background-color: #731963;
+    color: white;
+    border: none;
+}
+
+@media(min-width: 361px){
+
+}
+
+@media(min-width: 769px){
+
+    main{
+        flex-direction: row;
+    }
+
+    .carousel{
+        height: 70%;
+        margin: 10%;
+    }
+    
+    .carousel-item img {
+        height: 70%;
+        object-fit: cover;
+    }
+
+}
 
