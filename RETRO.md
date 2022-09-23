@@ -56,5 +56,4 @@
     - Formulario de login con error (login.html) [Mariano Lema Garrone](Link de su git)
 
 5. Cagar al Trello las tareas pendientes de este sprint.
-    - 
 

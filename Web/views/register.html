@@ -20,7 +20,7 @@
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- Hoja de estilos local -->
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/login-register.css">
     <title>SelfInd</title>
 </head>
 
@@ -34,7 +34,7 @@
         </div>
         <div class="header-nav-text">
             <ul>
-                <li class="nav-text-element"><a href="">Home</a></li>
+                <li class="nav-text-element"><a href="/home">Home</a></li>
                 <li class="nav-text-element"><a href="">About</a></li>
                 <li class="nav-text-element"><a href="">Contact</a></li>
                 <li class="nav-text-element"><a href="/design">Make your own!</a></li>
@@ -42,12 +42,12 @@
         </div>
         <div class="header-nav-credentials">
             <ul>
-                <li class="nav-text-element"><a href="">Log in</a></li>
-                <li class="nav-text-element"><a href="">Sing in</a></li>
+                <li class="nav-text-element"><a href="/login">Log in</a></li>
+                <li class="nav-text-element"><a href="/register">Sing in</a></li>
             </ul>
         </div>
         <div class="cart-div">
-            <a href="/cart" class="cart-div">
+            <a href="/carrito" class="cart-div">
                 <span class="material-symbols-outlined">
                     shopping_cart
                 </span>
@@ -61,19 +61,25 @@
                 <h1 class="elemento-form">Crear una cuenta</h1>
 
                 <div class="div-email">
+
+                    <input id="email" name="id" class="elemento-form" type="email" >  <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
                     <label id="label-email" class="label" for="email">E-mail</label>
-                    <input id="email" name="id" class="elemento-form" type="email" required>
+
                 </div>
 
 
                 <div class="div-contrasena">
-                    <label for="contraseña" class="label">Contraseña</label>
-                    <input id="contraseña" name="contraseña " class="elemento-form" type="text" required>
+
+                    <input id="contraseña" name="contraseña " class="elemento-form" type="text" > <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                    <label id="label-pass" for="contraseña" class="label">Contraseña</label>
+
                 </div>
 
                 <div class="div-contrasena">
-                    <label for="contraseña" class="label">Repetir contraseña</label>
-                    <input id="contraseña" name="contraseña " class="elemento-form" type="text" required>
+                   
+                    <input id="contraseña" name="contraseña " class="elemento-form" type="text"  > <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                    <label id="label-pass-rep" for="contraseña" class="label">Repetir contraseña</label>
+                    
                 </div>
 
                 <button class="elemento-form">Registrarse</button>

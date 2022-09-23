@@ -66,7 +66,7 @@ button{
     border: none;
 }
 
-.elemento-form{
+.elementoForm{
     margin: 8px;
 }
 
@@ -91,8 +91,17 @@ button{
     transition: 500ms ease;
 }
 
-.div-contrasena:hover > label, 
-.div-email:hover > .label
+form input:focus + #label-pass ,
+form input:valid + #label-pass,
+form input:invalid + #label-pass,
+
+form input:focus + #label-pass-rep,
+form input:valid + #label-pass-rep,
+form input:invalid + #label-pass-rep,
+
+form input:focus + #label-email,
+form input:valid + #label-email,
+form input:invalid + #label-email
 {
     transform: translateY(-30%) scale(0.8);
     background-color: white;
@@ -177,14 +186,6 @@ button{
         transform: translateY(1rem);
         pointer-events: none;
         transition: 500ms ease;
-    }
-    
-    .div-contrasena:hover > label, 
-    .div-email:hover > .label
-    {
-        transform: translateY(-30%) scale(0.8);
-        background-color: white;
-        padding: 1%;
     }
     
 }
