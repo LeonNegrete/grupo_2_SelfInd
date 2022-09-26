@@ -9,29 +9,28 @@
     /* equivalencia para pngs obtenida a travez de https://codepen.io/sosuke/pen/Pjoqqp */
 
 }
-
-
-
+html{
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    justify-content: center;
+}
 header{
     width: 100vw;
 }
 
 main{
+    margin-top: 15vh;
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.card{
-    height: 100vh;
-    width: 100vw;
-    border:solid 1px #731963;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 form{
     height: 100%;
     width: 90%;
@@ -67,9 +66,11 @@ button{
 }
 
 .elementoForm{
-    margin: 8px;
+    margin-bottom: 5%;
 }
-
+.elemento-form{             /*No usamos la misma clase para no joder el posicionamiento del label*/
+    margin-bottom: 5%;
+}
 
 
 .div-email, .div-contrasena{
@@ -82,13 +83,15 @@ button{
 }
 
 .label{
+    margin-bottom: 10px;
     position: absolute;
     z-index: 2;
-    top: 9%;
+    top: 0%;
     left: 7%;
     transform: translateY(1rem);
     pointer-events: none;
     transition: 500ms ease;
+    text-align: left;
 }
 
 form input:focus + #label-pass ,
@@ -106,12 +109,20 @@ form input:invalid + #label-email
     transform: translateY(-30%) scale(0.8);
     background-color: white;
     padding: 1%;
+    margin-bottom: 10px;
 }
 
 
+.card{
 
-
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    --bs-card-border-width:0px;
+}
+footer{
+margin-top: auto;
+}
 @media(min-width: 361px){
 
 }
@@ -122,6 +133,7 @@ form input:invalid + #label-email
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top:  0px;
     }
     .card{
         height: 70%;
@@ -164,7 +176,7 @@ form input:invalid + #label-email
     }
     
     .elemento-form{
-        margin: 8px;
+        margin: 5%;
     }
     
     
@@ -179,13 +191,15 @@ form input:invalid + #label-email
     }
     
     .label{
+
         position: absolute;
         z-index: 2;
-        top: 9%;
-        left: 7%;
+        top:0%;
+        left: 5%;
         transform: translateY(1rem);
         pointer-events: none;
         transition: 500ms ease;
     }
+
     
 }
