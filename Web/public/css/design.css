@@ -21,7 +21,7 @@ main .remera-div{
 }
 main .remera-div img{
   height: 100%;
-  filter: drop-shadow(10px 5px 50px black);
+  filter: drop-shadow(5px 1px 3px black);
   z-index: 2;
 
 }
