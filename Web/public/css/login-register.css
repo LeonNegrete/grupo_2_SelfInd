@@ -129,13 +129,15 @@ margin-top: auto;
 
 @media(min-width: 769px){
     main{
-        height: 80vh;
+/*         height: 80vh; */
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top:  0px;
     }
     .card{
+        padding: 8% 0px;
+        margin: 12% 0px;
         height: 70%;
         width: 30%;
         border:solid 1px #731963;
@@ -175,9 +177,9 @@ margin-top: auto;
         border: none;
     }
     
-    .elemento-form{
+/*     .elemento-form{
         margin: 5%;
-    }
+    } */
     
     
     
