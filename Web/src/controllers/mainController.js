@@ -26,7 +26,12 @@ const path = require('path');
 
     carrito:(req, res)=>{
         res.render(path.join(__dirname, '../views/products/shop-car.ejs'))
+    },
+
+    create:(req, res)=>{
+        res.render(path.join(__dirname, '../views/products/new-detail.ejs'))
     }
+    
 
 }
 

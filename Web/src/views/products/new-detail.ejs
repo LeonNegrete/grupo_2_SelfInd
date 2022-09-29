@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %> 
+    <link rel="stylesheet" href="../css/new-detail.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <div class="nombre-producto">
+                <label for="name">Nombre del producto</label>
+                <input type="text" name="name" id="create-name" form="create">
+        </div>
+        <div class="dragNDrop">
+
+        </div>
+        <div class="resto-de-formulario">
+            <form action="/new-product" method="post" id="create">
+                <label for="descripcion">Descripcion del producto</label>
+                <textarea name="descripcion" id="create-description" cols="30" rows="10"></textarea>
+                <p>Marque los talles disponibles</p>
+                <input type="checkbox" name="talles" id="create-talles-XS" value="XS"><label for="create-talles-XS">XS</label>
+                <input type="checkbox" name="talles" id="create-talles-S" value="S"><label for="create-talles-S">S</label>
+                <input type="checkbox" name="talles" id="create-talles-M" value="M"><label for="create-talles-M">M</label>
+                <input type="checkbox" name="talles" id="create-talles-L" value="L"><label for="create-talles-L">L</label>
+                <input type="checkbox" name="talles" id="create-talles-XL" value="XL"><label for="create-talles-XL">XL</label>
+                <input type="radio" name="envio" id="retiro"><label for="retiro">Retiro por sucursal</label>
+                <input type="radio" name="envio" id="envioD"><label for="envioD">Envio a domicilio</label>
+            </form>
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

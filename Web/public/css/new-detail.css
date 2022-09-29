@@ -1,0 +1,10 @@
+main{
+    padding-left: 5%;
+}
+.nombre-producto, .resto-de-formulario, form{
+    display: flex;
+    flex-direction: column;
+}
+input, textarea{
+    width: 50%;
+}
