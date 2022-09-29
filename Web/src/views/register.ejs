@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <link rel="stylesheet" href="../css/login-register.css">
+        <title>SelfInd</title>
+</head>
+
+<body>
+    <%- include('./partials/header')%> 
+    <main>
+        <div class="card">
+            <form action="POST">
+                <h1 class="elemento-form">Crear una cuenta</h1>
+
+                <div class="div-email">
+
+                    <input id="email" name="id" class="elemento-form" type="email">
+                    <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                    <label id="label-email" class="label" for="email">E-mail</label>
+
+                </div>
+
+
+                <div class="div-contrasena">
+
+                    <input id="contraseña" name="contraseña " class="elemento-form" type="text">
+                    <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                    <label id="label-pass" for="contraseña" class="label">Contraseña</label>
+
+                </div>
+
+                <div class="div-contrasena">
+
+                    <input id="contraseña" name="contraseña " class="elemento-form" type="text">
+                    <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                    <label id="label-pass-rep" for="contraseña" class="label">Repetir contraseña</label>
+
+                </div>
+
+                <button class="elemento-form">Registrarse</button>
+                <a class="elemento-form" href="/login">¿Ya tienes una cuenta?</a>
+            </form>
+        </div>
+    </main>
+    <%- include('./partials/footer') %> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

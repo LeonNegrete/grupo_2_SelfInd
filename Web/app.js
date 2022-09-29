@@ -8,4 +8,8 @@ const PORT = 3030;
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', mainRoutes);
 
+app.set("view engine", "ejs");
+
+
+
 app.listen(PORT, () => { console.log(`Servidor corriendo en ${PORT}...`) });

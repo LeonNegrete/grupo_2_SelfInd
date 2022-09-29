@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <link rel="stylesheet" href="../css/design.css">
+        <title>Making it yours</title>
+</head>
+
+<body>
+    <%- include('./partials/header')%> 
+    <main>
+        <h1>Es momento de hacer lo tuyo, de hacerlo tuyo...</h1>
+        <input type="file" name="image_input" id="image_input" accept="image/png, image/jpg, image/jpeg">
+        <div class="remera-div">
+            <img src="images/Design/t-shirt-1976334_1280.webp" alt="Remera">
+
+            <div class="mover-diseno-div">
+                <div id="diseno-div" class="diseno-div"></div>
+            </div>
+
+        </div>
+    </main>
+    <%- include('./partials/footer') %> 
+    <script src="/design.js"></script>
+</body>
+
+</html>

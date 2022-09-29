@@ -5,27 +5,27 @@ const path = require('path');
     },
 
     home: (req, res) => {
-        res.sendFile(path.join(__dirname, '../views/home.html'))
+        res.render(path.join(__dirname, '../views/home.ejs'))
     },
 
     detalle: (req, res)=>{
-        res.sendFile(path.join(__dirname, '../views/detalle.html'))
+        res.render(path.join(__dirname, '../views/detalle.ejs'))
     },
     
     design: (req, res)=>{
-        res.sendFile(path.join(__dirname, '../views/design.html'))
+        res.render(path.join(__dirname, '../views/design.ejs'))
     },
 
     login: (req, res)=>{
-        res.sendFile(path.join(__dirname, '../views/login.html'))
+        res.render(path.join(__dirname, '../views/login.ejs'))
     },
 
     register:(req, res)=>{
-        res.sendFile(path.join(__dirname, '../views/register.html'))
+        res.render(path.join(__dirname, '../views/register.ejs'))
     },
 
     carrito:(req, res)=>{
-        res.sendFile(path.join(__dirname, '../views/shop-car.html'))
+        res.render(path.join(__dirname, '../views/shop-car.ejs'))
     }
 
 }

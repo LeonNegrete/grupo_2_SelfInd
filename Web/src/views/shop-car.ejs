@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+    <link rel="stylesheet" href="../css/carrito-style.css">
+    <title>SelfInd</title>
+</head>
+
+<body>
+    <%- include('./partials/header')%> 
+    <main>
+
+        <section class="carrito">
+            <div class="header-boxes">
+                <h3 class="titulos-boxes">Shopping Cart</h3>
+                <button class="remove-all">Remove all</button>
+            </div>
+
+            <div class="box-car-articles">
+
+                <article id="car-article">
+
+                    <div class="header-article">
+                        <p class="title-prod">TITLE Producto</p>
+
+                        <a class="btn-del-article" href="#"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+
+                    <div class="preview-article">
+                        <img class="img-article" src="images/Remeras/colombia-rem2.webp" />
+                    </div>
+
+
+                    <div class="detail-article">
+                        <label for="talla" class="title-detail">Talla</label>
+                        <select id="talla" name="talla" class="data-detail">
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+
+                    <div class="detail-article">
+                        <label class="title-detail">Precio</label>
+                        <p class="data-detail">$100.00</p>
+                    </div>
+
+                    <div class="detail-article cant-div">
+                        <label for="cantidad" class="title-detail">Cantidad</label>
+                        <input name="cantidad" id="cantidad" type="number" class="data-detail cant">
+                    </div>
+
+                    <div class="detail-article">
+                        <label class="title-detail">Total</label>
+                        <p class="data-detail">$000.00</p>
+                    </div>
+
+                </article>
+
+                <article id="car-article">
+
+                    <div class="header-article">
+                        <p class="title-prod">TITLE Producto</p>
+
+                        <a class="btn-del-article" href="#"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+
+                    <div class="preview-article">
+                        <img class="img-article" src="images/Remeras/colombia-rem2.webp" />
+                    </div>
+
+
+                    <div class="detail-article">
+                        <label for="talla" class="title-detail">Talla</label>
+                        <select id="talla" name="talla" class="data-detail">
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+
+                    <div class="detail-article">
+                        <label class="title-detail">Precio</label>
+                        <p class="data-detail">$100.00</p>
+                    </div>
+
+                    <div class="detail-article cant-div">
+                        <label for="cantidad" class="title-detail">Cantidad</label>
+                        <input name="cantidad" id="cantidad" type="number" class="data-detail cant">
+                    </div>
+
+                    <div class="detail-article">
+                        <label class="title-detail">Total</label>
+                        <p class="data-detail">$000.00</p>
+                    </div>
+
+                </article>
+
+                <article id="car-article">
+
+                    <div class="header-article">
+                        <p class="title-prod">TITLE Producto</p>
+
+                        <a class="btn-del-article" href="#"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+
+                    <div class="preview-article">
+                        <img class="img-article" src="images/Remeras/colombia-rem2.webp" />
+                    </div>
+
+
+                    <div class="detail-article">
+                        <label for="talla" class="title-detail">Talla</label>
+                        <select id="talla" name="talla" class="data-detail">
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+
+                    <div class="detail-article">
+                        <label class="title-detail">Precio</label>
+                        <p class="data-detail">$100.00</p>
+                    </div>
+
+                    <div class="detail-article cant-div">
+                        <label for="cantidad" class="title-detail">Cantidad</label>
+                        <input name="cantidad" id="cantidad" type="number" class="data-detail cant">
+
+
+                    </div>
+
+                    <div class="detail-article">
+                        <label class="title-detail">Total</label>
+                        <p class="data-detail">$000.00</p>
+                    </div>
+
+                </article>
+            </div>
+
+        </section>
+
+        <section class="pagoFinal">
+            <div class="header-boxes">
+                <h3 class="titulos-boxes">Buy</h3>
+            </div>
+
+            <div class="box-buy-sections">
+
+                <article id="buy-section">
+                    <label class="buy-title">¿Tienes un cúpon de descuento? <i class="fas fa-tag"></i></label>
+                    <input class="code-input" type="text" placeholder="Código">
+                    <div class="div-envio">
+                        <button class="envio">Envio a domicilio</button>
+                        <button class="envio">Retiro por sucursal</button>
+                    </div>
+                    <label class="buy-title">Resumen de compra</label>
+
+                    <div class="buy-detail">
+                        <p class="buy-title ">Subtotal</p>
+                        <p class="data-detail">$000.00</p>
+                    </div>
+
+
+                </article>
+
+
+                <article class="payment" id="buy-section">
+                    <div class="buy-detail">
+                        <p class="buy-title ">Total a Pagar</p>
+                        <p class="data-detail">$000.00</p>
+                    </div>
+                    <button class="payment-buton">Pagar</button>
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+    <%- include('./partials/footer') %> 
+</body>
+
+</html>
