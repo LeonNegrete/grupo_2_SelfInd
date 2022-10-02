@@ -28,7 +28,10 @@
         - Plantear un trabajo como completado cuando no lo esta, asi como tambien decir que va a ser completado pasada la fecha de entrega
         - No contestar cuando se plantean cuales son los problemas dentro de un trbajo ya entregado o "en revision". Aunque las observaciones planteadas no nos parezcan correctas o apropiadas deberiamos en ese caso hablar con el compañero sobre estos problemas y revisarlos en conjunto
 
+2. Actualizar Trello.
+
+3. Ya completados los primeros 6 puntos del sprint se les deriva a Gera y Felipe la tarea de completar el punto 7 en lo que queda del domingo y hasta la tarde del lunes, donde León se compromete a revisar y de ser necesario ajustar el view del formulario de carga de productos para el administrador.
 
     ### Se concluyo junto a todos los integrantes del equipo el conjunto de los puntos anteriores.
-    
+
     - ###### Concluir en el RETRO.MD como playground lo pide.        
