@@ -22,13 +22,13 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../images/remeras/argentina-rem2.webp" class="d-block w-100" alt="...">
+                        <img src="<%- productsArray[idP].image %> " class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="../images/remeras/argentina-rem2.webp" class="d-block w-100" alt="...">
+                        <img src="<%- productsArray[idP].image %>" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="../images/remeras/argentina-rem2.webp" class="d-block w-100" alt="...">
+                        <img src="<%- productsArray[idP].image %>" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -45,20 +45,19 @@
         </div>
 
         <div class="detalle-producto">
-            <h1>Camiseta de la seleccion</h1>
-            <p class="precio-producto">$5500</p>
-            <p class="descripcion-producto">Confeccionada en 75% polyester 25% algodon, prenda de la mas alta calidad
-                con mangas y cuello reforzados, tira de hombro a hombro Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. At, vitae.</p>
+            <h1><%- productsArray[idP].title %> </h1>
+            <p class="precio-producto">$<%- productsArray[idP].price %> </p>
+            <p class="descripcion-producto"><%- productsArray[idP].description %> </p>
             <div class="envios-talle">
+                
                 <div class="talle-div">
                     <label for="talle">Talle</label>
                     <select id="talle" name="talle">
-                        <option value="1">XS</option>
-                        <option value="2">S</option>
-                        <option value="3">M</option>
-                        <option value="4">L</option>
-                        <option value="5">XL</option>
+                        <% for( let i = 0; i < 6; i++ ) { %>
+                            <% if (productsArray[idP].sizesQuantity[i] >= 1) { %>
+                                <option value="<%-i%>"> <%-productsArray[idP].sizes[i]%> </option>
+                            <% } %>
+                        <% } %>
                     </select>
                 </div>
                 <div class="envios-div">

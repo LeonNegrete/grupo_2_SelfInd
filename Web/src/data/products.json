@@ -1,77 +1,76 @@
 {
     "products": [
         {
-            "id":"1",
+            "id":"0",
             "title":"Saint Lucie Tee",
             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
             "price":4500,
             "image":"../images/Remeras/1.webp",
             "sizes":["XS","S","M","L","XL","XXL"],
-            "sold": false
+            "sizesQuantity":[0,0,0,0,0,0]
         },
         {
-            "id":"2",
+            "id":"1",
             "title":"Smear Tee",
             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
             "price":4500,
             "image":"../images/Remeras/2.webp",
             "sizes":["XS","S","M","L","XL","XXL"],
-            "sold": false
+            "sizesQuantity":[1,0,1,1,1,0]
         },
         {
-            "id":"3",
+            "id":"2",
             "title":"Fuck Off Tee",
             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
             "price":4500,
             "image":"../images/Remeras/3.webp",
             "sizes":["XS","S","M","L","XL","XXL"],
-            "sold": false
+            "sizesQuantity":[1,1,1,0,0,1]
         },
         {
-            "id":"4",
+            "id":"3",
             "title":"Somewhere Tee",
             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
             "price":4500,
             "image":"../images/Remeras/4.webp",
             "sizes":["XS","S","M","L","XL","XXL"],
-            "sold": false
+            "sizesQuantity":[1,1,1,1,1,0]
         },
         {
-            "id":"5",
+            "id":"4",
             "title":"Lorem Ipsum Tee",
             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
             "price":4500,
             "image":"../images/Remeras/5.webp",
             "sizes":["XS","S","M","L","XL","XXL"],
-            "sold": true
+            "sizesQuantity":[0,0,0,0,0,0]
         },
         {
-            "id":"6",
+            "id":"5",
             "title":"Something Tee",
             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
             "price":4500,
             "image":"../images/Remeras/6.webp",
             "sizes":["XS","S","M","L","XL","XXL"],
-            "sold": true
+            "sizesQuantity":[0,0,0,0,0,0]
         },
         {
-            "id":"7",
+            "id":"6",
             "title":"Jhon Doe Tee",
             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
             "price":4500,
             "image":"../images/Remeras/7.webp",
             "sizes":["XS","S","M","L","XL","XXL"],
-            "sold": true
+            "sizesQuantity":[0,0,0,0,0,0]
         },
         {
-            "id":"8",
+            "id":"7",
             "title":"FizzBuzz Tee",
             "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
             "price":4500,
             "image":"../images/Remeras/8.webp",
             "sizes":["XS","S","M","L","XL","XXL"],
-            "sold": true
-            
+            "sizesQuantity":[1,0,0,0,0,0]
         }
     ]
 }
