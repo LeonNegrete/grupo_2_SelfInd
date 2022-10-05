@@ -1,0 +1,77 @@
+{
+    "products": [
+        {
+            "id":"1",
+            "title":"Saint Lucie Tee",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
+            "price":4500,
+            "image":"../images/Remeras/1.webp",
+            "sizes":["XS","S","M","L","XL","XXL"],
+            "sold": false
+        },
+        {
+            "id":"2",
+            "title":"Smear Tee",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
+            "price":4500,
+            "image":"../images/Remeras/2.webp",
+            "sizes":["XS","S","M","L","XL","XXL"],
+            "sold": false
+        },
+        {
+            "id":"3",
+            "title":"Fuck Off Tee",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
+            "price":4500,
+            "image":"../images/Remeras/3.webp",
+            "sizes":["XS","S","M","L","XL","XXL"],
+            "sold": false
+        },
+        {
+            "id":"4",
+            "title":"Somewhere Tee",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
+            "price":4500,
+            "image":"../images/Remeras/4.webp",
+            "sizes":["XS","S","M","L","XL","XXL"],
+            "sold": false
+        },
+        {
+            "id":"5",
+            "title":"Lorem Ipsum Tee",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
+            "price":4500,
+            "image":"../images/Remeras/5.webp",
+            "sizes":["XS","S","M","L","XL","XXL"],
+            "sold": true
+        },
+        {
+            "id":"6",
+            "title":"Something Tee",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
+            "price":4500,
+            "image":"../images/Remeras/6.webp",
+            "sizes":["XS","S","M","L","XL","XXL"],
+            "sold": true
+        },
+        {
+            "id":"7",
+            "title":"Jhon Doe Tee",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
+            "price":4500,
+            "image":"../images/Remeras/7.webp",
+            "sizes":["XS","S","M","L","XL","XXL"],
+            "sold": true
+        },
+        {
+            "id":"8",
+            "title":"FizzBuzz Tee",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo, enim sit amet interdum accumsan, quam eros fringilla velit, quis pellentesque odio nisi eget mauris. Integer viverra vehicula sollicitudin. Nam feugiat semper porttitor. Nam blandit lorem in urna sollicitudin pharetra. Cras ut augue et elit mattis vehicula. Morbi et erat. ",
+            "price":4500,
+            "image":"../images/Remeras/8.webp",
+            "sizes":["XS","S","M","L","XL","XXL"],
+            "sold": true
+            
+        }
+    ]
+}

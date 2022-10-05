@@ -1,11 +1,25 @@
 const path = require('path');
+const products = require('../data/products.json');
+const fs = require('fs');
  const mainController = {
-    homeRD:(req,res)=>{
-        res.redirect('/home');
+
+    productsArr: () =>{
+        let readed = fs.readFileSync(path.resolve(__dirname,'../data/products.json'),'utf-8');
+        return JSON.parse(readed);
     },
 
     home: (req, res) => {
-        res.render(path.join(__dirname, '../views/products/home.ejs'))
+        let productsArray = mainController.productsArr()
+        let soldOut = [];
+        let onSale = [];
+        for (const e of productsArray.products) {
+            if (e.sold) {
+                soldOut.push(e)
+            }else{
+                onSale.push(e)
+            }
+        }
+        res.render(path.join(__dirname, '../views/products/home.ejs'), {onSale, soldOut})
     },
 
     detalle: (req, res)=>{
