@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.get('/', mainController.home)
 router.get('/home', mainController.home)
-router.get('/detalle', mainController.detalle)
+router.get('/detalle/:id', mainController.detalle)
 router.get('/design', mainController.design)
 router.get('/login', mainController.login )
 router.get('/register', mainController.register)

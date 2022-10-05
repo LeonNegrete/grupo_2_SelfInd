@@ -42,10 +42,10 @@
         </div>
         <section class="productos">
             <section class="nuevo">
-                <h4>Nuevos drops</h4>
+                <h4>NEW DROPS</h4>
                 <% for (let i=0;i < onSale.length ;i++){ %>
                 <article class="articulo">
-                    <a href="/detalle" class="articulo">
+                    <a class="articulo" href="/detalle/<%=onSale[i].id%> ">
                         <img src= "<%- onSale[i].image -%>" alt="" class="img-articulo">
                         <h5 class="titulo"><%- onSale[i].title %> </h5>
                         <h5 class="precio">$<%- onSale[i].price %> </h5>
@@ -54,10 +54,10 @@
                 <% }%>
             </section>
             <section class="vendidos">
-                <h4>Nuevos drops</h4>
+                <h4>SOLD OUTS</h4>
                 <% for (let i=0;i < soldOut.length ;i++){ %>
                 <article class="articulo">
-                    <a href="/detalle" class="articulo">
+                    <a class="articulo" href="/detalle/<%=soldOut[i].id%> ">
                         <img src= "<%- soldOut[i].image -%>" alt="" class="img-articulo">
                         <h5 class="titulo"><%- soldOut[i].title %> </h5>
                         <h5 class="precio">$<%- soldOut[i].price %> </h5>
