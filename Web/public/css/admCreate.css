@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: arial;
+
+}
+
+.form-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 90%;
+    
+    background: black;
+    margin: auto;
+    box-shadow: 7px 13px 37px black;
+    padding: 20px 30px;
+    border-top: 40px solid #581845;
+    color: white;
+}
+
+.form-admin h5 {
+    margin: 0;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid;
+    font-size: 20px;
+}
+
+.diseno {
+    width: 100%;
+    border: 1px solid #581845;
+    margin-bottom: 15px;
+    padding: 11px 10px;
+    background: #252323;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.buttons {
+    width: 100%;
+    height: 40px;
+    background: #581845;
+    border: none;
+    color: white;
+    margin-bottom: 16px;
+
+}
+
+
+/*
+body{
+    background-color: black;
+}
+
+main section.carga-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}
+
+.title-carga{
+    background-color: whitesmoke;
+    color: #731963;
+    text-align: center;
+    border-radius: 20px;
+}
+
+form.form-container {
+    width: 100%;
+}
+
+fieldset.fieldCreate {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content:center ;
+    margin: .5rem;
+    border-radius: 10px;
+    color: white;
+    background-color:#731963;
+}
+
+fieldset.fieldCreate legend{
+    color: white;
+} 
+
+form.form-container input {
+    margin: .5rem;
+    width: 80%;
+    background-color: lightgray ;
+}
+
+
+form.form-container textarea {
+    margin: .5rem;
+    background-color: lightgray;
+}
+
+button.cargar-prod{
+    width: 10rem;
+}
+
+*/
