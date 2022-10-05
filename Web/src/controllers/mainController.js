@@ -49,16 +49,11 @@ const mainController = {
 
     create: (req, res) => {
         res.render(path.join(__dirname, '../views/products/new-detail.ejs'))
-<<<<<<< HEAD
     },
     
     admCreate:(req, res)=>{
         res.render(path.join(__dirname, '../views/products/admCreate.ejs'))
     }
-=======
-    }
-
->>>>>>> f119382024136676cd42bbbd31a586a2c5332f15
 
 }
 
