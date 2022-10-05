@@ -4,46 +4,79 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: arial;
-
+main.containerCreate{
+    display: flex;
+    justify-content: center;
+    height: 100%;
 }
 
-.form-admin {
+section.create-form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
-    margin-top: 5%;
-    margin-bottom: 5%;
+
+    margin-top: 2%;
     width: 90%;
-    
-    background: black;
-    margin: auto;
-    box-shadow: 7px 13px 37px black;
-    padding: 20px 30px;
+
     border-top: 40px solid #581845;
+    border-radius: 10px;
+    background: black;
+    box-shadow: 7px 13px 37px black;
     color: white;
 }
 
-.form-admin h5 {
-    margin: 0;
-    text-align: center;
-    height: 40px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid;
-    font-size: 20px;
+form.create-form-sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
 }
 
-.diseno {
-    width: 100%;
-    border: 1px solid #581845;
-    margin-bottom: 15px;
-    padding: 11px 10px;
-    background: #252323;
-    font-size: 14px;
+.title-carga{
+    font-size: 5vw;
+    font-weight: bolder;
+    padding: .5em;
+    margin-bottom: 1em;
+    color: white;
+    text-align: center;
+    border-bottom: white 4px solid;
+}
+
+fieldset.fieldCreate{
+    margin: .5rem;
+    border: #581845 solid 3px;
+    border-radius: 5px;
+    color: white;
+
+}
+
+legend.legendCreate{
+    margin-left: 2vw;
+    padding: .5vw;
+    float:none;
+    width:auto;
+    background-color:#581845;
+    color: white;
+    border-radius: 5px;
+    font-size: 3vw;
     font-weight: bold;
 }
+
+
+fieldset.fieldCreate input {
+    margin: .5rem;
+    width: 95%;
+    background-color: #252323 ;
+    
+}
+
+fieldset.fieldCreate textarea {
+    margin: .5rem;
+    width: 95%;
+    background-color: #252323;
+    color:gray;
+}
+
 
 .buttons {
     width: 100%;
@@ -55,62 +88,13 @@ body {
 
 }
 
-
-/*
-body{
-    background-color: black;
-}
-
-main section.carga-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    margin-top: 5%;
-    margin-bottom: 5%;
-
-}
-
-.title-carga{
-    background-color: whitesmoke;
-    color: #731963;
-    text-align: center;
-    border-radius: 20px;
-}
-
-form.form-container {
-    width: 100%;
-}
-
-fieldset.fieldCreate {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content:center ;
-    margin: .5rem;
+button.cargar-prod{
+    padding: .5vw;
+    width: 50%;
+    background: #581845;
+    border: none;
     border-radius: 10px;
     color: white;
-    background-color:#731963;
+    margin: 2vw;
+    font-weight: bold;
 }
-
-fieldset.fieldCreate legend{
-    color: white;
-} 
-
-form.form-container input {
-    margin: .5rem;
-    width: 80%;
-    background-color: lightgray ;
-}
-
-
-form.form-container textarea {
-    margin: .5rem;
-    background-color: lightgray;
-}
-
-button.cargar-prod{
-    width: 10rem;
-}
-
-*/
