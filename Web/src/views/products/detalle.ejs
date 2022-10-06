@@ -55,7 +55,7 @@
                     <select id="talle" name="talle">
                         <% for( let i = 0; i < 6; i++ ) { %>
                             <% if (productsArray[idP].sizesQuantity[i] >= 1) { %>
-                                <option value="<%-i%>"> <%-productsArray[idP].sizes[i]%> </option>
+                                <option value="<%-i%>"> <%-sizesList[i]%> </option>
                             <% } %>
                         <% } %>
                     </select>

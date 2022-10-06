@@ -11,5 +11,6 @@ router.get('/register', mainController.register)
 router.get('/carrito', mainController.carrito)
 router.get('/create', mainController.create)
 router.get('/admCreate', mainController.admCreate)
+router.post('/admCreate', mainController.admCreatePost)
 
 module.exports = router;
