@@ -7,7 +7,7 @@ Apuntado principalmente para adolecentes y jovenes adultos interesados en el str
 Destinado a resolver la sensacion dada por la falta del estilo propio, **empoderando al usuario con un sentimiento de poder y libre albedrio, ya que somos reales por lo que expresamos**
 
 ## Sobre nosotros
-Somos un equipo conformado por 4 humanos localizados en distintos paises de latinoamerica, estudiantes y trabajadores con la ambicion de un desarrollo individual a travez de la cooperacion colectiva, mediante los recursos de la virtualidad compartiendo conocimientos *y fundamentalmente unidos por el codigo*  
+Somos un equipo conformado por 3 humanos localizados en distintos paises de latinoamerica, estudiantes y trabajadores con la ambicion de un desarrollo individual a travez de la cooperacion colectiva, mediante los recursos de la virtualidad compartiendo conocimientos *y fundamentalmente unidos por el codigo*  
 
 ## Sitios de inspiracion
 
