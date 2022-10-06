@@ -1,16 +1,20 @@
 const express = require("express");
-const mainController = require("../controllers/mainController")
+const productController = require("../controllers/productController")
+const userController = require("../controllers/userController")
 const router = express.Router()
 
-router.get('/', mainController.home)
-router.get('/home', mainController.home)
-router.get('/detalle/:id', mainController.detalle)
-router.get('/design', mainController.design)
-router.get('/login', mainController.login )
-router.get('/register', mainController.register)
-router.get('/carrito', mainController.carrito)
-router.get('/create', mainController.create)
-router.get('/admCreate', mainController.admCreate)
-router.post('/admCreate', mainController.admCreatePost)
+router.get('/', productController.home)
+router.get('/home', productController.home)
+router.get('/detalle/:id', productController.detalle)
+router.get('/design', productController.design)
+router.get('/carrito', productController.carrito)
+router.get('/create', productController.create)
+router.get('/admCreate', productController.admCreate)
+router.get('/admEdit', productController.admEdit);
+router.post('/admCreate', productController.admCreatePost)
+
+
+router.get('/login', userController.login )
+router.get('/register', userController.register)
 
 module.exports = router;
