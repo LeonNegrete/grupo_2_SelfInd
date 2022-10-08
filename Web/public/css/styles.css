@@ -172,6 +172,7 @@ main {
 
 .img-articulo {
     width: 100%;
+/*     transform: scale(1.5); */
     /* imagen de producto */
 }
 
@@ -384,6 +385,9 @@ a:hover {
     }
 
     /* MAIN */
+    .img-articulo{
+        width: 120%;
+    }
 
     .carousel-item img {
         object-position: 0px 5%;

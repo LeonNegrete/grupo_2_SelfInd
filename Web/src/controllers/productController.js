@@ -46,10 +46,6 @@ const productController = {
         res.render(path.join(__dirname, '../views/products/shop-car.ejs'))
     },
 
-    create: (req, res) => {
-        res.render(path.join(__dirname, '../views/products/new-detail.ejs'))
-    },
-
     admCreate: (req, res) => {
         res.render(path.join(__dirname, '../views/products/admCreate.ejs'))
     },
