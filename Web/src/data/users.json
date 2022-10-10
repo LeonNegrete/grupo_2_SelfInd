@@ -1,45 +1,49 @@
 {
-    "id": 1,
-    "first-name": "Regan",
-    "last_name": "McLane",
-    "direction": "rmclane0@example.com",
-    "image": "Zhulebino",
-    "email": "1345255315",
-    "password": "SCTwOQLCPT"
-}
-{
-    "id": 2,
-    "first-name": "Mickie",
-    "last_name": "Reichartz",
-    "direction": "mreichartz1@altervista.org",
-    "image": "Chrząstowice",
-    "email": "9458816484",
-    "password": "mYYEhLSUIFeI"
-}
-{
-    "id": 3,
-    "first-name": "Levon",
-    "last_name": "Hentzeler",
-    "direction": "lhentzeler2@bloomberg.com",
-    "image": "Guanaja",
-    "email": "5758986134",
-    "password": "q9gf9R8h6zr"
-}
-{
-    "id": 4,
-    "first-name": "Tedd",
-    "last_name": "Byres",
-    "direction": "tbyres3@dyndns.org",
-    "image": "Dahay",
-    "email": "5784261397",
-    "password": "4EPXsaixCpxs"
-}
-{
-    "id": 5,
-    "first-name": "Franzen",
-    "last_name": "McIlenna",
-    "direction": "fmcilenna4@mtv.com",
-    "image": "Kalix",
-    "email": "7367256392",
-    "password": "uQUGsgccFHqs"
+    "users": [
+        {
+            "id": 1,
+            "first-name": "Regan",
+            "last_name": "McLane",
+            "direction": "rmclane0@example.com",
+            "image": "Zhulebino",
+            "email": "1345255315",
+            "password": "SCTwOQLCPT"
+        },
+        {
+            "id": 2,
+            "first-name": "Mickie",
+            "last_name": "Reichartz",
+            "direction": "mreichartz1@altervista.org",
+            "image": "Chrząstowice",
+            "email": "9458816484",
+            "password": "mYYEhLSUIFeI"
+        },
+        {
+            "id": 3,
+            "first-name": "Levon",
+            "last_name": "Hentzeler",
+            "direction": "lhentzeler2@bloomberg.com",
+            "image": "Guanaja",
+            "email": "5758986134",
+            "password": "q9gf9R8h6zr"
+        },
+        {
+            "id": 4,
+            "first-name": "Tedd",
+            "last_name": "Byres",
+            "direction": "tbyres3@dyndns.org",
+            "image": "Dahay",
+            "email": "5784261397",
+            "password": "4EPXsaixCpxs"
+        },
+        {
+            "id": 5,
+            "first-name": "Franzen",
+            "last_name": "McIlenna",
+            "direction": "fmcilenna4@mtv.com",
+            "image": "Kalix",
+            "email": "7367256392",
+            "password": "uQUGsgccFHqs"
+        }
+    ]
 }

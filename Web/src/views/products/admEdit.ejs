@@ -3,8 +3,8 @@
 
 <head>
     <%- include('../partials/head') %>
-        <link rel="stylesheet" href="css/admCreate.css">
-        <title>Panel Administrativo - Charge</title>
+        <link rel="stylesheet" href="../../css/admCreate.css">
+        <title>Panel Administrativo - Edit</title>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
 
             <section class="create-form-container">
 
-                <form action="/admCreate" method="POST" class="create-form-sections">
+                <form action="/products/<%=idP%>?_method=PUT" method="POST" class="create-form-sections" >
 
 
                     <h1 class="title-carga">EDIT PRODUCT</h1>
@@ -25,13 +25,13 @@
                         
                         <input type="number" name="id" id="id" placeholder="Id del producto">
 
-                        <input id="nombre" type="text" name="name_product" placeholder="Nombre del producto" required>
+                        <input id="nombre" type="text" name="name_product" placeholder="Nombre del producto" >
 
                         <input class="number-input" id="precio" type="number" name="price" placeholder="Precio" min="0"
-                            step=".01" required>
+                            step=".01" >
 
                         <textarea name="description" id="descripcion" placeholder="Descripción del producto"
-                            required></textarea>
+                            ></textarea>
                     </fieldset>
 
                     <fieldset class="fieldCreate">
@@ -43,22 +43,22 @@
                         <legend class="legendCreate"> STOCK </legend>
 
                         <label for="stock-xs">XS : <input type="number" class="number-input" name="xs"
-                                placeholder="Cantidad en stock" min="0" step="1" required></label>
+                                placeholder="Cantidad en stock" min="0" step="1" ></label>
 
                         <label for="stock-s">S : <input type="number" class="number-input" name="s"
-                                placeholder="Cantidad en stock" min="0" step="1" required></label>
+                                placeholder="Cantidad en stock" min="0" step="1" ></label>
 
                         <label for="stock-m">M : <input type="number" class="number-input" name="m"
-                                placeholder="Cantidad en stock" min="0" step="1" required></label>
+                                placeholder="Cantidad en stock" min="0" step="1" ></label>
 
                         <label for="stock-l">L : <input type="number" class="number-input" name="l"
-                                placeholder="Cantidad en stock" min="0" step="1" required></label>
+                                placeholder="Cantidad en stock" min="0" step="1" ></label>
 
                         <label for="stock-xl">XL : <input type="number" class="number-input" name="xl"
-                                placeholder="Cantidad en stock" min="0" step="1" required></label>
+                                placeholder="Cantidad en stock" min="0" step="1" ></label>
 
                         <label for="stock-xxl">XXL : <input type="number" class="number-input" name="xxl"
-                                placeholder="Cantidad en stock" min="0" step="1" required></label>
+                                placeholder="Cantidad en stock" min="0" step="1" ></label>
 
                     </fieldset>
 

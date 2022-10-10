@@ -60,7 +60,8 @@
                     <a class="articulo" href="/products/<%=soldOut[i].id%> ">
                         <img src= "<%- soldOut[i].image -%>" alt="" class="img-articulo">
                         <h5 class="titulo"><%- soldOut[i].title %> </h5>
-                        <h5 class="precio">$<%- soldOut[i].price %> </h5>
+                        <h5 class="precio">SOLD OUT</h5>
+                        <h5 class="precio" style="text-decoration: line-through ;">$<%- soldOut[i].price %> </h5>
                     </a>
                 </article>
                 <% }%>

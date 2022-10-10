@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <%- include('../partials/head') %>
+        <link rel="stylesheet" href="../css/products.css">
+        <title>Listado de productos</title>
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+
+        <main>
+            <% for (let i=0;i < productsArray.length ;i++){ %>
+                <article class="articulo">
+                    <a class="articulo" href="/products/<%=productsArray[i].id%> ">
+                        <img src="<%- productsArray[i].image -%>" alt="" class="img-articulo">
+                        <h5 class="titulo">
+                            <%-productsArray[i].title %>
+                             - $<%-productsArray[i].price %>
+                        </h5>
+                        <% for (let index2=0 ; index2 < productsArray[i].sizesQuantity.length ; index2++){ %>
+                            <span>
+                            <%- sizesList[index2]%>
+                            
+                            =
+                            <%- productsArray[i].sizesQuantity[index2] %>
+                            </span>
+                        <% } %>  
+                        <h5 class="titulo">ID:<%- productsArray[i].id %>
+                            <form action="/products/<%=productsArray[i].id%>?_method=DELETE" method="post">
+                                <button type="submit"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </h5>
+                    </a>
+                </article>
+                <% }%>
+        </main>
+
+    <%- include('../partials/footer') %>
+</body>
+
+</html>

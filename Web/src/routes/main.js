@@ -8,13 +8,13 @@ router.get('/', productController.home)
 router.get('/home', productController.home)
 
 //ADMINISTRACION
-/* router.get('/products', ); listado de productos */
+router.get('/products', productController.productList ); 
 router.get('/products/create', productController.admCreate)
 router.get('/products/:id', productController.detalle)
 router.post('/products', productController.admCreatePost)
 router.get('/products/:id/edit', productController.admEdit);
-/* router.put('/products/:id', ); accion de edicion */
-/* router.delete('/products/:id', ) accion de borrar */
+router.put('/products/:id', productController.putEdit);
+router.delete('/products/:id', productController.deleteItem )
 
 //PRODUCTOS
 router.get('/design', productController.design)

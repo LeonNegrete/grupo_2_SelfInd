@@ -15,17 +15,30 @@ const productController = {
         this.price = price
         this.sizesQuantity = [xs, s, m, l, xl, xxl];
     },
-
+    editExistingProduct: (producto,newData)=>{
+        producto.id = newData.id || producto.id; 
+        producto.title = newData.name || producto.title; 
+        producto.description = newData.desc || producto.description; 
+        producto.price = newData.price || producto.price; 
+        producto.sizesQuantity = newData.sizesQuantity || producto.sizesQuantity; 
+    },
+    hayStock: (arrayDeTalles)=>{
+            let stock = arrayDeTalles.sizesQuantity.every((e) => (e == 0)); //evalua si todos los elementos del array que contiene el stock estan en cero
+            if (stock) {
+                return false //Si estan en cero retorna false (No hay stock)
+            } else {
+                return true //Caso contrario retorna true (hay stock)
+            }
+    },
     home: (req, res) => {
         let productsArray = productController.productsArr() 
         let soldOut = [];
         let onSale = [];
         for (const e of productsArray.products) { //itera el array pasando por cada remera
-            let stock = e.sizesQuantity.every((e) => (e == 0)) //evalua si todos los elementos del array que contiene el stock estan en cero
-            if (stock) {
-                soldOut.push(e) //Si estan en cero se los agrega al array de vendidos
+            if (productController.hayStock(e)) {
+                onSale.push(e) //Si estan en cero se los agrega al array de vendidos
             } else {
-                onSale.push(e) //Caso contrario se los agrega al array de disponibles
+                soldOut.push(e) //Caso contrario se los agrega al array de disponibles
             }
         }
         res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut }) //Se exportan los arrays de vendidos y disponibles
@@ -47,7 +60,7 @@ const productController = {
     },
 
     admCreate: (req, res) => {
-        res.render(path.join(__dirname, '../views/products/admCreate.ejs'))
+        res.render(path.join(__dirname, '../views/products/admCreate'))
     },
 
     admCreatePost: (req, res) => {
@@ -69,7 +82,6 @@ const productController = {
                 parseInt(req.body.xxl)
             )
         let newElement = productController.productsArr();
-        console.log(newElement)
         let nuevoId = parseInt(newElement.products[newElement.products.length - 1].id) + 1;
         newProduct.id = nuevoId.toString();
         newElement.products.push(newProduct)
@@ -78,7 +90,48 @@ const productController = {
         res.redirect('/');
     },
     admEdit: (req, res) => {
-        res.render(path.join(__dirname, '../views/products/admEdit.ejs'))
+        let idP = req.params.id;
+        res.render(path.join(__dirname, '../views/products/admEdit.ejs'),{idP});
+    },
+    putEdit: (req,res) => {
+        function CreateNewProduct(name, desc, price, xs, s, m, l, xl, xxl) {   //POR QUE NO ME DEJA USAR EL CONSTRUCTOR DECLARADO COMO METODO DEL PRODUCTCONTROLLER???!?!?!?!
+            this.name = name;
+            this.description = desc;
+            this.price = price
+            this.sizesQuantity = [xs, s, m, l, xl, xxl];
+        }
+        let idP = req.params.id
+        let editedData = new CreateNewProduct(req.body.name_product,
+            req.body.description,
+            req.body.price,
+            parseInt(req.body.xs),
+                parseInt(req.body.s),
+                parseInt(req.body.m),
+                parseInt(req.body.l),
+                parseInt(req.body.xl),
+                parseInt(req.body.xxl)
+            )
+        console.log(editedData);
+        let elementToEdit = productController.productsArr(); //selecciona el elemento correspondiente
+        productController.editExistingProduct(elementToEdit.products[idP],editedData) //edita el elementToEdit
+        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(elementToEdit));
+        res.redirect('/');
+    },
+    productList: (req,res)=>{
+        let productsArray = productController.productsArr().products 
+        let sizesList = productController.productsArr().sizesList
+        res.render(path.join(__dirname, '../views/products/products.ejs'),{productsArray, sizesList})
+    },
+    deleteItem: (req,res)=>{
+        let idP = req.params.id;
+        let arrayToReturn = productController.productsArr(); //selecciona el elemento correspondiente
+        let elementToDelete= arrayToReturn.products.find((e)=>{
+            return e.id === idP
+        })
+        let indexOfElementToDelete = arrayToReturn.products.indexOf(elementToDelete);
+        arrayToReturn.products.splice(arrayToReturn.products.indexOf(indexOfElementToDelete),1);
+        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(arrayToReturn));
+        res.redirect('/')
     }
 }
 

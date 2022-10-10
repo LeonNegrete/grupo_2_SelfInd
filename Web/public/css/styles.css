@@ -172,11 +172,14 @@ main {
 
 .img-articulo {
     width: 100%;
+    margin-bottom: 3%;
 /*     transform: scale(1.5); */
     /* imagen de producto */
 }
 
+
 .articulo h5 {
+    font-weight: bolder;
     margin: 2px;
     font-family: 'Roboto', sans-serif;
     white-space: nowrap;

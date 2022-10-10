@@ -1,0 +1,28 @@
+html{
+    height: 100%;
+}
+body{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    display: flex; 
+    flex-flow: row wrap;
+}
+
+footer{
+    justify-self: flex-end;
+    margin-top: auto;
+}
+span{
+    font-size: small;
+    text-align: right;
+}
+button{
+    border: none;
+}
+button:hover{
+    color: red;
+}

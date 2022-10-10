@@ -20,17 +20,22 @@ a{
     color: black;
     text-decoration: none;
 }
+html{
+    height: 100%;
+}
 body {
     display: flex;
     flex-direction: column;
     overflow: visible;
     font-family: 'Roboto', sans-serif;
+    min-height: 100%;
 }
 
 main{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: auto;
 }
 .carousel-boot{
     display: flex;
@@ -72,11 +77,11 @@ main{
     color: white;
     border: none;
 }
-
-
-@media(min-width: 361px){
-
+footer{
+    margin-top: auto;
 }
+
+
 
 @media(min-width: 769px){
     .carousel-boot{
@@ -90,8 +95,9 @@ main{
     main{
         flex-direction: row;
     }
-
+    
     .carousel{
+
         height: 70%;
         margin: 10%;
     }
@@ -102,4 +108,6 @@ main{
     }
 
 }
+@media(min-width: 361px){
 
+}

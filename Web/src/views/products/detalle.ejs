@@ -48,31 +48,35 @@
             <h1><%- productsArray[idP].title %> </h1>
             <p class="precio-producto">$<%- productsArray[idP].price %> </p>
             <p class="descripcion-producto"><%- productsArray[idP].description %> </p>
-            <div class="envios-talle">
+            <% if (productsArray[idP].sizesQuantity.some((e) => (e > 0))) { %>
+                <div class="envios-talle">
                 
-                <div class="talle-div">
-                    <label for="talle">Talle</label>
-                    <select id="talle" name="talle">
-                        <% for( let i = 0; i < 6; i++ ) { %>
-                            <% if (productsArray[idP].sizesQuantity[i] >= 1) { %>
-                                <option value="<%-i%>"> <%-sizesList[i]%> </option>
+                    <div class="talle-div">
+                        <label for="talle">Talle</label>
+                        <select id="talle" name="talle">
+                            <% for( let i = 0; i < 6; i++ ) { %>
+                                <% if (productsArray[idP].sizesQuantity[i] >= 1) { %>
+                                    <option value="<%-i%>"> <%-sizesList[i]%> </option>
+                                <% } %>
                             <% } %>
-                        <% } %>
-                    </select>
+                        </select>
+                    </div>
+                    <div class="envios-div">
+                        <input type="checkbox" name="envio" id="envio">
+                        <label for="envio">Envio a domicilio</label>
+                    </div>
                 </div>
-                <div class="envios-div">
-                    <input type="checkbox" name="envio" id="envio">
-                    <label for="envio">Envio a domicilio</label>
+    
+    
+                <div class="botones">
+                    <button type="submit">Comprar</button>
+                    <button type="submit">Agregar al carrito</button>
+    
                 </div>
             </div>
-
-
-            <div class="botones">
-                <button type="submit">Comprar</button>
-                <button type="submit">Agregar al carrito</button>
-
-            </div>
-        </div>
+            <% }else{ %>
+                <h5>SOLD OUT ITEM</h5>
+            <% } %>   
     </main>
     <%- include('../partials/footer') %> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
