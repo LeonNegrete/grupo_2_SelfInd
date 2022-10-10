@@ -15,23 +15,23 @@ const productController = {
         this.price = price
         this.sizesQuantity = [xs, s, m, l, xl, xxl];
     },
-    editExistingProduct: (producto,newData)=>{
-        producto.id = newData.id || producto.id; 
-        producto.title = newData.name || producto.title; 
-        producto.description = newData.desc || producto.description; 
-        producto.price = newData.price || producto.price; 
-        producto.sizesQuantity = newData.sizesQuantity || producto.sizesQuantity; 
+    editExistingProduct: (producto, newData) => {
+        producto.id = newData.id || producto.id;
+        producto.title = newData.name || producto.title;
+        producto.description = newData.desc || producto.description;
+        producto.price = newData.price || producto.price;
+        producto.sizesQuantity = newData.sizesQuantity || producto.sizesQuantity;
     },
-    hayStock: (arrayDeTalles)=>{
-            let stock = arrayDeTalles.sizesQuantity.every((e) => (e == 0)); //evalua si todos los elementos del array que contiene el stock estan en cero
-            if (stock) {
-                return false //Si estan en cero retorna false (No hay stock)
-            } else {
-                return true //Caso contrario retorna true (hay stock)
-            }
+    hayStock: (arrayDeTalles) => {
+        let stock = arrayDeTalles.sizesQuantity.every((e) => (e == 0)); //evalua si todos los elementos del array que contiene el stock estan en cero
+        if (stock) {
+            return false //Si estan en cero retorna false (No hay stock)
+        } else {
+            return true //Caso contrario retorna true (hay stock)
+        }
     },
     home: (req, res) => {
-        let productsArray = productController.productsArr() 
+        let productsArray = productController.productsArr()
         let soldOut = [];
         let onSale = [];
         for (const e of productsArray.products) { //itera el array pasando por cada remera
@@ -48,7 +48,10 @@ const productController = {
         let sizesList = productController.productsArr().sizesList; //Se trae el array con la lista de talles que puede tener cada remera
         let productsArray = productController.productsArr().products;//Se trae el array con la lista que contiene a todas las remeras
         let idP = req.params.id; //se trae a la id ingresada en la url
-        res.render(path.join(__dirname, '../views/products/detalle.ejs'), { idP, productsArray, sizesList })
+        let correctIndex = productsArray.indexOf(productsArray.find((e)=>{ //en caso de que el indice no sea el mismo que la id (Cosa que puede pasar despues de crear y borrar varios productos)
+            return e.id === idP
+        }))
+        res.render(path.join(__dirname, '../views/products/detalle.ejs'), { correctIndex, productsArray, sizesList })
     },
 
     design: (req, res) => {
@@ -75,12 +78,12 @@ const productController = {
             req.body.description,
             req.body.price,
             parseInt(req.body.xs),
-                parseInt(req.body.s),
-                parseInt(req.body.m),
-                parseInt(req.body.l),
-                parseInt(req.body.xl),
-                parseInt(req.body.xxl)
-            )
+            parseInt(req.body.s),
+            parseInt(req.body.m),
+            parseInt(req.body.l),
+            parseInt(req.body.xl),
+            parseInt(req.body.xxl)
+        )
         let newElement = productController.productsArr();
         let nuevoId = parseInt(newElement.products[newElement.products.length - 1].id) + 1;
         newProduct.id = nuevoId.toString();
@@ -91,45 +94,50 @@ const productController = {
     },
     admEdit: (req, res) => {
         let idP = req.params.id;
-        res.render(path.join(__dirname, '../views/products/admEdit.ejs'),{idP});
+        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP });
     },
-    putEdit: (req,res) => {
+    putEdit: (req, res) => {
         function CreateNewProduct(name, desc, price, xs, s, m, l, xl, xxl) {   //POR QUE NO ME DEJA USAR EL CONSTRUCTOR DECLARADO COMO METODO DEL PRODUCTCONTROLLER???!?!?!?!
             this.name = name;
             this.description = desc;
             this.price = price
-            this.sizesQuantity = [xs, s, m, l, xl, xxl];
+            
+            if (isNaN(xs)&&isNaN(s)&&isNaN(m)&&isNaN(l)&&isNaN(xl)&&isNaN(xxl)) { //Condicional necesario para no sobreescribir los datos de stock con un 'null' cada vez que se hace una edicion donde no se especifica el stock (la idea es que se asume que si no se especifica un dato en el formulario es debido a que no se quiere cambiarlo)
+                this.sizesQuantity = undefined //Cuando se sube un undefined, en la funcion edictExistingProduct, se conservara el valor actual
+            } else { this.sizesQuantity = [xs, s, m, l, xl, xxl]; } //Si se hizo un cambio se subira
         }
         let idP = req.params.id
         let editedData = new CreateNewProduct(req.body.name_product,
             req.body.description,
             req.body.price,
             parseInt(req.body.xs),
-                parseInt(req.body.s),
-                parseInt(req.body.m),
-                parseInt(req.body.l),
-                parseInt(req.body.xl),
-                parseInt(req.body.xxl)
-            )
-        console.log(editedData);
-        let elementToEdit = productController.productsArr(); //selecciona el elemento correspondiente
-        productController.editExistingProduct(elementToEdit.products[idP],editedData) //edita el elementToEdit
-        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(elementToEdit));
+            parseInt(req.body.s),
+            parseInt(req.body.m),
+            parseInt(req.body.l),
+            parseInt(req.body.xl),
+            parseInt(req.body.xxl)
+        )
+        let parsedJSON = productController.productsArr(); //Almacena el JSON convertido en objeto dentro de una variable
+        let elementToEdit = parsedJSON.products.find((e) => { //Busca el producto de manera que lo encuentre satisfactoriamente aunque el indice del array no sea el mismo que su id
+            return e.id === idP
+        })
+        productController.editExistingProduct(elementToEdit, editedData) //edita el parsedJSON
+        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
         res.redirect('/');
     },
-    productList: (req,res)=>{
-        let productsArray = productController.productsArr().products 
+    productList: (req, res) => {
+        let productsArray = productController.productsArr().products
         let sizesList = productController.productsArr().sizesList
-        res.render(path.join(__dirname, '../views/products/products.ejs'),{productsArray, sizesList})
+        res.render(path.join(__dirname, '../views/products/products.ejs'), { productsArray, sizesList })
     },
-    deleteItem: (req,res)=>{
+    deleteItem: (req, res) => {
         let idP = req.params.id;
         let arrayToReturn = productController.productsArr(); //selecciona el elemento correspondiente
-        let elementToDelete= arrayToReturn.products.find((e)=>{
+        let elementToDelete = arrayToReturn.products.find((e) => {
             return e.id === idP
         })
         let indexOfElementToDelete = arrayToReturn.products.indexOf(elementToDelete);
-        arrayToReturn.products.splice(arrayToReturn.products.indexOf(indexOfElementToDelete),1);
+        arrayToReturn.products.splice(arrayToReturn.products.indexOf(indexOfElementToDelete), 1);
         fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(arrayToReturn));
         res.redirect('/')
     }

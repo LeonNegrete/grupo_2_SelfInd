@@ -22,13 +22,13 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="<%- productsArray[idP].image %> " class="d-block w-100" alt="...">
+                        <img src="<%- productsArray[correctIndex].image %> " class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%- productsArray[idP].image %>" class="d-block w-100" alt="...">
+                        <img src="<%- productsArray[correctIndex].image %>" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<%- productsArray[idP].image %>" class="d-block w-100" alt="...">
+                        <img src="<%- productsArray[correctIndex].image %>" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -45,17 +45,17 @@
         </div>
 
         <div class="detalle-producto">
-            <h1><%- productsArray[idP].title %> </h1>
-            <p class="precio-producto">$<%- productsArray[idP].price %> </p>
-            <p class="descripcion-producto"><%- productsArray[idP].description %> </p>
-            <% if (productsArray[idP].sizesQuantity.some((e) => (e > 0))) { %>
+            <h1><%- productsArray[correctIndex].title %> </h1>
+            <p class="precio-producto">$<%- productsArray[correctIndex].price %> </p>
+            <p class="descripcion-producto"><%- productsArray[correctIndex].description %> </p>
+            <% if (productsArray[correctIndex].sizesQuantity.some((e) => (e > 0))) { %>
                 <div class="envios-talle">
                 
                     <div class="talle-div">
                         <label for="talle">Talle</label>
                         <select id="talle" name="talle">
                             <% for( let i = 0; i < 6; i++ ) { %>
-                                <% if (productsArray[idP].sizesQuantity[i] >= 1) { %>
+                                <% if (productsArray[correctIndex].sizesQuantity[i] >= 1) { %>
                                     <option value="<%-i%>"> <%-sizesList[i]%> </option>
                                 <% } %>
                             <% } %>
