@@ -133,7 +133,7 @@ const productController = {
     deleteItem: (req, res) => {
         let idP = req.params.id;
         let arrayToReturn = productController.productsArr(); //selecciona el elemento correspondiente
-        let elementToDelete = arrayToReturn.products.find((e) => {
+        let elementToDelete = arrayToReturn.products.find((e) => { //Busca el producto de manera que lo encuentre satisfactoriamente aunque el indice del array no sea el mismo que su id
             return e.id === idP
         })
         let indexOfElementToDelete = arrayToReturn.products.indexOf(elementToDelete);

@@ -14,5 +14,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/', mainRoutes);
-
+app.get('/draw', (req,res)=>{
+    res.render(path.join(__dirname, './src/views/products/draw.ejs'))
+})
 app.listen(PORT, () => { console.log(`Servidor corriendo en ${PORT}...`) });

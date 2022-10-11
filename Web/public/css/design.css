@@ -37,6 +37,11 @@ main .remera-div img{
   mix-blend-mode:multiply;
   opacity: 90%;
 }
+.paint{
+  mix-blend-mode:none;
+  opacity: none;
+  z-index: 4;
+}
 .diseno-div{
   
   height: 100%;
@@ -45,4 +50,7 @@ main .remera-div img{
   background-size:100% ;
   background-repeat: no-repeat;
   z-index: 3;
+}
+canvas{
+  border: black solid 2px;
 }

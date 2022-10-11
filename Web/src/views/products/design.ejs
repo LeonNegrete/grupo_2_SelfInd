@@ -8,6 +8,7 @@
 </head>
 
 <body>
+
     <%- include('../partials/header')%> 
     <main>
         <h1>Es momento de hacer lo tuyo, de hacerlo tuyo...</h1>
@@ -18,9 +19,18 @@
             <div class="mover-diseno-div">
                 <div id="diseno-div" class="diseno-div"></div>
             </div>
+            <div class="mover-diseno-div paint">
+                <div id="diseno-div-canvas" class="diseno-div paint"></div>
+            </div>
 
         </div>
     </main>
+    <canvas id="canvas" width="300px" height="300px"></canvas>
+    <br>
+    <input type="color" name="color" id="color" oninput="color(this.value);">
+    <input type="range" name="girth" id="girth" oninput="girth(this.value)" min="1" max="5" value="1">
+    <button id="preview-btn">Preview</button>
+    
     <%- include('../partials/footer') %> 
     <script src="/design.js"></script>
 </body>
