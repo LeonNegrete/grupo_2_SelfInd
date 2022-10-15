@@ -14,7 +14,7 @@
 
             <section class="create-form-container">
 
-                <form action="/products" method="POST" class="create-form-sections">
+                <form action="/products" method="POST" class="create-form-sections" enctype="multipart/form-data">
 
 
                     <h1 class="title-carga">CHARGE NEW PRODUCT</h1>
@@ -30,11 +30,13 @@
 
                         <textarea name="description" id="descripcion" placeholder="Descripción del producto"
                             required></textarea>
+
+                        
                     </fieldset>
 
                     <fieldset class="fieldCreate">
                         <legend class="legendCreate"> IMAGEN </legend>
-                        <input type="file" name="avatar" accept="image/*">
+                        <input type="file" name="image" id="image" accept="image/png, image/jpg, image/jpeg">
                     </fieldset>
 
                     <fieldset class="fieldCreate">

@@ -59,7 +59,7 @@ form input:invalid{
 button{
     width: 65%;
     padding: 0.7rem;  
-    border-radius: 15px;
+    border-radius: 12px;
     background-color: #731963;
     color: white;
     border: none;

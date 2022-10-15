@@ -204,6 +204,11 @@ main {
     border: solid 1px var(--main-emphasis) !important;
     background-color: #ffffff !important;
 }
+.make-btn:hover a{
+    color:var(--main-emphasis) !important;
+}
+
+
 
 
 /* /////////////FOOTER/////////////// */

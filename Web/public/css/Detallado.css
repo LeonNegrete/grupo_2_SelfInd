@@ -70,13 +70,7 @@ main{
 .envios-talle{
     display: flex;
 }
-.botones button{
-    padding: 0.7rem;  
-    border-radius: 15px;
-    background-color: #731963;
-    color: white;
-    border: none;
-}
+
 footer{
     margin-top: auto;
 }

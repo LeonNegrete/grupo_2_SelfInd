@@ -14,7 +14,7 @@
             <% for (let i=0;i < productsArray.length ;i++){ %>
                 <article class="articulo">
                     <a class="articulo" href="/products/<%=productsArray[i].id%> ">
-                        <img src="<%- productsArray[i].image -%>" alt="" class="img-articulo">
+                        <img src="<%-"../images/Remeras/" +  productsArray[i].image -%>" alt="" class="img-articulo">
                         <h5 class="titulo">
                             <%-productsArray[i].title %>
                              - $<%-productsArray[i].price %>

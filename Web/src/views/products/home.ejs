@@ -46,7 +46,7 @@
                 <% for (let i=0;i < onSale.length ;i++){ %>
                 <article class="articulo">
                     <a class="articulo" href="/products/<%=onSale[i].id%> ">
-                        <img src= "<%- onSale[i].image -%>" alt="" class="img-articulo">
+                        <img src="<%-"../images/Remeras/" +  onSale[i].image -%>" alt="" class="img-articulo">
                         <h5 class="titulo"><%- onSale[i].title %> </h5>
                         <h5 class="precio">$<%- onSale[i].price %> </h5>
                     </a>
@@ -58,7 +58,7 @@
                 <% for (let i=0;i < soldOut.length ;i++){ %>
                 <article class="articulo">
                     <a class="articulo" href="/products/<%=soldOut[i].id%> ">
-                        <img src= "<%- soldOut[i].image -%>" alt="" class="img-articulo">
+                        <img src= "<%-"../images/Remeras/" +  soldOut[i].image -%>" alt="" class="img-articulo">
                         <h5 class="titulo"><%- soldOut[i].title %> </h5>
                         <h5 class="precio">SOLD OUT</h5>
                         <h5 class="precio" style="text-decoration: line-through ;">$<%- soldOut[i].price %> </h5>
