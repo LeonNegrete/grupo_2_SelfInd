@@ -32,6 +32,7 @@ const productController = {
         }
     },
     home: (req, res) => {
+        console.log(req)
         let productsArray = productController.productsArr()
         let soldOut = [];
         let onSale = [];
@@ -42,6 +43,7 @@ const productController = {
                 soldOut.push(e) //Caso contrario se los agrega al array de disponibles
             }
         }
+        console.log(res)
         res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut }) //Se exportan los arrays de vendidos y disponibles
     },
 
