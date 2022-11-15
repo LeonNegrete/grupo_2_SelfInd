@@ -65,19 +65,17 @@ button{
     border: none;
 }
 
-.elementoForm{
-    margin-bottom: 5%;
-}
-.elemento-form{             /*No usamos la misma clase para no joder el posicionamiento del label*/
+
+.elemento-form{             
     margin-bottom: 5%;
 }
 
 
-.div-email, .div-contrasena{
+.div-email, .div-contrasena, .div-profile, .div-username{ /* cambiar esto a una sola clase (mas prolijo) */
     position: relative;
 }
 
-#contraseña, #email{
+#password, #email, #username, #profile { /* cambiar esto a una sola clase (mas prolijo) */
     width: 100%;
     
 }
@@ -102,9 +100,17 @@ form input:focus + #label-pass-rep,
 form input:valid + #label-pass-rep,
 form input:invalid + #label-pass-rep,
 
-form input:focus + #label-email,
+form input:focus + #label-email,                /* revisar esto, no puede ser que se tenga que escribir asi */
 form input:valid + #label-email,
-form input:invalid + #label-email
+form input:invalid + #label-email,
+
+form input:focus + #label-username,
+form input:valid + #label-username,
+form input:invalid + #label-username,
+
+form input:focus + #label-profile,
+form input:valid + #label-profile,
+form input:invalid + #label-profile
 {
     transform: translateY(-30%) scale(0.8);
     background-color: white;
@@ -187,7 +193,7 @@ margin-top: auto;
         position: relative;
     }
     
-    #contraseña, #email{
+    #password, #email{
         width: 100%;
         
     }

@@ -35,8 +35,5 @@ router.delete('/products/:id', productController.deleteItem )
 router.get('/design', productController.design)
 router.get('/carrito', productController.carrito)
 
-//USUARIOS
-router.get('/login', userController.login )
-router.get('/register', userController.register)
 
 module.exports = router;

@@ -11,12 +11,20 @@
     <%- include('../partials/header')%> 
     <main>
         <div class="card">
-            <form action="POST">
+            <form action="/user" method="POST" enctype="multipart/form-data">
                 <h1 class="elemento-form">Crear una cuenta</h1>
+
+                
+                <div class="div-email">
+
+                    <input type="text" name="username" id="username" class="elemento-form">
+                    <label id="label-username" for="username" class="label">Nombre de usuario</label>
+
+                </div>
 
                 <div class="div-email">
 
-                    <input id="email" name="id" class="elemento-form" type="email">
+                    <input id="email" name="email" class="elemento-form" type="email">
                     <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
                     <label id="label-email" class="label" for="email">E-mail</label>
 
@@ -25,21 +33,28 @@
 
                 <div class="div-contrasena">
 
-                    <input id="contraseña" name="contraseña " class="elemento-form" type="text">
+                    <input id="password" name="password" class="elemento-form" type="text">
                     <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
-                    <label id="label-pass" for="contraseña" class="label">Contraseña</label>
+                    <label id="label-pass" for="password" class="label">Contraseña</label>
 
                 </div>
 
-                <div class="div-contrasena">
+<!--                 <div class="div-contrasena">
 
-                    <input id="contraseña" name="contraseña " class="elemento-form" type="text">
-                    <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
-                    <label id="label-pass-rep" for="contraseña" class="label">Repetir contraseña</label>
+                    <input id="password" name="password2" class="elemento-form" type="text">
+                    
+                    <label id="label-pass-rep" for="password2" class="label">Repetir contraseña</label>
+
+                </div> -->
+
+                <div class="div-profile">
+
+                    <input type="file" name="profile" id="profile" class="elemento-form">
+                    <label id="label-profile" for="profile" class="label">Foto de perfil</label>
 
                 </div>
 
-                <button class="elemento-form  btn btn-outline-primary make-btn">Registrarse</button>
+                <button type="submit" class="elemento-form  btn btn-outline-primary make-btn">Registrarse</button>
                 <a class="elemento-form" href="/login">¿Ya tienes una cuenta?</a>
             </form>
         </div>
