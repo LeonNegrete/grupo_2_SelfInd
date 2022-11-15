@@ -12,23 +12,23 @@
     <%- include('../partials/header')%> 
     <main>
         <div class="card">
-            <form action="POST">
+            <form method="POST" action="/user/login">
                 <h1 class="elemento-form">Iniciar Sesion</h1>
 
                 <div class="div-email">
 
-                    <input id="email" name="id" class="elementoForm" type="email" ><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                    <input id="email" name="email" class="elemento-form" type="email" ><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
                     <label id="label-email" class="label" for="email">E-mail</label>
 
                 </div>
 
                 <div class="div-contrasena">
                    
-                    <input id="contraseña" name="contraseña " class="elementoForm" type="text"><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
-                    <label id="label-pass" for="contraseña" class="label">Contraseña</label>
+                    <input id="password" name="password" class="elemento-form" type="text"><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                    <label id="label-pass" for="password" class="label">Contraseña</label>
 
                 </div>
-                <button class="elemento-form btn btn-outline-primary make-btn">Ingresar</button>
+                <button type="submit" class="elemento-form btn btn-outline-primary make-btn">Ingresar</button>
                 <a class="elemento-form pass-forgot" href="#">¿Olvidaste tu contraseña?</a>
             </form>
         </div>

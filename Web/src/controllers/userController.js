@@ -13,13 +13,29 @@ const userController = {
         res.render(path.join(__dirname, '../views/users/login.ejs'))
     },
 
-    register: (req, res) => {
-        res.render(path.join(__dirname, '../views/users/register.ejs'))
+    loginPost: (req,res) => {
+        let listado = userController.usersObj();
+        let loginStatus = false
+        for ( user of listado.users){
+            
+            if (user.email == req.body.email){
+                console.log(req.body.password)
+                if (bcrypt.compareSync(req.body.password, user.password)){
+                    req.session.loginStatus = true;
+                    req.session.username = user.username;
+                    req.session.profile = user.profile;
+                    req.session.email = user.email;
+                }
+            }
+        }
+        
+        req.session.loginStatus ? res.redirect('/'): res.send('Error');
+
     },
 
-    list: (req, res) => {
-        let listado = userController.usersObj().users;
-        res.render(path.join(__dirname, '../views/users/list.ejs'), { listado })
+    register: (req, res) => {
+        let session = req.session.username;
+        res.render(path.join(__dirname, '../views/users/register.ejs'), {session})
     },
 
     registerPost: (req, res) => {
@@ -39,6 +55,11 @@ const userController = {
         fs.writeFileSync(path.join(__dirname, '../data/users.json'), JSON.stringify(listado))
 
         res.redirect('/user/list');
+    },
+
+    list: (req, res) => {
+        let listado = userController.usersObj().users;
+        res.render(path.join(__dirname, '../views/users/list.ejs'), { listado })
     }
 }
 

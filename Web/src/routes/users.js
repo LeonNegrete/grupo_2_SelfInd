@@ -21,6 +21,7 @@ var upload = multer({storage: storage})
 router.get('/login', userController.login )
 router.get('/register', userController.register)
 router.post('/',upload.single('profile'), userController.registerPost)
+router.post('/login',upload.single('profile'), userController.loginPost)
 //LISTAR
 router.get('/list', userController.list)
 //
