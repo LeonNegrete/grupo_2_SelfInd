@@ -68,7 +68,11 @@ const userController = {
         }else{
             res.send("User logged: " + req.session.username + " Email: " + req.session.email + " Picture: " + req.session.profile);
         }
-    }
+    },
+
+    profile: (req, res) => {
+        res.render(path.join(__dirname, '../views/users/profile.ejs'))
+    },
 }
 
 module.exports = userController;

@@ -26,6 +26,8 @@ router.post('/login',upload.single('profile'), userController.loginPost)
 router.get('/list', userController.list)
 //SESSION
 router.get('/checkLogin', userController.checkLogin)
+//PROFILE
+router.get('/profile', userController.profile)
 
 
 module.exports = router;
