@@ -32,7 +32,7 @@ const productController = {
         }
     },
     home: (req, res) => {
-        console.log(req)
+        let session = req.session;
         let productsArray = productController.productsArr()
         let soldOut = [];
         let onSale = [];
@@ -43,34 +43,37 @@ const productController = {
                 soldOut.push(e) //Caso contrario se los agrega al array de disponibles
             }
         }
-        console.log(res)
-        res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut }) //Se exportan los arrays de vendidos y disponibles
+        res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut, session}) //Se exportan los arrays de vendidos y disponibles
     },
 
     detalle: (req, res) => {
+        let session = req.session;
         let sizesList = productController.productsArr().sizesList; //Se trae el array con la lista de talles que puede tener cada remera
         let productsArray = productController.productsArr().products;//Se trae el array con la lista que contiene a todas las remeras
         let idP = req.params.id; //se trae a la id ingresada en la url
         let correctIndex = productsArray.indexOf(productsArray.find((e) => { //en caso de que el indice no sea el mismo que la id (Cosa que puede pasar despues de crear y borrar varios productos)
             return e.id === idP
         }))
-        res.render(path.join(__dirname, '../views/products/detalle.ejs'), { correctIndex, productsArray, sizesList })
+        res.render(path.join(__dirname, '../views/products/detalle.ejs'), { correctIndex, productsArray, sizesList, session })
     },
 
     design: (req, res) => {
-        res.render(path.join(__dirname, '../views/products/design.ejs'))
+        let session = req.session;
+        res.render(path.join(__dirname, '../views/products/design.ejs'),{session})
     },
 
     carrito: (req, res) => {
-        res.render(path.join(__dirname, '../views/products/shop-car.ejs'))
+        let session = req.session;
+        res.render(path.join(__dirname, '../views/products/shop-car.ejs'),{session})
     },
 
     admCreate: (req, res) => {
-        res.render(path.join(__dirname, '../views/products/admCreate'))
+        let session = req.session;
+        res.render(path.join(__dirname, '../views/products/admCreate'),{session})
     },
 
     admCreatePost: (req, res) => {
-
+        let session = req.session;
         let newElement = productController.productsArr();
         let newProduct = {
             ...req.body,
@@ -124,9 +127,10 @@ const productController = {
         res.redirect('/');
     },
     productList: (req, res) => {
+        let session = req.session;
         let productsArray = productController.productsArr().products
         let sizesList = productController.productsArr().sizesList
-        res.render(path.join(__dirname, '../views/products/products.ejs'), { productsArray, sizesList })
+        res.render(path.join(__dirname, '../views/products/products.ejs'), { productsArray, sizesList, session })
     },
     deleteItem: (req, res) => {
         let idP = req.params.id;

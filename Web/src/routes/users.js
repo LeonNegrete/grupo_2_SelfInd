@@ -24,8 +24,6 @@ router.post('/',upload.single('profile'), userController.registerPost)
 router.post('/login',upload.single('profile'), userController.loginPost)
 //LISTAR
 router.get('/list', userController.list)
-//SESSION
-router.get('/checkLogin', userController.checkLogin)
 
 
 module.exports = router;

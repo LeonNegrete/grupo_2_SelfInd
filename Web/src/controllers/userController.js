@@ -10,7 +10,11 @@ const userController = {
     },
 
     login: (req, res) => {
-        res.render(path.join(__dirname, '../views/users/login.ejs'))
+        let session = req.session;
+/*         if (typeof(session.username) !== 'undefined'){
+            res.render(path.join(__dirname, '../views/users/detail.ejs'))     //Cuando se tenga el detail
+        } */
+        res.render(path.join(__dirname, '../views/users/login.ejs'),{session})
     },
 
     loginPost: (req,res) => {
@@ -19,7 +23,6 @@ const userController = {
         for ( user of listado.users){
             
             if (user.email == req.body.email){
-                console.log(req.body.password)
                 if (bcrypt.compareSync(req.body.password, user.password)){
                     req.session.loginStatus = true;
                     req.session.username = user.username;
@@ -29,12 +32,15 @@ const userController = {
             }
         }
         
-        req.session.loginStatus ? res.redirect('/user/checkLogin'): res.send('Error');
+        req.session.loginStatus ? res.redirect('/'): res.send('Error');
 
     },
 
     register: (req, res) => {
-        let session = req.session.username;
+        let session = req.session;
+/*         if (typeof(session.username) !== 'undefined'){
+            res.render(path.join(__dirname, '../views/users/detail.ejs'))     //Cuando se tenga el detail
+        } */
         res.render(path.join(__dirname, '../views/users/register.ejs'), {session})
     },
 
@@ -58,16 +64,9 @@ const userController = {
     },
 
     list: (req, res) => {
+        let session = req.session;
         let listado = userController.usersObj().users;
-        res.render(path.join(__dirname, '../views/users/list.ejs'), { listado })
-    },
-
-    checkLogin: (req, res) => {
-        if (req.session == undefined){
-            res.send("No logueado");
-        }else{
-            res.send("User logged: " + req.session.username + " Email: " + req.session.email + " Picture: " + req.session.profile);
-        }
+        res.render(path.join(__dirname, '../views/users/list.ejs'), { listado, session })
     }
 }
 

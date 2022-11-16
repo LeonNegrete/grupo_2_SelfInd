@@ -14,10 +14,18 @@
         </ul>
     </div>
     <div class="header-nav-credentials">
-        <ul>
-            <li class="nav-text-element"><a href="/user/login">Log in</a></li>
-            <li class="nav-text-element"><a href="/user/register">Sing in</a></li>
-        </ul>
+        <% if (typeof(session.username) == 'undefined') { %>
+            <ul>
+                <li class="nav-text-element"><a href="/user/login">Log in</a></li>
+                <li class="nav-text-element"><a href="/user/register">Sing in</a></li>
+            </ul>
+        <% }else{ %>
+            <ul>
+                <li class="nav-text-element"><a href="/user/detail/:id"><%= session.username %> </a></li>
+                <li class="nav-text-element"><a href="/user/detail/:id" + session.id-%>"><img src="<%-"../images/users/" +  session.profile -%>" width="30px" height="30px"  ></a></li>
+            </ul> 
+        <% } %>    
+
     </div>
     <div class="cart-div">
         <a href="/carrito" class="cart-div">
