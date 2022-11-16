@@ -13,7 +13,10 @@ const PORT = 3030;
 //CONFIG EJS
 app.set("view engine", "ejs");
 //MIDDLEWARES
-app.use(session({secret: "SelfInd"}));
+app.use(session({
+    secret: "SelfInd",
+    resave: false, 
+    saveUninitialized: true}));
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

@@ -29,7 +29,7 @@ const userController = {
             }
         }
         
-        req.session.loginStatus ? res.redirect('/'): res.send('Error');
+        req.session.loginStatus ? res.redirect('/user/checkLogin'): res.send('Error');
 
     },
 
@@ -60,6 +60,14 @@ const userController = {
     list: (req, res) => {
         let listado = userController.usersObj().users;
         res.render(path.join(__dirname, '../views/users/list.ejs'), { listado })
+    },
+
+    checkLogin: (req, res) => {
+        if (req.session == undefined){
+            res.send("No logueado");
+        }else{
+            res.send("User logged: " + req.session.username + " Email: " + req.session.email + " Picture: " + req.session.profile);
+        }
     }
 }
 
