@@ -21,8 +21,8 @@
             </ul>
         <% }else{ %>
             <ul>
-                <li class="nav-text-element"><a href="/user/detail/:id"><%= session.username %> </a></li>
-                <li class="nav-text-element"><a href="/user/detail/:id" + session.id-%>"><img src="<%-"../images/users/" +  session.profile -%>" width="30px" height="30px"  ></a></li>
+                <li class="nav-text-element"><a href="/user/profile"><%= session.username %> </a></li>
+                <li class="nav-text-element"><a href="/user/profile" + session.id-%>"><img src="<%-"../images/users/" +  session.profile -%>" width="30px" height="30px"  ></a></li>
             </ul> 
         <% } %>    
 

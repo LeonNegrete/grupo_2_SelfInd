@@ -67,7 +67,13 @@ const userController = {
         let session = req.session;
         let listado = userController.usersObj().users;
         res.render(path.join(__dirname, '../views/users/list.ejs'), { listado, session })
+    },
+
+    profile: (req, res) => {
+        let session = req.session;
+        res.render(path.join(__dirname, '../views/users/profile.ejs'), {session})
     }
+    
 }
 
 module.exports = userController;
