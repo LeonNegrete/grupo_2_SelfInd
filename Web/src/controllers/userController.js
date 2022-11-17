@@ -33,14 +33,14 @@ const userController = {
             }
         }
         
-        req.session.loginStatus ? res.redirect('/'): res.send('Error');
+        req.session.loginStatus ? res.redirect('/'): res.redirect('/user/login');
 
     },
 
 
     register: (req, res) => {
         let session = req.session;
-         if (typeof(session.username) !== 'undefined'){
+        if (typeof(session.username) !== 'undefined'){
             res.redirect('/user/profile')     
         }else{
             res.render(path.join(__dirname, '../views/users/register.ejs'), {session})
@@ -75,7 +75,13 @@ const userController = {
 
     profile: (req, res) => {
         let session = req.session;
-        res.render(path.join(__dirname, '../views/users/profile.ejs'), {session})
+        //console.log(session.username);
+        if (typeof(session.username) !== 'undefined'){
+            res.render(path.join(__dirname, '../views/users/profile.ejs'), {session})
+        }else{
+            res.redirect('/user/login') 
+        }
+        
     }
     
 }
