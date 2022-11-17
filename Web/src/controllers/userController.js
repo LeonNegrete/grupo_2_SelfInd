@@ -11,10 +11,11 @@ const userController = {
 
     login: (req, res) => {
         let session = req.session;
-/*         if (typeof(session.username) !== 'undefined'){
-            res.render(path.join(__dirname, '../views/users/detail.ejs'))     //Cuando se tenga el detail
-        } */
-        res.render(path.join(__dirname, '../views/users/login.ejs'),{session})
+        if (typeof(session.username) !== 'undefined'){
+            res.redirect('/user/profile')     
+        }else{
+            res.render(path.join(__dirname, '../views/users/login.ejs'), {session})
+        }
     },
 
     loginPost: (req,res) => {
@@ -36,12 +37,15 @@ const userController = {
 
     },
 
+
     register: (req, res) => {
         let session = req.session;
-/*         if (typeof(session.username) !== 'undefined'){
-            res.render(path.join(__dirname, '../views/users/detail.ejs'))     //Cuando se tenga el detail
-        } */
-        res.render(path.join(__dirname, '../views/users/register.ejs'), {session})
+         if (typeof(session.username) !== 'undefined'){
+            res.redirect('/user/profile')     
+        }else{
+            res.render(path.join(__dirname, '../views/users/register.ejs'), {session})
+        }
+        
     },
 
     registerPost: (req, res) => {

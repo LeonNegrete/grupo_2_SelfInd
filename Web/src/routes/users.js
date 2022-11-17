@@ -17,15 +17,14 @@ var upload = multer({storage: storage})
 //aqui van las nuevas rutas
 
 
-//CREAR Y ACCEDER
+//RUTAS A LAS QUE ENTRAR SOLO SI NO SE ESTA LOGEADO
 router.get('/login', userController.login )
 router.get('/register', userController.register)
 router.post('/',upload.single('profile'), userController.registerPost)
 router.post('/login',upload.single('profile'), userController.loginPost)
-//LISTAR
+//RUTA QUE SIEMPRE SE PUEDE ENTRAR
 router.get('/list', userController.list)
-//SESSION
-//PROFILE
+// RUTAS A INGRESAR SOLO SI SE ESTA LOGEADO
 router.get('/profile', userController.profile)
 
 

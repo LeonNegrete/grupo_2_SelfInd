@@ -18,11 +18,11 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage})
 
 
-//HOME
+//HOME (PARA ENTRAR LOGUEADO O NO)
 router.get('/', productController.home)
 router.get('/home', productController.home)
 
-//ADMINISTRACION
+//ADMINISTRACION (PARA ADMINS)
 router.get('/products', productController.productList ); 
 router.get('/products/create', productController.admCreate)
 router.get('/products/:id', productController.detalle)
@@ -31,7 +31,7 @@ router.get('/products/:id/edit', productController.admEdit);
 router.put('/products/:id',upload.single('image'), productController.putEdit);
 router.delete('/products/:id', productController.deleteItem )
 
-//PRODUCTOS
+//PRODUCTOS (PARA ENTRAR LOGUEADO O NO)
 router.get('/design', productController.design)
 router.get('/carrito', productController.carrito)
 
