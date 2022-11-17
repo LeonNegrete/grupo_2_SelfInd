@@ -26,6 +26,7 @@ router.post('/login',upload.single('profile'), userController.loginPost)
 router.get('/list', userController.list)
 // RUTAS A INGRESAR SOLO SI SE ESTA LOGEADO
 router.get('/profile', userController.profile)
+router.get('/logout', userController.logout)
 
 
 module.exports = router;

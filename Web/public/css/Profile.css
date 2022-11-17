@@ -118,6 +118,14 @@ body {
     vertical-align: middle;
 }
 
+.logout{
+    margin: 10px;
+    padding: 0.7rem;  
+    border-radius: 15px;
+    background-color: #731963;
+    color: white;
+    border: none;
+}
 
 /* adactacion a dispositivos */
 @media (max-width: 750px) {
@@ -145,5 +153,14 @@ body {
     .seccion-perfil-usuario .redes-sociales .boton-redes+.boton-redes {
         margin-left: 1rem;
         margin-top: 0;
+    }
+
+    .exit{
+        width: 65%;
+        padding: 0.7rem;  
+        border-radius: 15px;
+        background-color: #731963;
+        color: white;
+        border: none;
     }
 }
