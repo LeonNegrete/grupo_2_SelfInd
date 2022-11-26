@@ -15,16 +15,33 @@
             <form method="POST" action="/user/login">
                 <h1 class="elemento-form">Iniciar Sesion</h1>
 
-                <div class="div-email">
-                    <input id="email" name="email" class="elemento-form" type="email" ><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
-                    <label id="label-email" class="label" for="email">E-mail</label>
-                </div>
+                <% if (typeof(recordar) == 'undefined') { %>
+                    <div class="div-email">
+                        <input id="email" name="email" class="elemento-form" type="email" ><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                        <label id="label-email" class="label" for="email">E-mail</label>
+                    </div>
+    
+                    <div class="div-contrasena">
+                        <input id="password" name="password" class="elemento-form" type="password"><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                        <label id="label-pass" for="password" class="label">Contraseña</label>
+                    </div>
+    
+                    <div class="div-recordar">
+                        <input class="elemento-form" id="recordar" name="recordar" type="checkbox">
+                        <label class="elemento-form" id="label-recordar" for="recordar"> Recordar cuenta </label>
+                    </div>
+                <% }else{ %>
+                    <div class="div-email">
+                        <input id="email" name="email" class="elemento-form" type="email" value="<%= recordar %>"><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                        <label id="label-email" class="label" for="email">E-mail</label>
+                    </div>
+    
+                    <div class="div-contrasena">
+                        <input id="password" name="password" class="elemento-form" type="password"><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                        <label id="label-pass" for="password" class="label">Contraseña</label>
+                    </div>
 
-                <div class="div-contrasena">
-                    <input id="password" name="password" class="elemento-form" type="password"><!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
-                    <label id="label-pass" for="password" class="label">Contraseña</label>
-
-                </div>
+                <% } %>  
 
                 <button type="submit" class="elemento-form btn btn-outline-primary make-btn">Ingresar</button>
                 <a class="elemento-form pass-forgot" href="#">¿Olvidaste tu contraseña?</a>

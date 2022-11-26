@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { CLIENT_RENEG_LIMIT } = require('tls');
 const userController = {
 
     usersObj: () => {
@@ -11,10 +12,12 @@ const userController = {
 
     login: (req, res) => {
         let session = req.session;
+        let recordar = req.cookies.last_account;
+        console.log(recordar);
         if (typeof(session.username) !== 'undefined'){
             res.redirect('/user/profile')     
         }else{
-            res.render(path.join(__dirname, '../views/users/login.ejs'), {session})
+            res.render(path.join(__dirname, '../views/users/login.ejs'), {session, recordar})
         }
     },
 
@@ -29,6 +32,9 @@ const userController = {
                     req.session.username = user.username;
                     req.session.profile = user.profile;
                     req.session.email = user.email;
+                    if (req.body.recordar){
+                        res.cookie('last_account', req.body.email, {maxAge: 60000 })
+                    }
                 }
             }
         }

@@ -6,13 +6,15 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override');
 const express = require('express');
 const path = require('path');
-const session = require('express-session')
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 //CONFIG EXPRESS
 const app = express();
 const PORT = 3030;
 //CONFIG EJS
 app.set("view engine", "ejs");
 //MIDDLEWARES
+app.use(cookieParser())
 app.use(session({
     secret: "SelfInd",
     resave: false, 

@@ -43,10 +43,10 @@ form{
 form input{
     position: relative;
     outline: none;
-   height: 2.5rem;
-   width: 20%;
-   transition: all 0.5s; 
-   padding: 1.5rem;   
+    height: 2.5rem;
+    width: 20%;
+    transition: all 0.5s; 
+    padding: 1.5rem;   
 }
 form input:focus{
     border: solid 0.125rem #731963;
@@ -65,11 +65,9 @@ button{
     border: none;
 }
 
-
 .elemento-form{             
     margin-bottom: 5%;
 }
-
 
 .div-email, .div-contrasena, .div-profile, .div-username{ /* cambiar esto a una sola clase (mas prolijo) */
     position: relative;
@@ -77,7 +75,22 @@ button{
 
 #password, #email, #username, #profile { /* cambiar esto a una sola clase (mas prolijo) */
     width: 100%;
-    
+}
+
+.div-recordar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#recordar{
+    height: 1.5rem;
+    margin-right: 5px;
+}
+
+a{
+    text-align: center;
 }
 
 .label{
