@@ -22,8 +22,14 @@ router.get('/login', userController.login )
 router.get('/register', userController.register)
 router.post('/',upload.single('profile'), userController.registerPost)
 router.post('/login',upload.single('profile'), userController.loginPost)
+
 //RUTA QUE SIEMPRE SE PUEDE ENTRAR
-router.get('/list', userController.list)
+router.get('/list', (req,res,next) => {
+    console.log("MD de ruta");
+    next();
+},
+userController.list)
+
 // RUTAS A INGRESAR SOLO SI SE ESTA LOGEADO
 router.get('/profile', userController.profile)
 router.get('/logout', userController.logout)
