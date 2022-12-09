@@ -11,14 +11,10 @@ const userController = {
     },
 
     login: (req, res) => {
-        let session = req.session;
         let recordar = req.cookies.last_account;
-        console.log(recordar);
-        if (typeof(session.username) !== 'undefined'){
-            res.redirect('/user/profile')     
-        }else{
-            res.render(path.join(__dirname, '../views/users/login.ejs'), {session, recordar})
-        }
+        let session = req.session;
+
+        res.render(path.join(__dirname, '../views/users/login.ejs'), {session,recordar})
     },
 
     loginPost: (req,res) => {
@@ -46,12 +42,8 @@ const userController = {
 
     register: (req, res) => {
         let session = req.session;
-        if (typeof(session.username) !== 'undefined'){
-            res.redirect('/user/profile')     
-        }else{
-            res.render(path.join(__dirname, '../views/users/register.ejs'), {session})
-        }
         
+        res.render(path.join(__dirname, '../views/users/register.ejs'), { session })
     },
 
     registerPost: (req, res) => {
@@ -81,13 +73,8 @@ const userController = {
 
     profile: (req, res) => {
         let session = req.session;
-        //console.log(session.username);
-        if (typeof(session.username) !== 'undefined'){
-            res.render(path.join(__dirname, '../views/users/profile.ejs'), {session})
-        }else{
-            res.redirect('/user/login') 
-        }
         
+        res.render(path.join(__dirname, '../views/users/profile.ejs'), {session})
     }, 
 
     logout: (req, res) => {

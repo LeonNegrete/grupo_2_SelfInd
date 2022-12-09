@@ -1,7 +1,11 @@
 const express = require("express");
-const userController = require("../controllers/userController")
-const router = express.Router()
+const userController = require("../controllers/userController");
+const router = express.Router();
 const path = require('path');
+
+//MIDDLEWARE CUSTOM
+const sessionGuestMD = require('../middleware/sessionGuestMD');
+const sessionUserMD = require('../middleware/sessionUserMD');
 
 const multer  = require('multer')
 var storage = multer.diskStorage({
@@ -18,21 +22,17 @@ var upload = multer({storage: storage})
 
 
 //RUTAS A LAS QUE ENTRAR SOLO SI NO SE ESTA LOGEADO
-router.get('/login', userController.login )
-router.get('/register', userController.register)
-router.post('/',upload.single('profile'), userController.registerPost)
-router.post('/login',upload.single('profile'), userController.loginPost)
+router.get('/login', sessionGuestMD ,userController.login )
+router.get('/register', sessionGuestMD ,userController.register)
+router.post('/', sessionGuestMD, upload.single('profile'), userController.registerPost)
+router.post('/login', sessionGuestMD, upload.single('profile'), userController.loginPost)
 
 //RUTA QUE SIEMPRE SE PUEDE ENTRAR
-router.get('/list', (req,res,next) => {
-    console.log("MD de ruta");
-    next();
-},
-userController.list)
+router.get('/list', userController.list) //Hacer visible SOLO para admin despues
 
 // RUTAS A INGRESAR SOLO SI SE ESTA LOGEADO
-router.get('/profile', userController.profile)
-router.get('/logout', userController.logout)
+router.get('/profile', sessionUserMD, userController.profile)
+router.get('/logout', sessionUserMD, userController.logout)
 
 
 module.exports = router;

@@ -10,6 +10,8 @@ const path = require('path');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+//const pruebasMD = require('./src/middleware/pruebasMD')
+
 //CONFIG EXPRESS
 const app = express();
 const PORT = 3030;
@@ -29,10 +31,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
 //MIDDLEWARES CUSTOM
-app.use( (req,res,next) => {
-    console.log("Middleware custom");
-    next();
-})
+//app.use(pruebasMD);
 
 //CONFIG RUTAS
 app.use('/', mainRoutes);
