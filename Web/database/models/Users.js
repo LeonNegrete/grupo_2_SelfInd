@@ -20,6 +20,9 @@ module.exports = (sequelize, dataTypes) => {
         },
         user_admin: {
             type: dataTypes.INTEGER
+        },
+        user_pic:{
+            type: dataTypes.STRING
         }
     };
     let config = {

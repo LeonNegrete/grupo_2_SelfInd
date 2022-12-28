@@ -2,6 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const { CLIENT_RENEG_LIMIT } = require('tls');
+const db = require('../../database/models/index');
+const sequelize = require('sequelize')
 const userController = {
 
     usersObj: () => {
@@ -47,27 +49,25 @@ const userController = {
     },
 
     registerPost: (req, res) => {
-        let listado = userController.usersObj();
         console.log(req.body)
         if (req.file) {
             var prof = req.file.filename
         } else { var prof = 'default.png' }
-        let nuevoUser = {
-            id: (parseInt(listado.users[listado.users.length - 1].id) + 1),
-            username: req.body.username,
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 10),
-            profile: prof
-        }
-        listado.users.push(nuevoUser)
-        fs.writeFileSync(path.join(__dirname, '../data/users.json'), JSON.stringify(listado))
 
+        db.Users.create({
+            user_name: req.body.name,
+            user_nick: req.body.username,
+            user_email: req.body.email,
+            user_pass: bcrypt.hashSync(req.body.password, 10),
+            user_pic: prof
+    })
         res.redirect('/user/list');
     },
 
     list: (req, res) => {
         let session = req.session;
-        let listado = userController.usersObj().users;
+        /* let listado = userController.usersObj().users; */
+        let listado = db.find
         res.render(path.join(__dirname, '../views/users/list.ejs'), { listado, session })
     },
 

@@ -13,7 +13,14 @@
         <div class="card">
             <form action="/user" method="POST" enctype="multipart/form-data">
                 <h1 class="elemento-form">Crear una cuenta</h1>
-
+                
+                <div class="div-email"> <!-- NOMBRE -->
+                
+                    <input id="email" name="name" class="elemento-form" type="text">
+                    <!-- Por fines esteticos no le ponemos aun los required, ya que sin javascript no podemos configurar el input de manera que solo muestre el invalid despues del intento de submit -->
+                    <label id="label-email" class="label" for="name">Nombre</label>
+                
+                </div>
                 
                 <div class="div-email">
 
@@ -31,6 +38,7 @@
                 </div>
 
 
+
                 <div class="div-contrasena">
 
                     <input id="password" name="password" class="elemento-form" type="password">
@@ -38,14 +46,6 @@
                     <label id="label-pass" for="password" class="label">Contraseña</label>
 
                 </div>
-
-<!--                 <div class="div-contrasena">
-
-                    <input id="password" name="password2" class="elemento-form" type="text">
-                    
-                    <label id="label-pass-rep" for="password2" class="label">Repetir contraseña</label>
-
-                </div> -->
 
                 <div class="div-profile">
 
