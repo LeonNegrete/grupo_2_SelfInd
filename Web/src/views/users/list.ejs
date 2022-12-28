@@ -9,13 +9,14 @@
 <body>
     <%- include('../partials/header')%> 
     <main>
-        
+
+        <% console.log(listado) %> 
         <% for( let i = 0; i < listado.length; i++ ) { %>
             <div>
-                <img src="<%-"../images/users/" +  listado[i].profile -%>"  alt="../images/users/default.png" width="50px" height="50px">
-                <p><%= listado[i].username %> </p>
-                <p><%= listado[i].email %> </p>
-                <p><%= listado[i].password %> </p>
+                <img src="<%-"../images/users/" +  listado[i].dataValues.user_pic -%>"  alt="Imagen no disponible" width="50px" height="50px">
+                <p><%= listado[i].dataValues.user_nick %> </p>
+                <p><%= listado[i].dataValues.user_email %> </p>
+                <p><%= listado[i].dataValues.user_pass %> </p>
                 <br>
             </div>
         <% } %>

@@ -70,8 +70,11 @@ const userController = {
     list: (req, res) => {
         let session = req.session;
         /* let listado = userController.usersObj().users; */
-        let listado = db.find
-        res.render(path.join(__dirname, '../views/users/list.ejs'), { listado, session })
+        db.Users.findAll().then((listado)=>{
+            res.render(path.join(__dirname, '../views/users/list.ejs'), { listado, session })
+        })
+        
+        
     },
 
     profile: (req, res) => {
