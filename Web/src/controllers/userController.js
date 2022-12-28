@@ -2,8 +2,10 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const { CLIENT_RENEG_LIMIT } = require('tls');
-const db = require('../../database/models/index');
-const sequelize = require('sequelize')
+
+const db = require('../database/models');
+const sequelize = db.sequelize;
+
 const userController = {
 
     usersObj: () => {
@@ -61,6 +63,7 @@ const userController = {
             user_pass: bcrypt.hashSync(req.body.password, 10),
             user_pic: prof
     })
+        console.log("USUARIO REGISTRADO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         res.redirect('/user/list');
     },
 
