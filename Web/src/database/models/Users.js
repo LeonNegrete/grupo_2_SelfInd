@@ -19,7 +19,8 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING
         },
         user_admin: {
-            type: dataTypes.INTEGER
+            type: dataTypes.INTEGER,
+            defaultValue: 0,
         },
         user_pic:{
             type: dataTypes.STRING
