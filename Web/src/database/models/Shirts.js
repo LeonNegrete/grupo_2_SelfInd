@@ -28,8 +28,7 @@ module.exports = (sequelize, dataTypes) => {
     let config = {
         tableName: 'Shirts',
         timestamps: true,
-        createdAt: "shirt_created_time",
-        updatedAt: "shirt_updated_time"
+        createdAt: "shirt_created_time"
     };
     const Shirts = sequelize.define(alias, cols, config)
 
