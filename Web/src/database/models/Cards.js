@@ -1,33 +1,36 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = 'Adresses';
+    let alias = 'Cards';
     let cols = {
-        address_id: {
+        card_id: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        address_num: {
+        card_num: {
             type: dataTypes.INT
         },
-        address_calle: {
+        card_ccv: {
             type: dataTypes.STRING
         },
-        address_cp: {
+        card_expire: {
+            type: dataTypes.DATE
+        },
+        card_holder: { 
             type: dataTypes.STRING
-        }
+        },
     };
     let config = {
-        tableName: 'Adressess',
+        tableName: 'Cards',
         timestamps: false
     };
-    const Adresses = sequelize.define(alias, cols, config)
+    const Cards = sequelize.define(alias, cols, config)
 
-    Adresses.associate =  (models) => {
-        Adresses.belongsTo(models.Users, { 
+    Cards.associate =  (models) => {
+        Cards.belongsTo(models.Users, { 
             as: "Users",
             foreignKey: "user_id"
         })
 
     }
-    return Adresses
+    return Cards
 }
