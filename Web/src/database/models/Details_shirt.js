@@ -20,7 +20,7 @@ module.exports = (sequelize, dataTypes) => {
     const Details_shirt = sequelize.define(alias, cols, config)
 
     Details_shirt.associate =  (models) => {
-        Shirts.belongsTo(models.Users, { 
+        Details_shirt.belongsTo(models.Users, { 
             as: "Shirts",
             foreignKey: "shirt_id"
         })

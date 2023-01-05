@@ -36,7 +36,12 @@ module.exports = (sequelize, dataTypes) => {
         Shirts.belongsTo(models.Users, { 
             as: "Users",
             foreignKey: "user_id"
-        })
+        }),
+
+        Shirts.hasMany(models.Details_shirt, { 
+            as: "Details_shirt", 
+            foreignKey: "shirt_id"
+        }),
 
     }
     return Shirts
