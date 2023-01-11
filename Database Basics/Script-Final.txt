@@ -19,7 +19,7 @@ CREATE TABLE `Users` (
 
 CREATE TABLE `Adresses` (
    `address_id` INT NOT NULL,
-   `adress_num` INT NOT NULL,
+   `address_num` INT NOT NULL,
    `address_calle` CHAR(50) NOT NULL,
    `address_cp` CHAR(10) NOT NULL,
    `user_id` INT NOT NULL,
@@ -58,12 +58,12 @@ CREATE TABLE `Details_shirt` (
 );
 
 CREATE TABLE `Cart_Items` (
-   `order_id` INT NOT NULL,
-   `order_price` DOUBLE NOT NULL,
-   `order_quantity` INT NOT NULL,
+   `cart_item_id` INT NOT NULL,
+   `cart_item_price` DOUBLE NOT NULL,
+   `cart_item_quantity` INT NOT NULL,
    `shirt_id` INT NOT NULL,
    `cart_id` INT NOT NULL,
-   PRIMARY KEY (`order_id`)
+   PRIMARY KEY (`cart_item_id`)
 );
 
 CREATE TABLE `Cart` (
