@@ -7,7 +7,7 @@ module.exports = (sequelize, dataTypes) => {
             autoIncrement: true
         },
         card_num: {
-            type: dataTypes.INT
+            type: dataTypes.INTEGER
         },
         card_ccv: {
             type: dataTypes.STRING
