@@ -12,7 +12,7 @@ CREATE TABLE `Users` (
    `user_name` CHAR(100) NOT NULL,
    `user_pass` CHAR(100) NOT NULL,
    `user_email` CHAR(50) NOT NULL,
-   `user_admin` INT NOT NULL,
+   `user_admin` INT NOT NULL DEFAULT 0,
    `user_pic` CHAR(100) NOT NULL,
    PRIMARY KEY (`user_id`)
 );
