@@ -12,7 +12,7 @@ CREATE TABLE `Users` (
    `user_name` CHAR(100) NOT NULL,
    `user_pass` CHAR(100) NOT NULL,
    `user_email` CHAR(50) NOT NULL,
-   `user_admin` INT NOT NULL,
+   `user_admin` INT default 0 NOT NULL,
    `user_pic` CHAR(100) NOT NULL,
    PRIMARY KEY (`user_id`)
 );
@@ -59,7 +59,6 @@ CREATE TABLE `Details_shirt` (
 
 CREATE TABLE `Cart_Items` (
    `cart_item_id` INT NOT NULL,
-   `cart_item_price` DOUBLE NOT NULL,
    `cart_item_quantity` INT NOT NULL,
    `shirt_id` INT NOT NULL,
    `cart_id` INT NOT NULL,
@@ -107,3 +106,15 @@ ALTER TABLE `Orders_shipping` ADD CONSTRAINT `FK_10fd01f5-0e06-4ac5-875b-cd7522e
 ALTER TABLE `Orders_shipping` ADD CONSTRAINT `FK_f0e594bb-f188-4ca7-be19-7ba54dc8e5d3` FOREIGN KEY (`address_id`) REFERENCES `Adresses`(`address_id`)  ;
 
 ALTER TABLE `Orders_shipping` ADD CONSTRAINT `FK_5a3d1c68-f8ee-412d-9a04-ada319234834` FOREIGN KEY (`card_id`) REFERENCES `Cards`(`card_id`)  ;
+
+INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic , user_admin) 
+values ( 'rakan' , 'Rakan LZ' , '$2$10$5qoXlqPWI8J6fs5WS.I2XOdxMO.OpHCYy2YQ1tIcrmr3J5eUiPf/K' , 'rakan@gmail.com' , 'profile-1668560350104.jpg' , '1' );
+
+INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic) 
+values ( 'rakan2' , 'Rakan LZ 2' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'rakan2@gmail.com' , 'profile-1668715664919.jpg');
+
+INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic, user_admin) 
+values ( 'leoG' , 'Leon Negrete' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'leon.negrete.dev@gmail.com' , 'profile-1668567203394.jpg', '1');
+
+INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic, user_admin) 
+values ( 'feliB' , 'Felipe Bustamante' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'feliB@gmail.com' , 'profile-1672288256574.png', '1');
