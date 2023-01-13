@@ -6,9 +6,9 @@ module.exports = (sequelize, dataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        cart_item_price: {
+        /* cart_item_price: {
             type: dataTypes.DOUBLE
-        },
+        }, */
         cart_item_quantity: {
             type: dataTypes.INTEGER
         }

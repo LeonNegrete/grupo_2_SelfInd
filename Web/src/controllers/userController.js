@@ -21,8 +21,77 @@ const userController = {
         res.render(path.join(__dirname, '../views/users/login.ejs'), {session,recordar})
     },
 
-    loginPost: (req,res) => {
-        let listado = userController.usersObj();
+    loginPost: async (req,res) => {
+        try{
+            let inputName = req.body.email
+            let inputPass = req.body.password
+            
+            let search = await db.Users.findOne({
+                where: {
+                    user_email: inputName
+                    /* [Op.or]: [
+                        {
+                            user_email:{
+                                [Op.eq]:inputName
+                            }
+                        },
+                        {
+                            user_nick:{
+                                [Op.eq]:inputName
+                            }
+                        }
+                    ] */
+                }
+            })
+            
+
+
+
+            if (search){
+                
+                if (bcrypt.compareSync(inputPass, search.user_pass)){
+                    req.session.loginStatus = true;
+                    req.session.username = search.user_nick;
+                    req.session.profile = search.user_pic;
+                    req.session.email = search.user_email;
+                    if (req.body.recordar){
+                        res.cookie('last_account', search.user_email, {maxAge: 60000 })
+                    }
+                }else{
+                    req.session.loginStatus = false;
+                }
+            }else{
+                req.session.loginStatus = false;
+            }
+
+            req.session.loginStatus ? res.redirect('/'): res.redirect('/user/login'); 
+        
+        }catch(error){
+            console.log(error)
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* let listado = userController.usersObj();
         let loginStatus = false
         for ( user of listado.users){
             
@@ -40,7 +109,7 @@ const userController = {
         }
         
         req.session.loginStatus ? res.redirect('/'): res.redirect('/user/login');
-
+ */
     },
 
 
