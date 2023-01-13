@@ -4,8 +4,8 @@ values ( 'rakan' , 'Rakan LZ' , '$2$10$5qoXlqPWI8J6fs5WS.I2XOdxMO.OpHCYy2YQ1tIcr
 INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic) 
 values ( 'rakan2' , 'Rakan LZ 2' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'rakan2@gmail.com' , 'profile-1668715664919.jpg');
 
-INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic) 
+INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic, user_admin) 
 values ( 'leoG' , 'Leon Negrete' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'leong@gmail.com' , 'profile-1668567203394.jpg', '1');
 
-INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic) 
+INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic, user_admin) 
 values ( 'feliB' , 'Felipe Bustamante' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'feliB@gmail.com' , 'profile-1672288256574.png', '1');
