@@ -10,25 +10,30 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.DOUBLE
         },
         shirt_discount: {
-            type: dataTypes.INTEGER
+            type: dataTypes.INTEGER,
+            default: 0
         },
         shirt_name: {
             type: dataTypes.STRING
         },
         shirt_desc: {
-            type: dataTypes.TEXT    
+            type: dataTypes.TEXT,
         },
         shirt_img: {
             type: dataTypes.STRING
         },
         shirt_custom: {
-            type: dataTypes.INTEGER
-        }
+            type: dataTypes.INTEGER,
+            default:0
+        }/* ,
+        shirt_created_time:{
+            type: dataTypes.DATATIME
+        } */
     };
     let config = {
         tableName: 'Shirts',
-        timestamps: true,
-        createdAt: "shirt_created_time"
+        timestamps: false,
+/*         createdAt: "shirt_created_time" */
     };
     const Shirts = sequelize.define(alias, cols, config)
 

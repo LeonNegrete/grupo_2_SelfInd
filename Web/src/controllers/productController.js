@@ -1,6 +1,8 @@
 const path = require('path');
 const products = require('../data/products.json');
 const fs = require('fs');
+const db = require('../database/models');
+const sequelize = db.sequelize;
 const productController = {
     //Funcion destinada a traer el JSON 'Products' y transformarlo en un objeto literal
     productsArr: () => {
@@ -43,7 +45,7 @@ const productController = {
                 soldOut.push(e) //Caso contrario se los agrega al array de disponibles
             }
         }
-        res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut, session}) //Se exportan los arrays de vendidos y disponibles
+        res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut, session }) //Se exportan los arrays de vendidos y disponibles
     },
 
     detalle: (req, res) => {
@@ -59,21 +61,85 @@ const productController = {
 
     design: (req, res) => {
         let session = req.session;
-        res.render(path.join(__dirname, '../views/products/design.ejs'),{session})
+        res.render(path.join(__dirname, '../views/products/design.ejs'), { session })
     },
 
     carrito: (req, res) => {
         let session = req.session;
-        res.render(path.join(__dirname, '../views/products/shop-car.ejs'),{session})
+        res.render(path.join(__dirname, '../views/products/shop-car.ejs'), { session })
     },
 
     admCreate: (req, res) => {
         let session = req.session;
-        res.render(path.join(__dirname, '../views/products/admCreate'),{session})
+        res.render(path.join(__dirname, '../views/products/admCreate'), { session })
     },
 
-    admCreatePost: (req, res) => {
-        let session = req.session;
+    admCreatePost: async(req, res) => {
+        console.log(req.body)
+        console.log(req.session)
+        db.Shirts.create({
+            shirt_name: req.body.name_product,
+            shirt_price: req.body.price,
+            shirt_discount: req.body.descuento,
+            shirt_desc: req.body.description,
+            shirt_img: req.file.filename,
+            shirt_custom: req.session.admin,
+            user_id: req.session.userid
+        })
+        let talles = [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL"
+        ]
+        try{
+            let shirtId = await db.Shirts.findOne({
+                where: {
+                    shirt_name : req.body.name_product
+                }
+            })
+                db.Details_shirt.create({
+                   shirt_size: 'XL',
+                   shirt_stock: req.body.XL,
+                   shirt_id: shirtId.shirt_id
+               })
+        }catch(err){
+            console.log(err)
+        }
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* let session = req.session;
         let newElement = productController.productsArr();
         let newProduct = {
             ...req.body,
@@ -88,22 +154,22 @@ const productController = {
                 parseInt(req.body.xxl)]
         }
         newElement.products.push(newProduct)
-        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(newElement))
+        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(newElement)) */
 
         res.redirect('/');
     },
     admEdit: (req, res) => {
         let idP = req.params.id;
         let selectedProduct = productController.productsArr().products[idP]
-        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP , selectedProduct });
+        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP, selectedProduct });
     },
     putEdit: (req, res) => {
         let idP = req.params.id
         let editedData = {
             ...req.body,
         }
-        let arrayEvaluacion = [req.body.xs,req.body.s,req.body.m,req.body.l,req.body.xl,req.body.xxl]
-        if ([req.body.xs,req.body.s,req.body.m,req.body.l,req.body.xl,req.body.xxl].every((e)=>{
+        let arrayEvaluacion = [req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl]
+        if ([req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl].every((e) => {
             return isNaN(parseInt(e));
         })) { //Condicional necesario para no sobreescribir los datos de stock con un 'null' cada vez que se hace una edicion donde no se especifica el stock (la idea es que se asume que si no se especifica un dato en el formulario es debido a que no se quiere cambiarlo)
             editedData.sizesQuantity = undefined //Cuando se sube un undefined, en la funcion edictExistingProduct, se conservara el valor actual
@@ -112,9 +178,9 @@ const productController = {
 
 
 
-       /*  if ((req.body.xs === '') && (req.body.s === '') && (req.body.m === '') && (req.body.l === '') && (req.body.xl === '') && (req.body.xxl === '')) { //Condicional necesario para no sobreescribir los datos de stock con un 'null' cada vez que se hace una edicion donde no se especifica el stock (la idea es que se asume que si no se especifica un dato en el formulario es debido a que no se quiere cambiarlo)
-            editedData.sizesQuantity = undefined //Cuando se sube un undefined, en la funcion edictExistingProduct, se conservara el valor actual
-        } else { editedData.sizesQuantity = [req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl]; } //Si se hizo un cambio se subira    */
+        /*  if ((req.body.xs === '') && (req.body.s === '') && (req.body.m === '') && (req.body.l === '') && (req.body.xl === '') && (req.body.xxl === '')) { //Condicional necesario para no sobreescribir los datos de stock con un 'null' cada vez que se hace una edicion donde no se especifica el stock (la idea es que se asume que si no se especifica un dato en el formulario es debido a que no se quiere cambiarlo)
+             editedData.sizesQuantity = undefined //Cuando se sube un undefined, en la funcion edictExistingProduct, se conservara el valor actual
+         } else { editedData.sizesQuantity = [req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl]; } //Si se hizo un cambio se subira    */
         console.log(req.file)
         /* editedData.image = (req.file.filename); */
         console.log(editedData)

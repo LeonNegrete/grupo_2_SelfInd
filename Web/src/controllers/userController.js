@@ -43,10 +43,6 @@ const userController = {
                     ] */
                 }
             })
-            
-
-
-
             if (search){
                 
                 if (bcrypt.compareSync(inputPass, search.user_pass)){
@@ -54,6 +50,8 @@ const userController = {
                     req.session.username = search.user_nick;
                     req.session.profile = search.user_pic;
                     req.session.email = search.user_email;
+                    req.session.userid = search.user_id;
+                    req.session.admin = search.user_admin;
                     if (req.body.recordar){
                         res.cookie('last_account', search.user_email, {maxAge: 60000 })
                     }
@@ -69,47 +67,6 @@ const userController = {
         }catch(error){
             console.log(error)
         }
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* let listado = userController.usersObj();
-        let loginStatus = false
-        for ( user of listado.users){
-            
-            if (user.email == req.body.email){
-                if (bcrypt.compareSync(req.body.password, user.password)){
-                    req.session.loginStatus = true;
-                    req.session.username = user.username;
-                    req.session.profile = user.profile;
-                    req.session.email = user.email;
-                    if (req.body.recordar){
-                        res.cookie('last_account', req.body.email, {maxAge: 60000 })
-                    }
-                }
-            }
-        }
-        
-        req.session.loginStatus ? res.redirect('/'): res.redirect('/user/login');
- */
     },
 
 
