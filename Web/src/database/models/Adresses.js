@@ -7,7 +7,7 @@ module.exports = (sequelize, dataTypes) => {
             autoIncrement: true
         },
         address_num: {
-            type: dataTypes.INT
+            type: dataTypes.INTEGER
         },
         address_calle: {
             type: dataTypes.STRING
