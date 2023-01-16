@@ -18,7 +18,7 @@ CREATE TABLE `Users` (
 );
 
 CREATE TABLE `Adresses` (
-   `address_id` INT NOT NULL,
+   `address_id` INT NOT NULL AUTO_INCREMENT,
    `address_num` INT NOT NULL,
    `address_calle` CHAR(50) NOT NULL,
    `address_cp` CHAR(10) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `Adresses` (
 );
 
 CREATE TABLE `Cards` (
-   `card_id` INT NOT NULL,
+   `card_id` INT NOT NULL AUTO_INCREMENT,
    `card_num` CHAR(20) NOT NULL,
    `card_ccv` CHAR(5) NOT NULL,
    `card_expire` DATE NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `Shirts` (
 );
 
 CREATE TABLE `Details_shirt` (
-   `detail_id` INT NOT NULL,
+   `detail_id` INT NOT NULL AUTO_INCREMENT,
    `shirt_size` CHAR(5) NOT NULL,
    `shirt_stock` INT NOT NULL,
    `shirt_id` INT NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `Details_shirt` (
 );
 
 CREATE TABLE `Cart_Items` (
-   `cart_item_id` INT NOT NULL,
+   `cart_item_id` INT NOT NULL AUTO_INCREMENT,
    `cart_item_quantity` INT NOT NULL,
    `shirt_id` INT NOT NULL,
    `cart_id` INT NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE `Cart_Items` (
 );
 
 CREATE TABLE `Cart` (
-   `cart_id` INT NOT NULL,
+   `cart_id` INT NOT NULL AUTO_INCREMENT,
    `cart_total` DOUBLE NOT NULL,
    `cart_created_time` TIMESTAMP NOT NULL,
    `user_id` INT NOT NULL,
