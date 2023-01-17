@@ -92,7 +92,7 @@ const productController = {
         })
 
         
-        let tallas = { 
+        let stock = { 
             "XS" : req.body.XS,
             "S" : req.body.S,
             "M" : req.body.M,
@@ -104,40 +104,20 @@ const productController = {
         try{
             let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
 
-            //console.log(shirtCreated)
-            for (let talla in tallas){
-                console.log(`${talla}: ${tallas[talla]}`)
+            for (let talla in stock){
+                //console.log(`${talla}: ${stock[talla]}`)
+                db.Details_shirt.create({
+                    shirt_size: talla,
+                    shirt_stock: stock[talla],
+                    shirt_id: shirtCreated.shirt_id
+                })
             } 
             
-            /* db.Details_shirt.create({
-               shirt_size: 'XL',
-               shirt_stock: req.body.XL,
-               shirt_id: shirtCreated.shirt_id
-            }) */
-            
-            console.log("Las tallas ingresadas fueron.-")
-            console.log(tallas)
-
+            /* console.log("Las tallas ingresadas fueron.-")
+            console.log(tallas) */
         }catch(err){
             console.log(err)
         }
-
-        /* let session = req.session;
-        let newElement = productController.productsArr();
-        let newProduct = {
-            ...req.body,
-            id: (parseInt(newElement.products[newElement.products.length - 1].id) + 1).toString(),
-            image: (req.file.filename),
-            sizesQuantity: [
-                parseInt(req.body.xs),
-                parseInt(req.body.s),
-                parseInt(req.body.m),
-                parseInt(req.body.l),
-                parseInt(req.body.xl),
-                parseInt(req.body.xxl)]
-        }
-        newElement.products.push(newProduct)
-        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(newElement)) */
 
         res.redirect('/');
     },
