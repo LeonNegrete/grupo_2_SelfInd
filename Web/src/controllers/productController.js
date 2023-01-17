@@ -17,6 +17,7 @@ const productController = {
         this.price = price
         this.sizesQuantity = [xs, s, m, l, xl, xxl];
     },
+
     editExistingProduct: (producto, newData) => {
         producto.id = newData.id || producto.id;
         producto.title = newData.title || producto.title;
@@ -25,6 +26,7 @@ const productController = {
         producto.sizesQuantity = newData.sizesQuantity || producto.sizesQuantity;
         producto.image = newData.image || producto.image;
     },
+
     hayStock: (arrayDeTalles) => {
         let stock = arrayDeTalles.sizesQuantity.every((e) => (e == 0)); //evalua si todos los elementos del array que contiene el stock estan en cero
         if (stock) {
@@ -33,6 +35,7 @@ const productController = {
             return true //Caso contrario retorna true (hay stock)
         }
     },
+
     home: (req, res) => {
         let session = req.session;
         let productsArray = productController.productsArr()
@@ -74,10 +77,11 @@ const productController = {
         res.render(path.join(__dirname, '../views/products/admCreate'), { session })
     },
 
-    admCreatePost: async(req, res) => {
-        console.log(req.body)
-        console.log(req.session)
-        db.Shirts.create({
+    admCreatePost: async (req, res) => {
+        //console.log(req.body)
+        //console.log(req.session)
+        
+        await db.Shirts.create({
             shirt_name: req.body.name_product,
             shirt_price: req.body.price,
             shirt_discount: req.body.descuento,
@@ -86,58 +90,37 @@ const productController = {
             shirt_custom: req.session.admin,
             user_id: req.session.userid
         })
-        let talles = [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL"
-        ]
+
+        
+        let tallas = { 
+            "XS" : req.body.XS,
+            "S" : req.body.S,
+            "M" : req.body.M,
+            "L" : req.body.L,
+            "XL" : req.body.XL,
+            "XXL" : req.body.XXL
+        }
+
         try{
-            let shirtId = await db.Shirts.findOne({
-                where: {
-                    shirt_name : req.body.name_product
-                }
-            })
-                db.Details_shirt.create({
-                   shirt_size: 'XL',
-                   shirt_stock: req.body.XL,
-                   shirt_id: shirtId.shirt_id
-               })
+            let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
+
+            //console.log(shirtCreated)
+            for (let talla in tallas){
+                console.log(`${talla}: ${tallas[talla]}`)
+            } 
+            
+            /* db.Details_shirt.create({
+               shirt_size: 'XL',
+               shirt_stock: req.body.XL,
+               shirt_id: shirtCreated.shirt_id
+            }) */
+            
+            console.log("Las tallas ingresadas fueron.-")
+            console.log(tallas)
+
         }catch(err){
             console.log(err)
         }
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         /* let session = req.session;
         let newElement = productController.productsArr();
@@ -158,6 +141,7 @@ const productController = {
 
         res.redirect('/');
     },
+
     admEdit: (req, res) => {
         let idP = req.params.id;
         let selectedProduct = productController.productsArr().products[idP]

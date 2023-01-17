@@ -12,7 +12,7 @@ CREATE TABLE `Users` (
    `user_name` CHAR(100) NOT NULL,
    `user_pass` CHAR(100) NOT NULL,
    `user_email` CHAR(50) NOT NULL,
-   `user_admin` INT default 0 NOT NULL DEFAULT 0,
+   `user_admin` INT NOT NULL DEFAULT 0,
    `user_pic` CHAR(100) NOT NULL,
    PRIMARY KEY (`user_id`)
 );
@@ -39,7 +39,7 @@ CREATE TABLE `Cards` (
 CREATE TABLE `Shirts` (
    `shirt_id` INT NOT NULL AUTO_INCREMENT,
    `shirt_price` DOUBLE NOT NULL,
-   `shirt_discount` SMALLINT NOT NULL,
+   `shirt_discount` SMALLINT NOT NULL DEFAULT 0,
    `shirt_name` CHAR(25) NOT NULL,
    `shirt_desc` TEXT NOT NULL,
    `shirt_img` CHAR(50) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `Shirts` (
 CREATE TABLE `Details_shirt` (
    `detail_id` INT NOT NULL AUTO_INCREMENT,
    `shirt_size` CHAR(5) NOT NULL,
-   `shirt_stock` INT NOT NULL,
+   `shirt_stock` INT NOT NULL DEFAULT 0,
    `shirt_id` INT NOT NULL,
    PRIMARY KEY (`detail_id`)
 );
