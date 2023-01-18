@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const { CLIENT_RENEG_LIMIT } = require('tls');
-
+const { validationResult } = require('express-validator');
 const db = require('../database/models');
 const sequelize = db.sequelize;
 
@@ -77,20 +77,27 @@ const userController = {
     },
 
     registerPost: (req, res) => {
-        console.log(req.body)
-        if (req.file) {
-            var prof = req.file.filename
-        } else { var prof = 'default.png' }
+        let errors = validationResult(req)
 
-        db.Users.create({
-            user_name: req.body.name,
-            user_nick: req.body.username,
-            user_email: req.body.email,
-            user_pass: bcrypt.hashSync(req.body.password, 10),
-            user_pic: prof
-    })
-        console.log("USUARIO REGISTRADO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        res.redirect('/user/list');
+        if(errors){
+            console.log(errors.mapped())
+            res.render(path.join(__dirname, '../views/users/register.ejs'), { errors: errors.mapped(), session: req.session })
+        }else{
+            if (req.file) {
+                var prof = req.file.filename
+            } else { var prof = 'default.png' }
+    
+            db.Users.create({
+                user_name: req.body.name,
+                user_nick: req.body.username,
+                user_email: req.body.email,
+                user_pass: bcrypt.hashSync(req.body.password, 10),
+                user_pic: prof
+            })
+            console.log("USUARIO REGISTRADO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            res.redirect('/user/list');
+        }
+
     },
 
     list: (req, res) => {
