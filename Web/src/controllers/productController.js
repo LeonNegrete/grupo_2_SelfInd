@@ -96,15 +96,28 @@ const productController = {
                 res.redirect('/products/create')
                 console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
             }else{
-                await db.Shirts.create({
-                    shirt_name: req.body.name_product,
-                    shirt_price: req.body.price,
-                    shirt_discount: req.body.descuento,
-                    shirt_desc: req.body.description,
-                    shirt_img: req.file.filename,
-                    shirt_custom: req.session.admin,
-                    user_id: req.session.userid
-                })
+                if (req.session.admin == 1){
+                    await db.Shirts.create({
+                        shirt_name: req.body.name_product,
+                        shirt_price: req.body.price,
+                        shirt_discount: req.body.descuento,
+                        shirt_desc: req.body.description,
+                        shirt_img: req.file.filename,
+                        shirt_custom: 0, 
+                        user_id: req.session.userid
+                    })
+                }else{
+                    await db.Shirts.create({
+                        shirt_name: req.body.name_product,
+                        shirt_price: req.body.price,
+                        shirt_discount: req.body.descuento,
+                        shirt_desc: req.body.description,
+                        shirt_img: req.file.filename,
+                        shirt_custom: 1, 
+                        user_id: req.session.userid
+                    })
+                }
+                
     
                 let stock = { 
                     "XS" : req.body.XS,
@@ -135,10 +148,13 @@ const productController = {
 
     admEdit: (req, res) => {
         let idP = req.params.id;
+        let session = req.session;
         let selectedProduct = productController.productsArr().products[idP]
-        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP, selectedProduct });
+        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP, selectedProduct, session });
     },
+    
     putEdit: (req, res) => {
+        
         let idP = req.params.id
         let editedData = {
             ...req.body,
@@ -157,6 +173,7 @@ const productController = {
         productController.editExistingProduct(elementToEdit, editedData) //edita el parsedJSON
         fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
         res.redirect('/');
+    
     },
 
     productList: (req, res) => {
