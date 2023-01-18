@@ -47,29 +47,32 @@ const productController = {
         
         let session = req.session;
         let idShirt = req.params.id;
-        //console.log(idShirt)
         try{
-            let shirtShow = await db.Shirts.findByPk(idShirt, { 
-                include : [
-                    { 
-                        model: db.Details_shirt,
-                        as: 'Details_shirt', 
-                        required: true 
-                    }]} )
-            console.log(shirtShow)
+            let shirtShow = await db.Shirts.findByPk(idShirt);
+
+            let talles = await db.Details_shirt.findAll({
+                where: {
+                  shirt_id : idShirt
+                }
+            });
+
+            console.log(shirtShow.dataValues.shirt_img)
+
+            res.render(path.join(__dirname,'../views/products/detalle.ejs'), {shirtShow, talles,session});
+
         }catch(err){
-            console.log(err)
+            console.log(err);
         }
         
 
-        let sizesList = productController.productsArr().sizesList; //Se trae el array con la lista de talles que puede tener cada remera
+       /*  let sizesList = productController.productsArr().sizesList; //Se trae el array con la lista de talles que puede tener cada remera
         let productsArray = productController.productsArr().products;//Se trae el array con la lista que contiene a todas las remeras
         let idP = req.params.id; //se trae a la id ingresada en la url
         let correctIndex = productsArray.indexOf(productsArray.find((e) => { //en caso de que el indice no sea el mismo que la id (Cosa que puede pasar despues de crear y borrar varios productos)
             return e.id === idP
-        }))
+        })) */
 
-        res.render(path.join(__dirname, '../views/products/detalle.ejs'), { correctIndex, productsArray, sizesList, session })
+        /* res.render(path.join(__dirname, '../views/products/detalle.ejs'), { correctIndex, productsArray, sizesList, session }) */
     },
 
     design: (req, res) => {
