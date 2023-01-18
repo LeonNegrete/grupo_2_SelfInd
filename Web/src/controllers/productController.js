@@ -10,14 +10,6 @@ const productController = {
         return JSON.parse(readed); //Se transforma de JSON a objeto literal
     },
 
-    //Funcion constructora encargada de construir los objetos que representaran las remeras.
-    CreateNewProduct: (name, desc, price, xs, s, m, l, xl, xxl) => {
-        this.name = name;
-        this.desc = desc;
-        this.price = price
-        this.sizesQuantity = [xs, s, m, l, xl, xxl];
-    },
-
     editExistingProduct: (producto, newData) => {
         producto.id = newData.id || producto.id;
         producto.title = newData.title || producto.title;
@@ -51,14 +43,32 @@ const productController = {
         res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut, session }) //Se exportan los arrays de vendidos y disponibles
     },
 
-    detalle: (req, res) => {
+    detalle: async (req, res) => {
+        
         let session = req.session;
+        let idShirt = req.params.id;
+        //console.log(idShirt)
+        try{
+            let shirtShow = await db.Shirts.findByPk(idShirt, { 
+                include : [
+                    { 
+                        model: db.Details_shirt,
+                        as: 'Details_shirt', 
+                        required: true 
+                    }]} )
+            console.log(shirtShow)
+        }catch(err){
+            console.log(err)
+        }
+        
+
         let sizesList = productController.productsArr().sizesList; //Se trae el array con la lista de talles que puede tener cada remera
         let productsArray = productController.productsArr().products;//Se trae el array con la lista que contiene a todas las remeras
         let idP = req.params.id; //se trae a la id ingresada en la url
         let correctIndex = productsArray.indexOf(productsArray.find((e) => { //en caso de que el indice no sea el mismo que la id (Cosa que puede pasar despues de crear y borrar varios productos)
             return e.id === idP
         }))
+
         res.render(path.join(__dirname, '../views/products/detalle.ejs'), { correctIndex, productsArray, sizesList, session })
     },
 
@@ -80,46 +90,53 @@ const productController = {
     admCreatePost: async (req, res) => {
         //console.log(req.body)
         //console.log(req.session)
-        
-        await db.Shirts.create({
-            shirt_name: req.body.name_product,
-            shirt_price: req.body.price,
-            shirt_discount: req.body.descuento,
-            shirt_desc: req.body.description,
-            shirt_img: req.file.filename,
-            shirt_custom: req.session.admin,
-            user_id: req.session.userid
-        })
-
-        
-        let stock = { 
-            "XS" : req.body.XS,
-            "S" : req.body.S,
-            "M" : req.body.M,
-            "L" : req.body.L,
-            "XL" : req.body.XL,
-            "XXL" : req.body.XXL
-        }
-
         try{
-            let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
-
-            for (let talla in stock){
-                //console.log(`${talla}: ${stock[talla]}`)
-                db.Details_shirt.create({
-                    shirt_size: talla,
-                    shirt_stock: stock[talla],
-                    shirt_id: shirtCreated.shirt_id
-                })
-            } 
+            let shirtToCreate = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
             
-            /* console.log("Las tallas ingresadas fueron.-")
-            console.log(tallas) */
+            if( shirtToCreate != null){
+                res.redirect('/products/create')
+                console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
+            }else{
+                await db.Shirts.create({
+                    shirt_name: req.body.name_product,
+                    shirt_price: req.body.price,
+                    shirt_discount: req.body.descuento,
+                    shirt_desc: req.body.description,
+                    shirt_img: req.file.filename,
+                    shirt_custom: req.session.admin,
+                    user_id: req.session.userid
+                })
+    
+                let stock = { 
+                    "XS" : req.body.XS,
+                    "S" : req.body.S,
+                    "M" : req.body.M,
+                    "L" : req.body.L,
+                    "XL" : req.body.XL,
+                    "XXL" : req.body.XXL
+                }
+            
+                let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
+    
+                for (let talla in stock){
+                    //console.log(`${talla}: ${stock[talla]}`)
+                    await db.Details_shirt.create({
+                        shirt_size: talla,
+                        shirt_stock: stock[talla],
+                        shirt_id: shirtCreated.shirt_id
+                    })
+                } 
+    
+                res.redirect(`/products/${shirtCreated.shirt_id}`);
+                
+                /* console.log("Las tallas ingresadas fueron.-")
+                console.log(tallas) */
+            }
+        
         }catch(err){
             console.log(err)
+            res.redirect('/');
         }
-
-        res.redirect('/');
     },
 
     admEdit: (req, res) => {
@@ -156,12 +173,14 @@ const productController = {
         fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
         res.redirect('/');
     },
+
     productList: (req, res) => {
         let session = req.session;
         let productsArray = productController.productsArr().products
         let sizesList = productController.productsArr().sizesList
         res.render(path.join(__dirname, '../views/products/products.ejs'), { productsArray, sizesList, session })
     },
+
     deleteItem: (req, res) => {
         let idP = req.params.id;
         let arrayToReturn = productController.productsArr(); //selecciona el elemento correspondiente
