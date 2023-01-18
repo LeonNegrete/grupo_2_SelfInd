@@ -75,8 +75,7 @@ const productController = {
     },
 
     admCreatePost: async(req, res) => {
-        console.log(req.body)
-        console.log(req.session)
+        try{
         db.Shirts.create({
             shirt_name: req.body.name_product,
             shirt_price: req.body.price,
@@ -94,21 +93,33 @@ const productController = {
             "XL",
             "XXL"
         ]
-        try{
-            let shirtId = await db.Shirts.findOne({
+        
+            let shirtId = db.Shirts.findOne({
                 where: {
                     shirt_name : req.body.name_product
                 }
-            })
-                db.Details_shirt.create({
-                   shirt_size: 'XL',
-                   shirt_stock: req.body.XL,
-                   shirt_id: shirtId.shirt_id
-               })
-        }catch(err){
-            console.log(err)
-        }
+            }) 
+            console.log('1_________________________________')
+             
+            console.log('2_________________________________')
+            console.log( await shirtId.Shirts.dataValues.shirt_id)
+            console.log('3_________________________________')
+            console.log( await shirtId.Shirts.shirt_id)
+            console.log('4_________________________________')
+            console.log( await shirtId.dataValues.shirt_id)
+            console.log('5_________________________________')
+            console.log( await shirtId.Shirts.dataValues)
+                /* for (const talle of talles) {
+                 db.Details_shirt.create({
+                   shirt_size: talle,
+                   shirt_stock: req.body[talle],
+                   shirt_id:  shirtId.shirt_id
+               }) */
         
+    }catch(err){
+        console.log(err)
+    }
+    
         
 
 
