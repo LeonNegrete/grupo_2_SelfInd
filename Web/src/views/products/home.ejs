@@ -45,10 +45,10 @@
                 <h4>NEW DROPS</h4>
                 <% for (let i=0;i < onSale.length ;i++){ %>
                 <article class="articulo">
-                    <a class="articulo" href="/products/<%=onSale[i].id%> ">
-                        <img src="<%-"../images/Remeras/" +  onSale[i].image -%>" alt="" class="img-articulo">
-                        <h5 class="titulo"><%- onSale[i].title %> </h5>
-                        <h5 class="precio">$<%- onSale[i].price %> </h5>
+                    <a class="articulo" href="/products/<%=onSale[i].dataValues.shirt_id%> ">
+                        <img src="<%-"../images/Remeras/" +  onSale[i].dataValues.shirt_img -%>" alt="" class="img-articulo">
+                        <h5 class="titulo"><%- onSale[i].dataValues.shirt_name %> </h5>
+                        <h5 class="precio">$<%- onSale[i].dataValues.shirt_price %> </h5>
                     </a>
                 </article>
                 <% }%>
@@ -57,11 +57,11 @@
                 <h4>SOLD OUTS</h4>
                 <% for (let i=0;i < soldOut.length ;i++){ %>
                 <article class="articulo">
-                    <a class="articulo" href="/products/<%=soldOut[i].id%> ">
-                        <img src= "<%-"../images/Remeras/" +  soldOut[i].image -%>" alt="" class="img-articulo">
-                        <h5 class="titulo"><%- soldOut[i].title %> </h5>
+                    <a class="articulo" href="/products/<%=soldOut[i].dataValues.shirt_id%> ">
+                        <img src= "<%-"../images/Remeras/" +  soldOut[i].dataValues.shirt_img -%>" alt="" class="img-articulo">
+                        <h5 class="titulo"><%- soldOut[i].dataValues.shirt_name %> </h5>
                         <h5 class="precio">SOLD OUT</h5>
-                        <h5 class="precio" style="text-decoration: line-through ;">$<%- soldOut[i].price %> </h5>
+                        <h5 class="precio" style="text-decoration: line-through ;">$<%- soldOut[i].dataValues.shirt_price %> </h5>
                     </a>
                 </article>
                 <% }%>
