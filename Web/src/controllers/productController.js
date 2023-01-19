@@ -90,18 +90,23 @@ const productController = {
     },
 
     admCreatePost: async (req, res) => {
-        let errors = validationResult(req);
-        console.log(errors)
-        if (!errors.isEmpty()) {
-            res.render(path.join(__dirname, '../views/products/admCreate'), { session:req.session, errors: errors.mapped() })
-        }else{
-
-            try{
-                let shirtToCreate = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
-                
-                if( shirtToCreate != null){
-                    res.redirect('/products/create')
-                    console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
+        try{
+            let shirtToCreate = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
+            
+            if( shirtToCreate != null){
+                res.redirect('/products/create')
+                console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
+            }else{
+                if (req.session.admin == 1){
+                    await db.Shirts.create({
+                        shirt_name: req.body.name_product,
+                        shirt_price: req.body.price,
+                        shirt_discount: req.body.descuento,
+                        shirt_desc: req.body.description,
+                        shirt_img: req.file.filename,
+                        shirt_custom: 0, 
+                        user_id: req.session.userid
+                    })
                 }else{
                     await db.Shirts.create({
                         shirt_name: req.body.name_product,
@@ -109,44 +114,47 @@ const productController = {
                         shirt_discount: req.body.descuento,
                         shirt_desc: req.body.description,
                         shirt_img: req.file.filename,
-                        shirt_custom: req.session.admin,
+                        shirt_custom: 1, 
                         user_id: req.session.userid
                     })
-        
-                    let stock = { 
-                        "XS" : req.body.XS,
-                        "S" : req.body.S,
-                        "M" : req.body.M,
-                        "L" : req.body.L,
-                        "XL" : req.body.XL,
-                        "XXL" : req.body.XXL
-                    }
-                
-                    let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
-        
-                    for (let talla in stock){
-                        await db.Details_shirt.create({
-                            shirt_size: talla,
-                            shirt_stock: stock[talla],
-                            shirt_id: shirtCreated.shirt_id
-                        })
-                    } 
-                    res.redirect(`/products/${shirtCreated.shirt_id}`);
+                }
+    
+                let stock = { 
+                    "XS" : req.body.XS,
+                    "S" : req.body.S,
+                    "M" : req.body.M,
+                    "L" : req.body.L,
+                    "XL" : req.body.XL,
+                    "XXL" : req.body.XXL
                 }
             
-            }catch(err){
-                console.log(err)
-                res.redirect('/');
+                let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
+    
+                for (let talla in stock){
+                    await db.Details_shirt.create({
+                        shirt_size: talla,
+                        shirt_stock: stock[talla],
+                        shirt_id: shirtCreated.shirt_id
+                    })
+                } 
+                res.redirect(`/products/${shirtCreated.shirt_id}`);
             }
+        
+        }catch(err){
+            console.log(err)
+            res.redirect('/');
         }
     },
 
     admEdit: (req, res) => {
         let idP = req.params.id;
+        let session = req.session;
         let selectedProduct = productController.productsArr().products[idP]
-        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP, selectedProduct });
+        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP, selectedProduct, session });
     },
+    
     putEdit: (req, res) => {
+        
         let idP = req.params.id
         let editedData = {
             ...req.body,
@@ -165,6 +173,7 @@ const productController = {
         productController.editExistingProduct(elementToEdit, editedData) //edita el parsedJSON
         fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
         res.redirect('/');
+    
     },
 
     productList: (req, res) => {
