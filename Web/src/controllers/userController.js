@@ -18,10 +18,17 @@ const userController = {
         let recordar = req.cookies.last_account;
         let session = req.session;
 
-        res.render(path.join(__dirname, '../views/users/login.ejs'), {session,recordar})
+        res.render(path.join(__dirname, '../views/users/login.ejs'), {session,recordar,errors: {}})
     },
 
     loginPost: async (req,res) => {
+        let errors = validationResult(req)
+
+        if(!errors.isEmpty()){
+            console.log(errors.mapped())
+            res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: errors.mapped(), session: req.session })
+        }else{
+    
         try{
             let inputName = req.body.email
             let inputPass = req.body.password
@@ -62,25 +69,25 @@ const userController = {
                 req.session.loginStatus = false;
             }
 
-            req.session.loginStatus ? res.redirect('/'): res.redirect('/user/login'); 
+            req.session.loginStatus ? res.redirect('/'): res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: {err:{msg:'Credenciales invalidas'}}, session: req.session }); 
         
         }catch(error){
             console.log(error)
         }
+    }
     },
 
 
     register: (req, res) => {
         let session = req.session;
         
-        res.render(path.join(__dirname, '../views/users/register.ejs'), { session })
+        res.render(path.join(__dirname, '../views/users/register.ejs'), { session, errors: undefined })
     },
 
     registerPost: (req, res) => {
         let errors = validationResult(req)
-
-        if(errors){
-            console.log(errors.mapped())
+        console.log(errors)
+        if(!errors.isEmpty()){
             res.render(path.join(__dirname, '../views/users/register.ejs'), { errors: errors.mapped(), session: req.session })
         }else{
             if (req.file) {

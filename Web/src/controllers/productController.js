@@ -4,6 +4,7 @@ const fs = require('fs');
 const db = require('../database/models');
 /* const { removeTicks } = require('sequelize/types/utils'); */ // me pa que esto no tiene que estar aca
 const sequelize = db.sequelize;
+const { validationResult } = require('express-validator');
 const productController = {
     //Funcion destinada a traer el JSON 'Products' y transformarlo en un objeto literal
     productsArr: () => {
@@ -85,51 +86,58 @@ const productController = {
 
     admCreate: (req, res) => {
         let session = req.session;
-        res.render(path.join(__dirname, '../views/products/admCreate'), { session })
+        res.render(path.join(__dirname, '../views/products/admCreate'), { session, errors: 'undefined' })
     },
 
     admCreatePost: async (req, res) => {
-        try{
-            let shirtToCreate = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
-            
-            if( shirtToCreate != null){
-                res.redirect('/products/create')
-                console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
-            }else{
-                await db.Shirts.create({
-                    shirt_name: req.body.name_product,
-                    shirt_price: req.body.price,
-                    shirt_discount: req.body.descuento,
-                    shirt_desc: req.body.description,
-                    shirt_img: req.file.filename,
-                    shirt_custom: req.session.admin,
-                    user_id: req.session.userid
-                })
-    
-                let stock = { 
-                    "XS" : req.body.XS,
-                    "S" : req.body.S,
-                    "M" : req.body.M,
-                    "L" : req.body.L,
-                    "XL" : req.body.XL,
-                    "XXL" : req.body.XXL
+        let errors = validationResult(req);
+        console.log(errors)
+        if (!errors.isEmpty()) {
+            res.render(path.join(__dirname, '../views/products/admCreate'), { session:req.session, errors: errors.mapped() })
+        }else{
+
+            try{
+                let shirtToCreate = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
+                
+                if( shirtToCreate != null){
+                    res.redirect('/products/create')
+                    console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
+                }else{
+                    await db.Shirts.create({
+                        shirt_name: req.body.name_product,
+                        shirt_price: req.body.price,
+                        shirt_discount: req.body.descuento,
+                        shirt_desc: req.body.description,
+                        shirt_img: req.file.filename,
+                        shirt_custom: req.session.admin,
+                        user_id: req.session.userid
+                    })
+        
+                    let stock = { 
+                        "XS" : req.body.XS,
+                        "S" : req.body.S,
+                        "M" : req.body.M,
+                        "L" : req.body.L,
+                        "XL" : req.body.XL,
+                        "XXL" : req.body.XXL
+                    }
+                
+                    let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
+        
+                    for (let talla in stock){
+                        await db.Details_shirt.create({
+                            shirt_size: talla,
+                            shirt_stock: stock[talla],
+                            shirt_id: shirtCreated.shirt_id
+                        })
+                    } 
+                    res.redirect(`/products/${shirtCreated.shirt_id}`);
                 }
             
-                let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
-    
-                for (let talla in stock){
-                    await db.Details_shirt.create({
-                        shirt_size: talla,
-                        shirt_stock: stock[talla],
-                        shirt_id: shirtCreated.shirt_id
-                    })
-                } 
-                res.redirect(`/products/${shirtCreated.shirt_id}`);
+            }catch(err){
+                console.log(err)
+                res.redirect('/');
             }
-        
-        }catch(err){
-            console.log(err)
-            res.redirect('/');
         }
     },
 

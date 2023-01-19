@@ -57,10 +57,12 @@
                 <button type="submit" class="elemento-form  btn btn-outline-primary make-btn">Registrarse</button>
                 <a class="elemento-form" href="/user/login">¿Ya tienes una cuenta?</a>
             </form>
-            <% if (errors != 'undefined') { %>
+            <% if (errors !== {}) { %>
+                <% console.log('Entra')%>
+                <% console.log(errors)  %>
                 <%for (let err in errors){%>
-                  <p><%err.msg %></p>
-                    <p>Los errores los configuramos bien en react</p>
+                  
+                    <p><%= errors[err].msg %> </p>
                  <%}%>   
                     
             <% } %> 
