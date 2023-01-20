@@ -48,17 +48,16 @@
             <h1><%- shirtShow.dataValues.shirt_name %> </h1>
             <p class="precio-producto">$<%- shirtShow.dataValues.shirt_price %> </p>
             <p class="descripcion-producto"><%- shirtShow.dataValues.shirt_desc %> </p>
-            <% if (talles) { %>
+            <% for( let i = 0; i < 6; i++ ) { %>
+                <% if (talles[i].dataValues.shirt_stock >= 1) { %>
                 <div class="envios-talle">
                 
                     <div class="talle-div">
                         <label for="talle">Talle</label>
                         <select id="talle" name="talle">
-                            <% for( let i = 0; i < 6; i++ ) { %>
-                                <% if (talles[i].dataValues.shirt_stock >= 1) { %>
+                            
                                     <option value="<%-i%>"> <%-talles[i].dataValues.shirt_size%> </option>
-                                <% } %>
-                            <% } %>
+
                         </select>
                     </div>
                     <div class="envios-div">
@@ -74,9 +73,9 @@
     
                 </div>
             </div>
-            <% }else{ %>
+            <% }} %>  
+
                 <h5>SOLD OUT ITEM</h5>
-            <% } %>   
     </main>
     <%- include('../partials/footer') %> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"

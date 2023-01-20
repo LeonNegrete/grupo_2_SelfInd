@@ -27,23 +27,20 @@ const productController = {
                 shirt_id : Remera.dataValues.shirt_id
             }
         })
-        talles.forEach(talle => {
-            let stock = false
-            if (talle.dataValues.shirt_stock > 0){
-                return true
-            }
-            return stock;
-        });
+        tallesInStock = talles.filter((talle)=>{
+            return talle.dataValues.shirt_stock
+        })
+        return tallesInStock.length
     },
 
     home: async(req, res) => {
         let session = req.session;
         let productsArray = await db.Shirts.findAll()
-        console.log(productsArray)
         let soldOut = [];
         let onSale = [];
+/*         console.log(productController.hayStock('ACA!!!!!!!!!!!!!!!',productsArray[2])) */
         for (const remera of productsArray) { //itera el array pasando por cada remera
-            if (productController.hayStock(remera)) {
+            if (await productController.hayStock(remera) > 0) {
                 onSale.push(remera) 
             } else {
                 soldOut.push(remera) 
@@ -64,8 +61,6 @@ const productController = {
                   shirt_id : idShirt
                 }
             });
-
-            console.log(shirtShow.dataValues.shirt_img)
 
             res.render(path.join(__dirname,'../views/products/detalle.ejs'), {shirtShow, talles,session});
 

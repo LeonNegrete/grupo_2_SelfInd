@@ -28,13 +28,13 @@ let validateRegister = [
         .isLength({ min: 4 }).withMessage('Tu nombre de usuario debe tener al menos 4 caracteres'),
     check('email').notEmpty().withMessage('Debes ingresar un email').bail()
         .isEmail().withMessage('Debes ingresar un email valido'),
-     /* body('email').custom(async value => {
+    body('email').custom(async value => {
         return await db.Users.findAll({ where: { user_email: value } }).then(user => {
-            if (user) {
+            if (user.length !== 0) {
                 return Promise.reject('Ya existe un usuario con este email');
             }
         });
-    }) */, 
+    }) ,
     check('password').notEmpty().withMessage('Ingresa contraseña').bail()
         .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
         .isStrongPassword({ minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1, returnScore: false })
@@ -50,7 +50,7 @@ let validateLogin = [
 //RUTAS A LAS QUE ENTRAR SOLO SI NO SE ESTA LOGEADO
 router.get('/login', sessionGuestMD, userController.login)
 router.get('/register', sessionGuestMD, userController.register)
-router.post('/', sessionGuestMD, upload.single('profile'), validateRegister, userController.registerPost)
+router.post('/', sessionGuestMD, upload.single('profile'),validateRegister, userController.registerPost)
 router.post('/login', sessionGuestMD, upload.single('profile'), validateLogin, userController.loginPost)
 
 //RUTA QUE SIEMPRE SE PUEDE ENTRAR
