@@ -81,6 +81,7 @@ const productController = {
 
     admCreate: (req, res) => {
         let session = req.session;
+        //console.log(path.join(__dirname, '../views/products/admCreate'))
         res.render(path.join(__dirname, '../views/products/admCreate'), { session, errors: 'undefined' })
     },
 
@@ -141,19 +142,102 @@ const productController = {
         }
     },
 
-    admEdit: (req, res) => {
-        let idP = req.params.id;
+    admEdit: async (req, res) => {
+        
         let session = req.session;
-        let selectedProduct = productController.productsArr().products[idP]
-        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP, selectedProduct, session });
+
+        let idShirt = req.params.id;
+        try{
+            let shirtShow = await db.Shirts.findByPk(idShirt);
+            //console.log(shirtShow)
+            if( shirtShow == null){
+                res.redirect('/')
+                console.log("No existe la camisa") //Hay que poner los errores con un render errors...
+            }else{
+                let talles = await db.Details_shirt.findAll({
+                    where: {
+                      shirt_id : idShirt
+                    }
+                });
+    
+                res.render(path.join(__dirname,'../views/products/admEdit.ejs'), {shirtShow, talles,session});
+            }
+            
+        }catch(err){
+            console.log(err);
+        }
+
     },
     
-    putEdit: (req, res) => {
-        
-        let idP = req.params.id
+    putEdit: async (req, res) => {
+        console.log("entra al put")
+        let session = req.session;
+
+        let idShirt = req.params.id;
         let editedData = {
             ...req.body,
         }
+
+        console.log(editedData)
+
+        try{
+            let shirtToEdit = await db.Shirts.findOne({ where : { shirt_id : idShirt } })
+            console.log(shirtToEdit)
+            /* if( shirtToCreate != null){
+                res.redirect('/products/create')
+                console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
+            }else{
+                if (req.session.admin == 1){
+                    await db.Shirts.create({
+                        shirt_name: req.body.name_product,
+                        shirt_price: req.body.price,
+                        shirt_discount: req.body.descuento,
+                        shirt_desc: req.body.description,
+                        shirt_img: req.file.filename,
+                        shirt_custom: 0, 
+                        user_id: req.session.userid
+                    })
+                }else{
+                    await db.Shirts.create({
+                        shirt_name: req.body.name_product,
+                        shirt_price: req.body.price,
+                        shirt_discount: req.body.descuento,
+                        shirt_desc: req.body.description,
+                        shirt_img: req.file.filename,
+                        shirt_custom: 1, 
+                        user_id: req.session.userid
+                    })
+                }
+    
+                let stock = { 
+                    "XS" : req.body.XS,
+                    "S" : req.body.S,
+                    "M" : req.body.M,
+                    "L" : req.body.L,
+                    "XL" : req.body.XL,
+                    "XXL" : req.body.XXL
+                }
+            
+                let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
+    
+                for (let talla in stock){
+                    await db.Details_shirt.create({
+                        shirt_size: talla,
+                        shirt_stock: stock[talla],
+                        shirt_id: shirtCreated.shirt_id
+                    })
+                } 
+                res.redirect(`/products/${shirtCreated.shirt_id}`);
+            } */
+        
+        }catch(err){
+            console.log(err)
+        } 
+/* 
+        let idP = req.params.id
+
+        console.log(editedData)
+
         let arrayEvaluacion = [req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl]
         if ([req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl].every((e) => {
             return isNaN(parseInt(e));
@@ -166,7 +250,7 @@ const productController = {
             return e.id === idP
         })
         productController.editExistingProduct(elementToEdit, editedData) //edita el parsedJSON
-        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
+        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON)); */
         res.redirect('/');
     
     },

@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+input{
+    color: white;
+}
+
 main.containerCreate{
     display: flex;
     justify-content: center;
