@@ -12,13 +12,13 @@ CREATE TABLE `Users` (
    `user_name` CHAR(100) NOT NULL,
    `user_pass` CHAR(100) NOT NULL,
    `user_email` CHAR(50) NOT NULL,
-   `user_admin` INT NOT NULL DEFAULT 0,
+   `user_admin` INT default 0 NOT NULL,
    `user_pic` CHAR(100) NOT NULL,
    PRIMARY KEY (`user_id`)
 );
 
 CREATE TABLE `Adresses` (
-   `address_id` INT NOT NULL AUTO_INCREMENT,
+   `address_id` INT NOT NULL,
    `address_num` INT NOT NULL,
    `address_calle` CHAR(50) NOT NULL,
    `address_cp` CHAR(10) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `Adresses` (
 );
 
 CREATE TABLE `Cards` (
-   `card_id` INT NOT NULL AUTO_INCREMENT,
+   `card_id` INT NOT NULL,
    `card_num` CHAR(20) NOT NULL,
    `card_ccv` CHAR(5) NOT NULL,
    `card_expire` DATE NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `Cards` (
 CREATE TABLE `Shirts` (
    `shirt_id` INT NOT NULL AUTO_INCREMENT,
    `shirt_price` DOUBLE NOT NULL,
-   `shirt_discount` SMALLINT NOT NULL DEFAULT 0,
+   `shirt_discount` SMALLINT NOT NULL,
    `shirt_name` CHAR(25) NOT NULL,
    `shirt_desc` TEXT NOT NULL,
    `shirt_img` CHAR(50) NOT NULL,
@@ -50,15 +50,15 @@ CREATE TABLE `Shirts` (
 );
 
 CREATE TABLE `Details_shirt` (
-   `detail_id` INT NOT NULL AUTO_INCREMENT,
+   `detail_id` INT NOT null AUTO_INCREMENT,
    `shirt_size` CHAR(5) NOT NULL,
-   `shirt_stock` INT NOT NULL DEFAULT 0,
+   `shirt_stock` INT NOT NULL,
    `shirt_id` INT NOT NULL,
    PRIMARY KEY (`detail_id`)
 );
 
 CREATE TABLE `Cart_Items` (
-   `cart_item_id` INT NOT NULL AUTO_INCREMENT,
+   `cart_item_id` INT NOT NULL,
    `cart_item_quantity` INT NOT NULL,
    `shirt_id` INT NOT NULL,
    `cart_id` INT NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE `Cart_Items` (
 );
 
 CREATE TABLE `Cart` (
-   `cart_id` INT NOT NULL AUTO_INCREMENT,
+   `cart_id` INT NOT NULL,
    `cart_total` DOUBLE NOT NULL,
    `cart_created_time` TIMESTAMP NOT NULL,
    `user_id` INT NOT NULL,
@@ -118,3 +118,158 @@ values ( 'leoG' , 'Leon Negrete' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AY
 
 INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic, user_admin) 
 values ( 'feliB' , 'Felipe Bustamante' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'feliB@gmail.com' , 'profile-1672288256574.png', '1');
+
+
+
+
+INSERT INTO shirts 
+( shirt_price , shirt_discount , shirt_name , shirt_desc , shirt_img , user_id , shirt_custom ) 
+VALUES 
+( '170.50' , '30' , 'Camisa Verde 2' , 'Una camisa color verde 2' , '2.png', '1', '0');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XS' , '0' , '1');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('S' , '0' , '1');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('M' , '0' , '1');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('L' , '0' , '1');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XL' , '0' , '1');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XXL' , '0' , '1');
+
+
+
+INSERT INTO shirts 
+( shirt_price , shirt_discount , shirt_name , shirt_desc , shirt_img , user_id , shirt_custom ) 
+VALUES 
+( '220.00' , '5' , 'Camisa verde - fucsia' , 'Una camisa color verde - fucsia' , '3.png', '1', '0');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XS' , '0' , '2');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('S' , '0' , '2');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('M' , '0' , '2');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('L' , '0' , '2');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XL' , '0' , '2');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XXL' , '0' , '2');
+
+
+
+INSERT INTO shirts 
+( shirt_price , shirt_discount , shirt_name , shirt_desc , shirt_img , user_id , shirt_custom ) 
+VALUES 
+( '100.90' , '28' , 'Camisa negra' , 'Una camisa color negra' , '4.png' , '1', '0');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XS' , '0' , '3');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('S' , '0' , '3');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('M' , '0' , '3');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('L' , '0' , '3');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XL' , '0' , '3');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XXL' , '0' , '3');
+
+
+
+
+INSERT INTO shirts 
+( shirt_price , shirt_discount , shirt_name , shirt_desc , shirt_img , user_id , shirt_custom ) 
+VALUES 
+( '189.99' , '1' , 'Camisa azul' , 'Una camisa color azul' , '5.png' , '1', '0');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XS' , '0' , '4');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('S' , '0' , '4');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('M' , '0' , '4');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('L' , '0' , '4');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XL' , '0' , '4');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XXL' , '0' , '4');
+
+
+
+INSERT INTO shirts 
+( shirt_price , shirt_discount , shirt_name , shirt_desc , shirt_img , user_id , shirt_custom ) 
+VALUES 
+( '320.99' , '10' , 'Camibuso' , 'Un camibuso blanco' , '6.png' , '1', '0');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XS' , '8' , '5');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('S' , '10' , '5');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('M' , '16' , '5');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('L' , '20' , '5');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XL' , '3' , '5');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XXL' , '6' , '5');
+
+
+
+INSERT INTO shirts 
+( shirt_price , shirt_discount , shirt_name , shirt_desc , shirt_img , user_id , shirt_custom ) 
+VALUES 
+( '320.99' , '99' , 'Camibuso 2' , 'Un camibuso blanco 2' , '7.png' , '1', '0');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XS' , '8' , '6');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('S' , '10' , '6');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('M' , '16' , '6');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('L' , '20' , '6');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XL' , '3' , '6');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XXL' , '6' , '6');
+
+
+INSERT INTO shirts 
+( shirt_price , shirt_discount , shirt_name , shirt_desc , shirt_img , user_id , shirt_custom ) 
+VALUES 
+( '300.99' , '11' , 'Camibuso 3' , 'Un camibuso blanco 3' , '8.png' , '1', '0');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XS' , '8' , '7');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('S' , '10' , '7');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('M' , '16' , '7');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('L' , '20' , '7');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XL' , '3' , '7');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XXL' , '6' , '7');
+
+
+INSERT INTO shirts 
+( shirt_price , shirt_discount , shirt_name , shirt_desc , shirt_img , user_id , shirt_custom ) 
+VALUES 
+( '100.10' , '5' , 'Camisa de diablos' , 'Una camisa con diablos' , '9.png' , '1', '0');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XS' , '8' , '8');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('S' , '10' , '8');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('M' , '16' , '8');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('L' , '20' , '8');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XL' , '3' , '8');
+
+insert into details_shirt ( shirt_size , shirt_stock , shirt_id ) values ('XXL' , '6' , '8');
+
+
+
