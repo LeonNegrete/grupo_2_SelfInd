@@ -28,9 +28,11 @@ const productController = {
             }
         })
         tallesInStock = talles.filter((talle)=>{
-            return talle.dataValues.shirt_stock
+            return talle.dataValues.shirt_stock > 0
         })
-        return tallesInStock.length
+        console.log(tallesInStock.length)
+
+        return tallesInStock
     },
 
     home: async(req, res) => {
@@ -38,9 +40,11 @@ const productController = {
         let productsArray = await db.Shirts.findAll()
         let soldOut = [];
         let onSale = [];
-/*         console.log(productController.hayStock('ACA!!!!!!!!!!!!!!!',productsArray[2])) */
-        for (const remera of productsArray) { //itera el array pasando por cada remera
-            if (await productController.hayStock(remera) > 0) {
+
+        for (const remera of productsArray) {
+
+            let aux = await productController.hayStock(remera)    
+            if (aux.length !== 0) {
                 onSale.push(remera) 
             } else {
                 soldOut.push(remera) 
@@ -55,6 +59,8 @@ const productController = {
         let idShirt = req.params.id;
         try{
             let shirtShow = await db.Shirts.findByPk(idShirt);
+            inStock = await productController.hayStock(shirtShow);
+
 
             let talles = await db.Details_shirt.findAll({
                 where: {
@@ -62,7 +68,7 @@ const productController = {
                 }
             });
 
-            res.render(path.join(__dirname,'../views/products/detalle.ejs'), {shirtShow, talles,session});
+            res.render(path.join(__dirname,'../views/products/detalle.ejs'), {shirtShow,inStock, talles,session});
 
         }catch(err){
             console.log(err);

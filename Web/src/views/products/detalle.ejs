@@ -8,79 +8,86 @@
 </head>
 
 <body>
-    <%- include('../partials/header')%> 
-    <main>
-        <div class="carousel-boot">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
+    <%- include('../partials/header')%>
+        <main>
+            <div class="carousel-boot">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="<%-" ../images/Remeras/" + shirtShow.dataValues.shirt_img %> " class="d-block
+                            w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="<%-" ../images/Remeras/" + shirtShow.dataValues.shirt_img %>" class="d-block
+                            w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="<%-" ../images/Remeras/" + shirtShow.dataValues.shirt_img %>" class="d-block
+                            w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="<%-"../images/Remeras/" + shirtShow.dataValues.shirt_img %> " class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="<%-"../images/Remeras/" +  shirtShow.dataValues.shirt_img %>" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="<%-"../images/Remeras/" +  shirtShow.dataValues.shirt_img %>" class="d-block w-100" alt="...">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
-        </div>
-
-        <div class="detalle-producto">
-            <h1><%- shirtShow.dataValues.shirt_name %> </h1>
-            <p class="precio-producto">$<%- shirtShow.dataValues.shirt_price %> </p>
-            <p class="descripcion-producto"><%- shirtShow.dataValues.shirt_desc %> </p>
-            <% for( let i = 0; i < 6; i++ ) { %>
-                <% if (talles[i].dataValues.shirt_stock >= 1) { %>
-                <div class="envios-talle">
+            <% if (inStock.length > 0) { %>
+            <div class="detalle-producto">
+                <h1><%- shirtShow.dataValues.shirt_name %> </h1>
+                <p class="precio-producto">$<%- shirtShow.dataValues.shirt_price %> </p>
+                <p class="descripcion-producto"><%- shirtShow.dataValues.shirt_desc %> </p>
                 
-                    <div class="talle-div">
-                        <label for="talle">Talle</label>
-                        <select id="talle" name="talle">
+
+
+
+                    <div class="envios-talle">
+
+                        <div class="talle-div">
+                            <label for="talle">Talle</label>
                             
-                                    <option value="<%-i%>"> <%-talles[i].dataValues.shirt_size%> </option>
+                                <select id="talle" name="talle">
+                                    <% for( let i=0; i < inStock.length; i++ ) { %>
+                                    <option value="<%-i%>"> <%-inStock[i].dataValues.shirt_size%> </option>
+                                    <% } %>
+                                </select>
+                                
+                        </div>
+                        <div class="envios-div">
+                            <input type="checkbox" name="envio" id="envio">
+                            <label for="envio">Envio a domicilio</label>
+                        </div>
+                    </div>
 
-                        </select>
+
+                    <div class="botones">
+                        <button class="btn btn-outline-primary make-btn" type="submit">Comprar</button>
+                        <button class="btn btn-outline-primary make-btn" type="submit">Agregar al carrito</button>
+
                     </div>
-                    <div class="envios-div">
-                        <input type="checkbox" name="envio" id="envio">
-                        <label for="envio">Envio a domicilio</label>
-                    </div>
-                </div>
-    
-    
-                <div class="botones">
-                    <button class="btn btn-outline-primary make-btn" type="submit">Comprar</button>
-                    <button class="btn btn-outline-primary make-btn" type="submit">Agregar al carrito</button>
-    
-                </div>
             </div>
-            <% }} %>  
-
+            <% }else{ %> 
                 <h5>SOLD OUT ITEM</h5>
-    </main>
-    <%- include('../partials/footer') %> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-        crossorigin="anonymous"></script>
+            <% } %> 
+        </main>
+        <%- include('../partials/footer') %>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+                crossorigin="anonymous"></script>
 </body>
 
 </html>
