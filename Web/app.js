@@ -1,6 +1,7 @@
 //RUTAS
 const mainRoutes = require('./src/routes/main')
 const userRoutes = require('./src/routes/users')
+const APIRoutes = require('./src/routes/api')
 
 //LIBRERIAS Y FRAMEWORKS
 const bodyParser = require('body-parser')
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 //CONFIG RUTAS
 app.use('/', mainRoutes);
 app.use('/user', userRoutes);
+app.use('/api', APIRoutes);
 app.get('/draw', (req,res)=>{
     res.render(path.join(__dirname, './src/views/products/draw.ejs'))
 })
