@@ -188,8 +188,6 @@ const productController = {
             //fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
             //console.log(shirtToEdit)
 
-            //imagenName = shirtToEdit.dataValues.shirt_img;
-
             if (req.file == undefined){
                 await db.Shirts.update({ 
                         shirt_name: req.body.title,
@@ -258,11 +256,22 @@ const productController = {
         res.render(path.join(__dirname, '../views/products/products.ejs'), { productsArray, sizesList, session }) */
     },
 
-    deleteItem: (req, res) => {
-        let idP = req.params.id;
+    deleteItem: async (req, res) => {
+        let idShirt = req.params.id;
+        
+        let shirtToDelete = await db.Shirts.findByPk(idShirt);
+        
+        fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)));
 
+        await db.Details_shirt.destroy(
+            {where : { shirt_id: idShirt,}
+        });
 
-        let arrayToReturn = productController.productsArr(); //selecciona el elemento correspondiente
+        await db.Shirts.destroy(
+            {where : { shirt_id: idShirt,}
+        });
+
+        /* let arrayToReturn = productController.productsArr(); //selecciona el elemento correspondiente
         let elementToDelete = arrayToReturn.products.find((e) => { //Busca el producto de manera que lo encuentre satisfactoriamente aunque el indice del array no sea el mismo que su id
             return e.id === idP
         })
@@ -271,7 +280,7 @@ const productController = {
         arrayToReturn.products.splice(arrayToReturn.products.indexOf(indexOfElementToDelete), 1);
         fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(arrayToReturn));
         console.log(elementToDelete.image.replace('../images/Remeras/', ''))
-        fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + elementToDelete.image)));
+        fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + elementToDelete.image))); */
         res.redirect('/products')
     }
 }
