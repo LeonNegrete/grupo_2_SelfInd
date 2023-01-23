@@ -176,104 +176,96 @@ const productController = {
     },
     
     putEdit: async (req, res) => {
-        console.log("entra al put")
-        let session = req.session;
+        //console.log("entra al put")
+        //let session = req.session;
 
-        let idShirt = req.params.id;
-        let editedData = {
-            ...req.body,
-        }
+        let idShirt = req.params.id
 
-        console.log(editedData)
-
+        //console.log(editedData)
+        
         try{
-            let shirtToEdit = await db.Shirts.findOne({ where : { shirt_id : idShirt } })
-            console.log(shirtToEdit)
-            /* if( shirtToCreate != null){
-                res.redirect('/products/create')
-                console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
+            let shirtToEdit = await db.Shirts.findByPk(idShirt);
+            //fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
+            //console.log(shirtToEdit)
+
+            //imagenName = shirtToEdit.dataValues.shirt_img;
+
+            if (req.file == undefined){
+                await db.Shirts.update({ 
+                        shirt_name: req.body.title,
+                        shirt_price: req.body.price,
+                        shirt_discount: req.body.descuento,
+                        shirt_desc: req.body.description,
+                    }, {where : {
+                        shirt_id: idShirt,
+                    }});
             }else{
-                if (req.session.admin == 1){
-                    await db.Shirts.create({
-                        shirt_name: req.body.name_product,
+                await db.Shirts.update(
+                    { 
+                        shirt_name: req.body.title,
                         shirt_price: req.body.price,
                         shirt_discount: req.body.descuento,
                         shirt_desc: req.body.description,
                         shirt_img: req.file.filename,
-                        shirt_custom: 0, 
-                        user_id: req.session.userid
-                    })
-                }else{
-                    await db.Shirts.create({
-                        shirt_name: req.body.name_product,
-                        shirt_price: req.body.price,
-                        shirt_discount: req.body.descuento,
-                        shirt_desc: req.body.description,
-                        shirt_img: req.file.filename,
-                        shirt_custom: 1, 
-                        user_id: req.session.userid
-                    })
-                }
-    
-                let stock = { 
-                    "XS" : req.body.XS,
-                    "S" : req.body.S,
-                    "M" : req.body.M,
-                    "L" : req.body.L,
-                    "XL" : req.body.XL,
-                    "XXL" : req.body.XXL
-                }
+                    }, {where : {
+                            shirt_id: idShirt,
+                    }});
+
+            }
             
-                let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
-    
-                for (let talla in stock){
-                    await db.Details_shirt.create({
-                        shirt_size: talla,
-                        shirt_stock: stock[talla],
-                        shirt_id: shirtCreated.shirt_id
-                    })
-                } 
-                res.redirect(`/products/${shirtCreated.shirt_id}`);
-            } */
+            let stock = { 
+                "XS" : req.body.XS,
+                "S" : req.body.S,
+                "M" : req.body.M,
+                "L" : req.body.L,
+                "XL" : req.body.XL,
+                "XXL" : req.body.XXL
+            }
+
+            for (let talla in stock){
+                await db.Details_shirt.update({
+                    shirt_stock: stock[talla]
+                }, {where : {
+                    shirt_id: idShirt,
+                    shirt_size: talla
+                }});
+            } 
         
         }catch(err){
             console.log(err)
         } 
-/* 
-        let idP = req.params.id
-
-        console.log(editedData)
-
-        let arrayEvaluacion = [req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl]
-        if ([req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl].every((e) => {
-            return isNaN(parseInt(e));
-        })) { //Condicional necesario para no sobreescribir los datos de stock con un 'null' cada vez que se hace una edicion donde no se especifica el stock (la idea es que se asume que si no se especifica un dato en el formulario es debido a que no se quiere cambiarlo)
-            editedData.sizesQuantity = undefined //Cuando se sube un undefined, en la funcion edictExistingProduct, se conservara el valor actual
-        } else { editedData.sizesQuantity = [req.body.xs, req.body.s, req.body.m, req.body.l, req.body.xl, req.body.xxl]; } //Si se hizo un cambio se subira   
-
-        let parsedJSON = productController.productsArr(); //Almacena el JSON convertido en objeto dentro de una variable
-        let elementToEdit = parsedJSON.products.find((e) => { //Busca el producto de manera que lo encuentre satisfactoriamente aunque el indice del array no sea el mismo que su id
-            return e.id === idP
-        })
-        productController.editExistingProduct(elementToEdit, editedData) //edita el parsedJSON
-        fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON)); */
         res.redirect('/');
     
     },
 
-    productList: (req, res) => {
+    productList: async (req, res) => {
         let session = req.session;
-        let productsArray = productController.productsArr().products
+        console.log("Entra a la lista")
+
+        try{
+            listado = await db.Shirts.findAll();
+            console.log(listado)
+            res.render(path.join(__dirname, '../views/products/products.ejs'), { listado, session })
+
+        }catch(err){
+            console.log(err)
+        }
+
+        
+        /* let productsArray = productController.productsArr().products
         let sizesList = productController.productsArr().sizesList
-        res.render(path.join(__dirname, '../views/products/products.ejs'), { productsArray, sizesList, session })
+        res.render(path.join(__dirname, '../views/products/products.ejs'), { productsArray, sizesList, session }) */
     },
 
     deleteItem: (req, res) => {
         let idP = req.params.id;
+
+
         let arrayToReturn = productController.productsArr(); //selecciona el elemento correspondiente
         let elementToDelete = arrayToReturn.products.find((e) => { //Busca el producto de manera que lo encuentre satisfactoriamente aunque el indice del array no sea el mismo que su id
             return e.id === idP
         })
+
         let indexOfElementToDelete = arrayToReturn.products.indexOf(elementToDelete);
         arrayToReturn.products.splice(arrayToReturn.products.indexOf(indexOfElementToDelete), 1);
         fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(arrayToReturn));

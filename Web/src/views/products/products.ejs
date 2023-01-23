@@ -11,24 +11,20 @@
     <%- include('../partials/header') %>
 
         <main>
-            <% for (let i=0;i < productsArray.length ;i++){ %>
+            <% for (let i=0;i < listado.lenght; i++){ %>
                 <article class="articulo">
-                    <a class="articulo" href="/products/<%=productsArray[i].id%> ">
-                        <img src="<%-"../images/Remeras/" +  productsArray[i].image -%>" alt="" class="img-articulo">
+                    <a class="articulo" href="/products/<%=listado[i].dataValues.shirt_id %> ">
+                        <img src="<%-"../images/Remeras/" +  listado[i].dataValues.shirt_img -%>" alt="" class="img-articulo">
+                        
                         <h5 class="titulo">
-                            <%-productsArray[i].title %>
-                             - $<%-productsArray[i].price %>
+                            <%= listado[i].dataValues.shirt_name %>
+                             - $<%- listado[i].dataValues.shirt_price %>
                         </h5>
-                        <% for (let index2=0 ; index2 < productsArray[i].sizesQuantity.length ; index2++){ %>
-                            <span>
-                            <%- sizesList[index2]%>
-                            
-                            =
-                            <%- productsArray[i].sizesQuantity[index2] %>
-                            </span>
-                        <% } %>  
-                        <h5 class="titulo">ID:<%- productsArray[i].id %>
-                            <form action="/products/<%=productsArray[i].id%>?_method=DELETE" method="post">
+
+                        
+
+                        <h5 class="titulo">ID:<%- listado[i].dataValues.shirt_id %>
+                            <form action="/products/<%- listado[i].dataValues.shirt_id %>?_method=DELETE" method="post">
                                 <button type="submit"><i class="fas fa-trash"></i></button>
                             </form>
                         </h5>

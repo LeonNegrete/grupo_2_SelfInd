@@ -14,7 +14,7 @@
 
             <section class="create-form-container">
 
-                <form action="/products/<%= shirtShow.dataValues.id %>?_method=PUT" method="POST" class="create-form-sections" enctype="multipart/form-data">
+                <form action="/products/<%= shirtShow.dataValues.shirt_id %>?_method=PUT" method="POST" class="create-form-sections" enctype="multipart/form-data">
 
 
                     <h1 class="title-carga">EDIT PRODUCT</h1>
@@ -28,6 +28,9 @@
 
                         <input class="number-input" id="precio" type="number" name="price" placeholder="Precio" min="0"
                             step=".01" value="<%= shirtShow.dataValues.shirt_price%>">
+
+                        <input class="number-input" id="descuento" type="number" name="descuento" placeholder="Descuento" min="0" max="90"
+                            step="1" value="<%= shirtShow.dataValues.shirt_discount%>">                            
 
                         <textarea name="description" id="descripcion" placeholder="Descripción del producto"><%= shirtShow.dataValues.shirt_desc %> </textarea>
                     </fieldset>
