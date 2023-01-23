@@ -11,13 +11,13 @@
     <%- include('../partials/header') %>
 
         <main>
-            <% for (let i=0;i < listado.lenght; i++){ %>
+            <% for (let i=0;i < listado.length; i++){ %>
                 <article class="articulo">
                     <a class="articulo" href="/products/<%=listado[i].dataValues.shirt_id %> ">
                         <img src="<%-"../images/Remeras/" +  listado[i].dataValues.shirt_img -%>" alt="" class="img-articulo">
                         
                         <h5 class="titulo">
-                            <%= listado[i].dataValues.shirt_name %>
+                            <%- listado[i].dataValues.shirt_name %>
                              - $<%- listado[i].dataValues.shirt_price %>
                         </h5>
 

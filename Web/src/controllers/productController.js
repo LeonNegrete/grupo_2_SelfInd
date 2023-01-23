@@ -240,11 +240,10 @@ const productController = {
 
     productList: async (req, res) => {
         let session = req.session;
-        console.log("Entra a la lista")
 
         try{
             listado = await db.Shirts.findAll();
-            console.log(listado)
+            console.log(listado.length)
             res.render(path.join(__dirname, '../views/products/products.ejs'), { listado, session })
 
         }catch(err){
