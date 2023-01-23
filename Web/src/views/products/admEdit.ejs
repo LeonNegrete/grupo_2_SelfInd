@@ -14,8 +14,7 @@
 
             <section class="create-form-container">
 
-                <form action="/products/<%=idP%>?_method=PUT" method="POST" class="create-form-sections"
-                    enctype="multipart/form-data">
+                <form action="/products/<%= shirtShow.dataValues.shirt_id %>?_method=PUT" method="POST" class="create-form-sections" enctype="multipart/form-data">
 
 
                     <h1 class="title-carga">EDIT PRODUCT</h1>
@@ -24,50 +23,35 @@
                     <fieldset class="fieldCreate">
                         <legend class="legendCreate"> DETAIL </legend>
 
-                        <input type="number" name="id" id="id" placeholder="Id del producto"
-                            value="<%= selectedProduct.id %>">
-
                         <input id="nombre" type="text" name="title" placeholder="Nombre del producto"
-                            value="<%= selectedProduct.title %>">
+                            value="<%= shirtShow.dataValues.shirt_name %>">
 
                         <input class="number-input" id="precio" type="number" name="price" placeholder="Precio" min="0"
-                            step=".01" value="<%= selectedProduct.price %>">
+                            step=".01" value="<%= shirtShow.dataValues.shirt_price%>">
 
-                        <textarea name="description" id="descripcion" placeholder="Descripción del producto"><%= selectedProduct.description %>
-                        </textarea>
+                        <input class="number-input" id="descuento" type="number" name="descuento" placeholder="Descuento" min="0" max="90"
+                            step="1" value="<%= shirtShow.dataValues.shirt_discount%>">                            
+
+                        <textarea name="description" id="descripcion" placeholder="Descripción del producto"><%= shirtShow.dataValues.shirt_desc %> </textarea>
                     </fieldset>
 
                     <fieldset class="fieldCreate">
-                        <legend class="legendCreate"> IMAGEN </legend>
+                        <legend class="legendCreate"> IMAGEN</legend>
+                        <div><img src="../../images/Remeras/<%= shirtShow.dataValues.shirt_img %>" class="d-block w-100" alt="..."></div>
                         <input type="file" name="image" id="image" accept="image/png, image/jpg, image/jpeg">
                     </fieldset>
 
                     <fieldset class="fieldCreate">
                         <legend class="legendCreate"> STOCK </legend>
 
-                        <label for="xs">XS : <input type="number" class="number-input" name="xs"
+                        <% for( let i = 0; i < 6; i++ ) { %>
+                            
+                            <label for="<%= talles[i].dataValues.shirt_size %>"><%= talles[i].dataValues.shirt_size %> : <input type="number" class="number-input" name="<%= talles[i].dataValues.shirt_size %>"
                                 placeholder="Cantidad en stock" min="0" step="1"
-                                value="<%= selectedProduct.sizesQuantity[0] %>"></label>
+                                value="<%= talles[i].dataValues.shirt_stock %>">
+                            </label>
 
-                        <label for="s">S : <input type="number" class="number-input" name="s"
-                                placeholder="Cantidad en stock" min="0" step="1"
-                                value="<%= selectedProduct.sizesQuantity[1] %>"></label>
-
-                        <label for="m">M : <input type="number" class="number-input" name="m"
-                                placeholder="Cantidad en stock" min="0" step="1"
-                                value="<%= selectedProduct.sizesQuantity[2] %>"></label>
-
-                        <label for="l">L : <input type="number" class="number-input" name="l"
-                                placeholder="Cantidad en stock" min="0" step="1"
-                                value="<%= selectedProduct.sizesQuantity[3] %>"></label>
-
-                        <label for="xl">XL : <input type="number" class="number-input" name="xl"
-                                placeholder="Cantidad en stock" min="0" step="1"
-                                value="<%= selectedProduct.sizesQuantity[4] %>"></label>
-
-                        <label for="xxl">XXL : <input type="number" class="number-input" name="xxl"
-                                placeholder="Cantidad en stock" min="0" step="1"
-                                value="<%= selectedProduct.sizesQuantity[5] %>"></label>
+                        <% } %>
 
                     </fieldset>
 

@@ -38,7 +38,7 @@ router.get('/products', productController.productList );
 router.get('/products/create', productController.admCreate)
 router.get('/products/:id', productController.detalle)
 router.post('/products',upload.single('image'),validateCreate, productController.admCreatePost)
-router.get('/products/:id/edit', productController.admEdit);
+router.get('/products/edit/:id', productController.admEdit);
 router.put('/products/:id',upload.single('image'),validateCreate, productController.putEdit);
 router.delete('/products/:id', productController.deleteItem )
 

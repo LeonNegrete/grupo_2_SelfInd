@@ -108,7 +108,7 @@ ALTER TABLE `Orders_shipping` ADD CONSTRAINT `FK_f0e594bb-f188-4ca7-be19-7ba54dc
 ALTER TABLE `Orders_shipping` ADD CONSTRAINT `FK_5a3d1c68-f8ee-412d-9a04-ada319234834` FOREIGN KEY (`card_id`) REFERENCES `Cards`(`card_id`)  ;
 
 INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic , user_admin) 
-values ( 'rakan' , 'Rakan LZ' , '$2$10$5qoXlqPWI8J6fs5WS.I2XOdxMO.OpHCYy2YQ1tIcrmr3J5eUiPf/K' , 'rakan@gmail.com' , 'profile-1668560350104.jpg' , '1' );
+values ( 'rakan' , 'Rakan LZ' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'rakan@gmail.com' , 'profile-1668560350104.jpg' , '1' );
 
 INSERT INTO Users (user_nick , user_name , user_pass , user_email , user_pic) 
 values ( 'rakan2' , 'Rakan LZ 2' , '$2a$10$O.4bdvWtnjj7zOaOGGz6YuFB4wQES0Dsmw5AYY31SIeuTCKrnjVDi' , 'rakan2@gmail.com' , 'profile-1668715664919.jpg');
