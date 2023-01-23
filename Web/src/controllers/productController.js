@@ -151,7 +151,7 @@ const productController = {
         let idP = req.params.id;
         let session = req.session;
         let selectedProduct = productController.productsArr().products[idP]
-        res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { idP, selectedProduct, session });
+        res.render(path.join(__dirname, '../views/products/admEdit'), { idP, selectedProduct, session });
     },
     
     putEdit: (req, res) => {
