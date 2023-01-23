@@ -19,6 +19,14 @@
                         <h5 class="titulo">
                             <%- listado[i].dataValues.shirt_name %>
                              - $<%- listado[i].dataValues.shirt_price %>
+                             <% let tallesSpecific = tallasList.filter((detail)=>{ %>
+                                <%return detail.dataValues.shirt_id === listado[i].shirt_id%>
+                            <% }) %> 
+                            <% console.log(tallesSpecific) %>     
+                            <% for( let i = 0; i < tallesSpecific.length; i++ ) { %>
+                                <p><%- tallesSpecific[i].dataValues.shirt_size %>:<%- tallesSpecific[i].dataValues.shirt_stock %></p>  
+                                
+                            <% } %>
                         </h5>
 
                         

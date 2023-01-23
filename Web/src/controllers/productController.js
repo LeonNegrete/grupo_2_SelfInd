@@ -243,12 +243,10 @@ const productController = {
 
         try{
             listado = await db.Shirts.findAll();
-            //console.log(listado.length)
-            
             tallasList = await db.Details_shirt.findAll();
-            console.log(tallasList)
+            
 
-            res.render(path.join(__dirname, '../views/products/products.ejs'), { listado, session })
+            res.render(path.join(__dirname, '../views/products/products.ejs'), { listado,tallasList, session })
 
         }catch(err){
             console.log(err)
