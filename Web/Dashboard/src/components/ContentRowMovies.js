@@ -8,32 +8,7 @@ import SmallCard from './SmallCard';
 
 
 
-let moviesInDB = {
-    title: 'Movies in Data Base',
-    color: 'primary', 
-    cuantity: 21,
-    icon: 'fa-clipboard-list'
-}
 
-/* <!-- Total awards --> */
-
-let totalAwards = {
-    title:' Total awards', 
-    color:'primary', 
-    cuantity: '79',
-    icon:'fa-award'
-}
-
-/* <!-- Actors quantity --> */
-
-let actorsQuantity = {
-    title:'Actors quantity' ,
-    color:'primary',
-    cuantity:'49',
-    icon:'fa-user-check'
-}
-
-let cartProps = [moviesInDB, totalAwards, actorsQuantity];
 
 function ContentRowMovies(){
     const [data, setData] = useState(null);
@@ -42,10 +17,10 @@ function ContentRowMovies(){
       async function fetchData() {
         try {
           const response = await fetch('http://localhost:3030/api/products');
-          console.log(response)
+          
           const jsonResponse = await response.json();
           
-          setData(jsonResponse);
+           setData({count: jsonResponse.count});
         } catch (error) {
           console.error(error);
         }
@@ -55,11 +30,38 @@ function ContentRowMovies(){
       
       fetchData();
     }, []);
+
+    console.log(data)
+
+    const [cards, setCards] = useState(null);
+     setCards([{
+        title: 'Total de productos',
+        color: 'primary', 
+        cuantity: data.count,
+        icon: 'fa-clipboard-list'
+    },
+    {
+        title:' Total awards', 
+        color:'primary', 
+        cuantity: '79',
+        icon:'fa-award'
+    },
+    {
+        title:'Actors quantity' ,
+        color:'primary',
+        cuantity:'49',
+        icon:'fa-user-check'
+    }
+]);
+
+
+
+
+
     return (
         <div className="row">
             <div>{JSON.stringify(data)}</div>
-            {cartProps.map( (movie, i) => {
-                <div>{JSON.stringify(data)}</div>
+            {cards.map( (movie, i) => {
                 return <SmallCard {...movie} key={i}/>
             
             })}
