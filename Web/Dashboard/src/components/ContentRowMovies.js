@@ -20,7 +20,7 @@ function ContentRowMovies(){
           
           const jsonResponse = await response.json();
           
-           setData({count: jsonResponse.count});
+           setData(JSON.stringify(jsonResponse));
         } catch (error) {
           console.error(error);
         }
@@ -32,28 +32,26 @@ function ContentRowMovies(){
     }, []);
 
     console.log(data)
-
-    const [cards, setCards] = useState(null);
-     setCards([{
+    let moviesInDB = {
         title: 'Total de productos',
         color: 'primary', 
-        cuantity: data.count,
         icon: 'fa-clipboard-list'
-    },
-    {
+    }
+    moviesInDB.cuantity = data
+    let totalAwards = {
         title:' Total awards', 
         color:'primary', 
         cuantity: '79',
         icon:'fa-award'
-    },
-    {
+    }
+    let actorsQuantity = {
         title:'Actors quantity' ,
         color:'primary',
         cuantity:'49',
         icon:'fa-user-check'
     }
-]);
-
+    
+    let cartProps = [moviesInDB, totalAwards, actorsQuantity];
 
 
 
@@ -61,7 +59,7 @@ function ContentRowMovies(){
     return (
         <div className="row">
             <div>{JSON.stringify(data)}</div>
-            {cards.map( (movie, i) => {
+            {cartProps.map( (movie, i) => {
                 return <SmallCard {...movie} key={i}/>
             
             })}
