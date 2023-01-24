@@ -30,9 +30,9 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public')));
-
 //MIDDLEWARES CUSTOM
 //app.use(pruebasMD);
+
 
 //CONFIG RUTAS
 app.use('/', mainRoutes);

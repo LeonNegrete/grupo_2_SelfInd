@@ -41,7 +41,7 @@ function ContentRowMovies(){
     useEffect(() => {
       async function fetchData() {
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/products');
+          const response = await fetch('http://localhost:3030/api/products');
           console.log(response)
           const jsonResponse = await response.json();
           
@@ -56,10 +56,10 @@ function ContentRowMovies(){
       fetchData();
     }, []);
     return (
-        
         <div className="row">
+            <div>{JSON.stringify(data)}</div>
             {cartProps.map( (movie, i) => {
-                
+                <div>{JSON.stringify(data)}</div>
                 return <SmallCard {...movie} key={i}/>
             
             })}
