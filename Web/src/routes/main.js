@@ -28,10 +28,10 @@ let validateCreate = [
 
 
 
-
 //HOME (PARA ENTRAR LOGUEADO O NO)
 router.get('/', productController.home)
 router.get('/home', productController.home)
+router.get('/about', productController.nosotros)
 
 //ADMINISTRACION (PARA ADMINS)
 router.get('/products', productController.productList ); 
