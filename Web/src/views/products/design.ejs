@@ -29,6 +29,9 @@
     <br>
     <input type="color" name="color" id="color" oninput="color(this.value);">
     <input type="range" name="girth" id="girth" oninput="girth(this.value)" min="1" max="5" value="1">
+    <input type="radio" checked name="style" id="normal">
+    <input type="radio" name="style" id="circle">
+    <input type="radio" name="style" id="liner">
     <button id="preview-btn">Preview</button>
     
     <%- include('../partials/footer') %> 
