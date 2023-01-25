@@ -13,7 +13,7 @@
     <main>
         <h1>Es momento de hacer lo tuyo, de hacerlo tuyo...</h1>
         <input type="file" name="image_input" id="image_input" accept="image/png, image/jpg, image/jpeg">
-        <div class="remera-div">
+        <div id="remera-div"class="remera-div">
             <img src="images/Design/t-shirt-1976334_1280.webp" alt="Remera">
 
             <div class="mover-diseno-div">
@@ -33,8 +33,12 @@
     <input type="radio" name="style" id="circle">
     <input type="radio" name="style" id="liner">
     <button id="preview-btn">Preview</button>
+    <button id="download-btn">Download</button>
+    <canvas id="screenshot"></canvas>
     
     <%- include('../partials/footer') %> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/dom-to-image"></script>
     <script src="/design.js"></script>
 </body>
 

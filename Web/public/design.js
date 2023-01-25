@@ -21,10 +21,14 @@ var rect = canvas.getBoundingClientRect();
 var x = 0, y = 0, painting = false, colorSelect = 'black', girthSelect = 1;
 var btn = document.getElementById('preview-btn');
 var canvasPlace = document.querySelector("#diseno-div-canvas");
-
+const downloadBtn = document.querySelector('#download-btn');
+const screenshot = document.querySelector('#screenshot');
 const normal = document.getElementById('normal');
 const liner = document.getElementById('liner');
 const circle = document.getElementById('circle');
+
+let contextScreenshot = screenshot.getContext('2d');
+let remera = document.getElementById('remera-div');
 
 
 function color(c) {
@@ -43,10 +47,6 @@ function paint(x1, y1, x2, y2) {
     ctx.closePath();
 }
 
-window.addEventListener("scroll", function() {
-  currentX = window.pageXOffset;
-  currentY = window.pageYOffset;
-});
 
 canvas.addEventListener('mousedown', (place) => {
     x = place.clientX - rect.left;
@@ -65,16 +65,16 @@ canvas.addEventListener('mousemove', (place) => {
     if (circle.checked) {
         if (painting) {
             paint(x, y, place.clientX - rect.left, place.clientY - rect.top)
-            x = place.clientX  + curentX  - rect.left;
-            y = place.clientY  + currentY  - rect.top;
+            x = place.clientX + curentX - rect.left;
+            y = place.clientY + currentY - rect.top;
         }
 
     }
     if (liner.checked) {
         if (painting) {
             paint(x, y, place.clientX - rect.left, place.clientY - rect.top)
-            x = event.clientX    - rect.left;
-            y = event.clientY  + currentY  - rect.top;
+            x = event.clientX - rect.left;
+            y = event.clientY + currentY - rect.top;
         }
 
     }
@@ -93,4 +93,26 @@ btn.addEventListener('click', () => {
     const dataURL = canvas.toDataURL()
     document.querySelector("#diseno-div-canvas").style.backgroundImage = `url(${dataURL})`
     console.log(document.querySelector("#diseno-div-canvas").style.backgroundImage === `url(${dataURL})`)
+})
+/* function takeScreenshot() {
+    html2canvas(remera,{scale:10}).then(canvas => {
+        var link = document.createElement('a');
+        link.download = "screenshot.png";
+        link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
+        link.click();
+    }
+    )
+} */
+function takeScreenshot() {
+    var node = remera
+    domtoimage.toPng(node)
+        .then(function (dataUrl) {
+            var link = document.createElement('a');
+            link.download = 'screenshot.png';
+            link.href = dataUrl;
+            link.click();
+        });
+  }
+downloadBtn.addEventListener('click', () => {
+    takeScreenshot();
 })
