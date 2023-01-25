@@ -1,24 +1,18 @@
 import React from 'react';
 
 
-function ChartRow(props){
+function ChartRow(props) {
     return (
-                <tr>
-                    <td>{props.Title}</td>
-                    <td>{props.Length}</td>
-                    <td>{props.Rating}</td>
-                    <td>
-                        <ul>
-                            {props.Categories.map( (category,i) => 
-                                <li key={`category ${i}`}>{category}</li>
-                            )}
-                        </ul>
-                    </td>
-                    <td>{props.Awards}</td>
-                </tr>
-            )
-    }
-    
-        
+        <tr>
+            <td>{props.id}</td>
+            <td>{props.name}</td>
+            <td>{props.description}</td>
+            <td>{props.created}</td>
+            <a className="btn btn-primary" target={props.detail} href={props.detail} rel='follow' >Ver detalle</a>
+        </tr>
+    )
+}
+
+
 
 export default ChartRow;

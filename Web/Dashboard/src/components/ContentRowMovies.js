@@ -20,7 +20,26 @@ function ContentRowMovies(){
           
           const jsonResponse = await response.json();
           
-           setData(JSON.stringify(jsonResponse));
+           setData(jsonResponse);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      
+      
+      fetchData();
+    }, []);
+    const [userData, setUserData] = useState(null);
+  
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const response = await fetch('http://localhost:3030/api/users');
+          
+          const jsonResponse = await response.json();
+          
+           setUserData(jsonResponse);
         } catch (error) {
           console.error(error);
         }
@@ -31,35 +50,29 @@ function ContentRowMovies(){
       fetchData();
     }, []);
 
-    console.log(data)
-    let moviesInDB = {
-        title: 'Total de productos',
-        color: 'primary', 
-        icon: 'fa-clipboard-list'
-    }
-    moviesInDB.cuantity = data
-    let totalAwards = {
-        title:' Total awards', 
-        color:'primary', 
-        cuantity: '79',
-        icon:'fa-award'
-    }
-    let actorsQuantity = {
-        title:'Actors quantity' ,
-        color:'primary',
-        cuantity:'49',
-        icon:'fa-user-check'
-    }
-    
-    let cartProps = [moviesInDB, totalAwards, actorsQuantity];
 
 
 
 
     return (
+
         <div className="row">
-            <div>{JSON.stringify(data)}</div>
-            {cartProps.map( (movie, i) => {
+            {[{
+            title: 'Total de productos',
+            color: 'primary', 
+            cuantity: data? data.count : 'Loading...' ,
+            icon: 'fa-clipboard-list'
+        },{
+            title:'Total de usuarios', 
+            color:'primary', 
+            cuantity: userData? userData.count : 'Loading...',
+            icon:'fa-award'
+        },{
+            title:'Hechos por usuarios' ,
+            color:'primary',
+            cuantity: data? data.countByCategory.countCustom : 'Loading...' ,
+            icon:'fa-user-check'
+        }].map( (movie, i) => {
                 return <SmallCard {...movie} key={i}/>
             
             })}
