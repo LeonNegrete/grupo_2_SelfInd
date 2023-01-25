@@ -57,7 +57,7 @@ function LastMovieInDb(){
                         <img className="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{width: 40 +'rem'}} src={data? product? product.shirt_img: 'loading...' : 'loadingData...'} alt=" Loading... "/>
                     </div>
                     <p>{data? product? product.shirt_desc: 'loading...' : 'loadingData...'}</p>
-                    <a className="btn btn-danger" target={data? data.products[data.products.length-1].detail : '/'} rel="follow" href={data? data.products[data.products.length-1].detail : '/'}>Ver detalle</a>
+                    <a className="btn btn-primary" target={data? data.products[data.products.length-1].detail : '/'} rel="follow" href={data? data.products[data.products.length-1].detail : '/'}>Ver detalle</a>
                 </div>
             </div>
         </div>
