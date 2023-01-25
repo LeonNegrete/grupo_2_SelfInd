@@ -270,6 +270,11 @@ const productController = {
         });
 
         res.redirect('/products')
+    },
+
+    nosotros: (req, res) => {
+        let session = req.session;
+        res.render(path.join(__dirname,'../views/users/about.ejs'), {session});
     }
 }
 
