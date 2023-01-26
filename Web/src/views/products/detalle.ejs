@@ -51,37 +51,51 @@
                 <h1><%- shirtShow.dataValues.shirt_name %> </h1>
                 <p class="precio-producto">$<%- shirtShow.dataValues.shirt_price %> </p>
                 <p class="descripcion-producto"><%- shirtShow.dataValues.shirt_desc %> </p>
-                
 
 
+                <div class="envios-talle">
 
-                    <div class="envios-talle">
-
-                        <div class="talle-div">
-                            <label for="talle">Talle</label>
+                    <div class="talle-div">
+                        <label for="talle">Talle</label>
+                        
+                            <select id="talle" name="talle">
+                                <% for( let i=0; i < inStock.length; i++ ) { %>
+                                <option value="<%-i%>"> <%-inStock[i].dataValues.shirt_size%> </option>
+                                <% } %>
+                            </select>
                             
-                                <select id="talle" name="talle">
-                                    <% for( let i=0; i < inStock.length; i++ ) { %>
-                                    <option value="<%-i%>"> <%-inStock[i].dataValues.shirt_size%> </option>
-                                    <% } %>
-                                </select>
-                                
-                        </div>
-                        <div class="envios-div">
-                            <input type="checkbox" name="envio" id="envio">
-                            <label for="envio">Envio a domicilio</label>
-                        </div>
                     </div>
+
+                    <div class="envios-div">
+                        <input type="checkbox" name="envio" id="envio">
+                        <label for="envio">Envio a domicilio</label>
+                    </div>
+                </div>
 
 
                     <div class="botones">
-                        <button class="btn btn-outline-primary make-btn" type="submit">Comprar</button>
-                        <button class="btn btn-outline-primary make-btn" type="submit">Agregar al carrito</button>
-
+                        <button class="btn btn-outline-primary make-btn btn-space" type="submit">Comprar</button>
+                        <button class="btn btn-outline-primary make-btn btn-space" type="submit">Agregar al carrito</button>
+                        <% if (session.admin == 1) { %>
+                            <form class="form-bt-edit" action="/products/edit/<%- shirtShow.dataValues.shirt_id %>" method="get">
+                                <button class="btn btn-outline-primary make-btn btn-space" type="submit">&#128221 Editar</button>
+                            </form>
+                        <% } %>
                     </div>
+                    
             </div>
             <% }else{ %> 
-                <h5>SOLD OUT ITEM</h5>
+                <div class="detalle-producto">
+                    <h5>SOLD OUT ITEM</h5>
+                    <% if (session.admin == 1) { %>
+                        <div class="botones">
+                            <form action="/products/edit/<%- shirtShow.dataValues.shirt_id %>" method="get">
+                                <button class="btn btn-outline-primary make-btn" type="submit">&#128221 Editar</button>
+                            </form>
+                        </div>
+                        
+                    <% } %>
+                </div>
             <% } %> 
         </main>
         <%- include('../partials/footer') %>

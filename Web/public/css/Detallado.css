@@ -75,7 +75,20 @@ footer{
     margin-top: auto;
 }
 
+.botones{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
 
+.form-bt-edit{
+    display: inline;
+
+}
+
+.btn-space{
+    margin: .2rem;
+}
 
 @media(min-width: 769px){
     .carousel-boot{
@@ -101,7 +114,10 @@ footer{
         object-fit: cover;
     }
 
-}
-@media(min-width: 361px){
 
+}
+@media(max-width: 768px){
+    .botones{
+        justify-content: center;
+    }
 }

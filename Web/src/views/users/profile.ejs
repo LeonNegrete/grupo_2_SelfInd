@@ -23,7 +23,7 @@
             <div class="perfil-usuario-body">
                 <div class="perfil-usuario-bio">
                     <h3 class="titulo"><%- session.username %> </h3>
-                    <p class="texto"><%- `Bienvenido ${session.username}, actualmernte tu correo electronico registrado es ${session.email}` %> </p>
+                    <p class="texto"><%- `Bienvenido ${session.username}, actualmente tu correo electronico registrado es ${session.email}` %> </p>
                 </div>
                 
                 <div class="perfil-usuario-footer">
@@ -34,11 +34,28 @@
                         <li><i class="icono fas fa-map-marker-alt"></i> Ubicacion: </li>
                     </ul>
                 </div>
+
+                <div class="perfil-usuario-extras">
+                    <form action="/user/logout" method="get">
+                        <input type="submit" value="&#128274 Log Out" name="logout" class="logout" />
+                    </form>
+                    <% if (session.admin == 1) { %>
+                        <form action="/products/create" method="get">
+                            <input type="submit" value=" &#127933 Create " name="logout" class="logout" />
+                        </form>
+                    <% }else{ %>
+                        <form action="/design" method="get">
+                            <input type="submit" value=" &#127912 Create " name="logout" class="logout" />
+                        </form>
+                    <% } %>  
+                    
+                </div>
+
             </div>
 
-            <form action="/user/logout" method="get">
-                <input type="submit" value="Log Out" name="logout" class="logout" />
-            </form>
+            
+
+
 
         </section>
     <%- include('../partials/footer') %> 
