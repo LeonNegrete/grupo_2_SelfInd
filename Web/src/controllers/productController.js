@@ -21,13 +21,13 @@ const productController = {
         producto.image = newData.image || producto.image;
     },
 
-    hayStock: async(Remera) => {
+    hayStock: async (Remera) => {
         let talles = await db.Details_shirt.findAll({
             where: {
-                shirt_id : Remera.dataValues.shirt_id
+                shirt_id: Remera.dataValues.shirt_id
             }
         })
-        tallesInStock = talles.filter((talle)=>{
+        tallesInStock = talles.filter((talle) => {
             return talle.dataValues.shirt_stock > 0
         })
         console.log(tallesInStock.length)
@@ -35,7 +35,7 @@ const productController = {
         return tallesInStock
     },
 
-    home: async(req, res) => {
+    home: async (req, res) => {
         let session = req.session;
         let productsArray = await db.Shirts.findAll()
         let soldOut = [];
@@ -43,34 +43,34 @@ const productController = {
 
         for (const remera of productsArray) {
 
-            let aux = await productController.hayStock(remera)    
+            let aux = await productController.hayStock(remera)
             if (aux.length !== 0) {
-                onSale.push(remera) 
+                onSale.push(remera)
             } else {
-                soldOut.push(remera) 
+                soldOut.push(remera)
             }
         }
         res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut, session }) //Se exportan los arrays de vendidos y disponibles
     },
 
     detalle: async (req, res) => {
-        
+
         let session = req.session;
         let idShirt = req.params.id;
-        try{
+        try {
             let shirtShow = await db.Shirts.findByPk(idShirt);
             inStock = await productController.hayStock(shirtShow);
 
 
             let talles = await db.Details_shirt.findAll({
                 where: {
-                  shirt_id : idShirt
+                    shirt_id: idShirt
                 }
             });
 
-            res.render(path.join(__dirname,'../views/products/detalle.ejs'), {shirtShow,inStock, talles,session});
+            res.render(path.join(__dirname, '../views/products/detalle.ejs'), { shirtShow, inStock, talles, session });
 
-        }catch(err){
+        } catch (err) {
             console.log(err);
         }
     },
@@ -92,89 +92,96 @@ const productController = {
     },
 
     admCreatePost: async (req, res) => {
-        try{
-            let shirtToCreate = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
-            
-            if( shirtToCreate != null){
-                res.redirect('/products/create')
-                console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
-            }else{
-                if (req.session.admin == 1){
-                    await db.Shirts.create({
-                        shirt_name: req.body.name_product,
-                        shirt_price: req.body.price,
-                        shirt_discount: req.body.descuento,
-                        shirt_desc: req.body.description,
-                        shirt_img: req.file.filename,
-                        shirt_custom: 0, 
-                        user_id: req.session.userid
-                    })
-                }else{
-                    await db.Shirts.create({
-                        shirt_name: req.body.name_product,
-                        shirt_price: req.body.price,
-                        shirt_discount: req.body.descuento,
-                        shirt_desc: req.body.description,
-                        shirt_img: req.file.filename,
-                        shirt_custom: 1, 
-                        user_id: req.session.userid
-                    })
+        let errors = validationResult(req)
+        if (errors.isEmpty()) {
+
+
+            try {
+                let shirtToCreate = await db.Shirts.findOne({ where: { shirt_name: req.body.name_product } })
+
+                if (shirtToCreate != null) {
+                    res.redirect('/products/create')
+                    console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
+                } else {
+                    if (req.session.admin == 1) {
+                        await db.Shirts.create({
+                            shirt_name: req.body.name_product,
+                            shirt_price: req.body.price,
+                            shirt_discount: req.body.descuento,
+                            shirt_desc: req.body.description,
+                            shirt_img: req.file.filename,
+                            shirt_custom: 0,
+                            user_id: req.session.userid
+                        })
+                    } else {
+                        await db.Shirts.create({
+                            shirt_name: req.body.name_product,
+                            shirt_price: req.body.price,
+                            shirt_discount: req.body.descuento,
+                            shirt_desc: req.body.description,
+                            shirt_img: req.file.filename,
+                            shirt_custom: 1,
+                            user_id: req.session.userid
+                        })
+                    }
+
+                    let stock = {
+                        "XS": req.body.XS,
+                        "S": req.body.S,
+                        "M": req.body.M,
+                        "L": req.body.L,
+                        "XL": req.body.XL,
+                        "XXL": req.body.XXL
+                    }
+
+                    let shirtCreated = await db.Shirts.findOne({ where: { shirt_name: req.body.name_product } })
+
+                    for (let talla in stock) {
+                        await db.Details_shirt.create({
+                            shirt_size: talla,
+                            shirt_stock: stock[talla],
+                            shirt_id: shirtCreated.shirt_id
+                        })
+                    }
+                    res.redirect(`/products/${shirtCreated.shirt_id}`);
                 }
-    
-                let stock = { 
-                    "XS" : req.body.XS,
-                    "S" : req.body.S,
-                    "M" : req.body.M,
-                    "L" : req.body.L,
-                    "XL" : req.body.XL,
-                    "XXL" : req.body.XXL
-                }
-            
-                let shirtCreated = await db.Shirts.findOne({ where : { shirt_name : req.body.name_product } })
-    
-                for (let talla in stock){
-                    await db.Details_shirt.create({
-                        shirt_size: talla,
-                        shirt_stock: stock[talla],
-                        shirt_id: shirtCreated.shirt_id
-                    })
-                } 
-                res.redirect(`/products/${shirtCreated.shirt_id}`);
+
+            } catch (err) {
+                console.log(err)
+                res.redirect('/');
             }
-        
-        }catch(err){
-            console.log(err)
-            res.redirect('/');
+        } else {
+            res.send(errors)
         }
     },
 
     admEdit: async (req, res) => {
-        
+
         let session = req.session;
 
         let idShirt = req.params.id;
-        try{
+        try {
             let shirtShow = await db.Shirts.findByPk(idShirt);
             //console.log(shirtShow)
-            if( shirtShow == null){
+            if (shirtShow == null) {
                 res.redirect('/')
                 console.log("No existe la camisa") //Hay que poner los errores con un render errors...
-            }else{
+            } else {
                 let talles = await db.Details_shirt.findAll({
                     where: {
-                      shirt_id : idShirt
+                        shirt_id: idShirt
                     }
                 });
-    
-                res.render(path.join(__dirname,'../views/products/admEdit.ejs'), {shirtShow, talles,session});
+
+                res.render(path.join(__dirname, '../views/products/admEdit.ejs'), { shirtShow, talles, session });
             }
-            
-        }catch(err){
+
+        } catch (err) {
             console.log(err);
         }
 
     },
-    
+
     putEdit: async (req, res) => {
         //console.log("entra al put")
         //let session = req.session;
@@ -182,73 +189,79 @@ const productController = {
         let idShirt = req.params.id
 
         //console.log(editedData)
-        
-        try{
+
+        try {
             let shirtToEdit = await db.Shirts.findByPk(idShirt);
 
             fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToEdit.shirt_img)));
             //fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
             //console.log(shirtToEdit)
 
-            if (req.file == undefined){
-                await db.Shirts.update({ 
-                        shirt_name: req.body.title,
-                        shirt_price: req.body.price,
-                        shirt_discount: req.body.descuento,
-                        shirt_desc: req.body.description,
-                    }, {where : {
+            if (req.file == undefined) {
+                await db.Shirts.update({
+                    shirt_name: req.body.title,
+                    shirt_price: req.body.price,
+                    shirt_discount: req.body.descuento,
+                    shirt_desc: req.body.description,
+                }, {
+                    where: {
                         shirt_id: idShirt,
-                    }});
-            }else{
+                    }
+                });
+            } else {
                 await db.Shirts.update(
-                    { 
+                    {
                         shirt_name: req.body.title,
                         shirt_price: req.body.price,
                         shirt_discount: req.body.descuento,
                         shirt_desc: req.body.description,
                         shirt_img: req.file.filename,
-                    }, {where : {
+                    }, {
+                        where: {
                             shirt_id: idShirt,
-                    }});
+                        }
+                });
 
             }
-            
-            let stock = { 
-                "XS" : req.body.XS,
-                "S" : req.body.S,
-                "M" : req.body.M,
-                "L" : req.body.L,
-                "XL" : req.body.XL,
-                "XXL" : req.body.XXL
+
+            let stock = {
+                "XS": req.body.XS,
+                "S": req.body.S,
+                "M": req.body.M,
+                "L": req.body.L,
+                "XL": req.body.XL,
+                "XXL": req.body.XXL
             }
 
-            for (let talla in stock){
+            for (let talla in stock) {
                 await db.Details_shirt.update({
                     shirt_stock: stock[talla]
-                }, {where : {
-                    shirt_id: idShirt,
-                    shirt_size: talla
-                }});
-            } 
-        
-        }catch(err){
+                }, {
+                    where: {
+                        shirt_id: idShirt,
+                        shirt_size: talla
+                    }
+                });
+            }
+
+        } catch (err) {
             console.log(err)
-        } 
+        }
         res.redirect('/');
-    
+
     },
 
     productList: async (req, res) => {
         let session = req.session;
 
-        try{
+        try {
             listado = await db.Shirts.findAll();
             tallasList = await db.Details_shirt.findAll();
-            
 
-            res.render(path.join(__dirname, '../views/products/products.ejs'), { listado,tallasList, session })
 
-        }catch(err){
+            res.render(path.join(__dirname, '../views/products/products.ejs'), { listado, tallasList, session })
+
+        } catch (err) {
             console.log(err)
         }
 
@@ -256,25 +269,27 @@ const productController = {
 
     deleteItem: async (req, res) => {
         let idShirt = req.params.id;
-        
+
         let shirtToDelete = await db.Shirts.findByPk(idShirt);
 
         fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)));
 
         await db.Details_shirt.destroy(
-            {where : { shirt_id: idShirt,}
-        });
+            {
+                where: { shirt_id: idShirt, }
+            });
 
         await db.Shirts.destroy(
-            {where : { shirt_id: idShirt,}
-        });
+            {
+                where: { shirt_id: idShirt, }
+            });
 
         res.redirect('/products')
     },
 
     nosotros: (req, res) => {
         let session = req.session;
-        res.render(path.join(__dirname,'../views/users/about.ejs'), {session});
+        res.render(path.join(__dirname, '../views/users/about.ejs'), { session });
     }
 }
 

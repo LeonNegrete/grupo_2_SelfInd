@@ -4,7 +4,7 @@ const userController = require("../controllers/userController")
 const router = express.Router()
 const path = require('path');
 const { check } = require('express-validator');
-
+const sessionUserMD = require('../middleware/sessionUserMD');
 
 const multer  = require('multer')
 
@@ -34,11 +34,11 @@ router.get('/home', productController.home)
 router.get('/about', productController.nosotros)
 
 //ADMINISTRACION (PARA ADMINS)
-router.get('/products', productController.productList ); 
-router.get('/products/create', productController.admCreate)
+router.get('/products',sessionUserMD, productController.productList ); 
+router.get('/products/create',sessionUserMD, productController.admCreate)
 router.get('/products/:id', productController.detalle)
 router.post('/products',upload.single('image'),validateCreate, productController.admCreatePost)
-router.get('/products/edit/:id', productController.admEdit);
+router.get('/products/edit/:id',sessionUserMD, productController.admEdit);
 router.put('/products/:id',upload.single('image'),validateCreate, productController.putEdit);
 router.delete('/products/:id', productController.deleteItem )
 
