@@ -192,8 +192,6 @@ const productController = {
 
         try {
             let shirtToEdit = await db.Shirts.findByPk(idShirt);
-
-            fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToEdit.shirt_img)));
             //fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
             //console.log(shirtToEdit)
 
@@ -206,9 +204,9 @@ const productController = {
                 }, {
                     where: {
                         shirt_id: idShirt,
-                    }
-                });
-            } else {
+                    }});
+            }else{
+                fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToEdit.shirt_img)));
                 await db.Shirts.update(
                     {
                         shirt_name: req.body.title,
