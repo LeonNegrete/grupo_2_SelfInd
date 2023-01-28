@@ -156,7 +156,6 @@ const productController = {
     },
 
     admEdit: async (req, res) => {
-
         let session = req.session;
 
         let idShirt = req.params.id;

@@ -16,16 +16,15 @@ const userController = {
 
     login: (req, res) => {
         let recordar = req.cookies.last_account;
-        let session = req.session;
-
-        res.render(path.join(__dirname, '../views/users/login.ejs'), { session, recordar, errors: {} })
+        let session = req.session; 
+        res.render(path.join(__dirname, '../views/users/login.ejs'), { session, recordar, errors: {} , urlForPost:req.originalUrl})
     },
 
     loginPost: async (req, res) => {
         let errors = validationResult(req)
-
+        console.log(req.query.redirect);    
         if (!errors.isEmpty()) {
-            res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: errors.mapped(), session: req.session })
+            res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: errors.mapped(), session: req.session, urlForPost:req.originalUrl })
         } else {
 
             try {
@@ -67,8 +66,7 @@ const userController = {
                 } else {
                     req.session.loginStatus = false;
                 }
-                console.log(req.header('Referer'))
-                req.session.loginStatus && req.header('Referer') ? res.redirect(req.header('Referer')) :
+                req.session.loginStatus && req.query.redirect ? res.redirect(req.query.redirect) :
                     req.session.loginStatus ? res.redirect('/') : res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: { err: { msg: 'Credenciales invalidas' } }, session: req.session });
 
             } catch (error) {
