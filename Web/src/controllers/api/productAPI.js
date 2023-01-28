@@ -2,6 +2,7 @@ const { dirname } = require('path');
 const path = require('path');
 const db = require('../../database/models');
 const sequelize = db.sequelize;
+const fs = require('fs');
 const productsAPIController = {
     allProducts: async (req,res)=>{
         let products = await db.Shirts.findAll();
@@ -31,12 +32,31 @@ const productsAPIController = {
         try{
             let product = await db.Shirts.findByPk(req.params.id)
             let result = await {...product.dataValues}
-            result.shirt_img = await  'http://localhost:3030/images/Remeras/' + product.shirt_img //El dirname hace que arranque desde el path de apis (Tiene que arrancar desde la raiz)
+            result.shirt_img = await  'http://localhost:3030/images/Remeras/' + product.shirt_img 
+            result.delete = await 'http://localhost:3030/products' + product.shirt_id + '?_method=DELETE'
             await res.json(result)
         }catch(err){
             console.log(err)
         }
 
+    },
+    deleteDetail: async(req,res)=>{
+        let idShirt = req.params.id;
+
+        let shirtToDelete = await db.Shirts.findByPk(idShirt);
+
+        fs.unlinkSync(path.join(__dirname, ('../../../public/images/Remeras/' + shirtToDelete.shirt_img)));
+
+        await db.Details_shirt.destroy(
+            {
+                where: { shirt_id: idShirt, }
+            });
+
+        await db.Shirts.destroy(
+            {
+                where: { shirt_id: idShirt, }
+            });
+        res.redirect(req.headers.referer)        
     }
 }
 module.exports = productsAPIController;

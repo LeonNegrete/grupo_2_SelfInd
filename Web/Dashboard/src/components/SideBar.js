@@ -62,11 +62,12 @@ function    SideBar() {
 
                 {/*<!-- Buscador -->*/}
                 <li className="nav-item">
-                    <Link className="nav-link" to="/SearchMovies">
-                        <i className="fas fa-search"></i>
-                        <span>Search a movie</span>
-                    </Link>
-                </li>
+                    <a className='nav-link' href='http://localhost:3030/products/create'>
+                    <i class="fas fa-layer-plus fa-fw"></i>
+                        <span>Create new product</span>
+                    </a>
+                    
+                </li>  
 
                 {/*<!-- Divider -->*/}
                 <hr className="sidebar-divider d-none d-md-block border-dark" />

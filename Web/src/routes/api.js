@@ -13,6 +13,7 @@ router.use((req, res, next) => {
 
 router.get('/products', productAPI.allProducts);
 router.get('/products/:id', productAPI.detail);
+router.post('/products/:id/delete', productAPI.deleteDetail);
 
 router.get('/users', userAPI.allUsers);
 router.get('/users/:id', userAPI.detail);
