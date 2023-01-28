@@ -28,10 +28,15 @@ const productsAPIController = {
         res.json(response);
     },
     detail: async (req,res)=>{
-        let product = await db.Shirts.findByPk(req.params.id)
-        result = {...product.dataValues}
-        result.shirt_img = 'http://localhost:3030/images/Remeras/' + product.shirt_img //El dirname hace que arranque desde el path de apis (Tiene que arrancar desde la raiz)
-        res.json(result)
+        try{
+            let product = await db.Shirts.findByPk(req.params.id)
+            let result = await {...product.dataValues}
+            result.shirt_img = await  'http://localhost:3030/images/Remeras/' + product.shirt_img //El dirname hace que arranque desde el path de apis (Tiene que arrancar desde la raiz)
+            await res.json(result)
+        }catch(err){
+            console.log(err)
+        }
+
     }
 }
 module.exports = productsAPIController;

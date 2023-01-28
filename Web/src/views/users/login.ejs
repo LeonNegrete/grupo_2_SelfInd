@@ -49,10 +49,7 @@
                 
             </form>
             <% if (errors !== {}) { %>
-                <% console.log('Entra')%>
-                <% console.log(errors)  %>
                 <%for (let err in errors){%>
-                  
                     <p><%= errors[err].msg %> </p>
                  <%}%>   
                     

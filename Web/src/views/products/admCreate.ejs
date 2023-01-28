@@ -68,6 +68,11 @@
                     <button class="cargar-prod" type="submit">CARGAR PRODUCTO</button>
 
                 </form>
+                <% if (errors !== {}) { %>
+                    <%for (let err in errors){%>
+                        <p><%= errors[err].msg %> </p>
+                     <%}%>   
+                <% } %> 
             </section>
 
         </main>

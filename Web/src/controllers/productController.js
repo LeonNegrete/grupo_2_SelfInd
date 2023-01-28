@@ -30,7 +30,6 @@ const productController = {
         tallesInStock = talles.filter((talle) => {
             return talle.dataValues.shirt_stock > 0
         })
-        console.log(tallesInStock.length)
 
         return tallesInStock
     },
@@ -151,7 +150,8 @@ const productController = {
                 res.redirect('/');
             }
         } else {
-            res.send(errors)
+            /* res.send(errors) */
+            res.render(path.join(__dirname, '../views/products/admCreate.ejs'), { errors: errors.mapped(), session: req.session })
         }
     },
 
@@ -183,17 +183,12 @@ const productController = {
     },
 
     putEdit: async (req, res) => {
-        //console.log("entra al put")
-        //let session = req.session;
 
         let idShirt = req.params.id
 
-        //console.log(editedData)
 
         try {
             let shirtToEdit = await db.Shirts.findByPk(idShirt);
-            //fs.writeFileSync(path.join(__dirname, '../data/products.json'), JSON.stringify(parsedJSON));
-            //console.log(shirtToEdit)
 
             if (req.file == undefined) {
                 await db.Shirts.update({

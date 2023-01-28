@@ -28,7 +28,7 @@ function LastMovieInDb(){
     useEffect(() => {
         async function fetchData() {
           try {
-            const id = await data.products.length
+            const id = await data.products[data.products.length - 1].id
             const response = await fetch('http://localhost:3030/api/products/' + id );
             
             const jsonResponse = await response.json();

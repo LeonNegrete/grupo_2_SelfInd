@@ -92,7 +92,6 @@ canvas.addEventListener('mouseup', (place) => {
 btn.addEventListener('click', () => {
     const dataURL = canvas.toDataURL()
     document.querySelector("#diseno-div-canvas").style.backgroundImage = `url(${dataURL})`
-    console.log(document.querySelector("#diseno-div-canvas").style.backgroundImage === `url(${dataURL})`)
 })
 /* function takeScreenshot() {
     html2canvas(remera,{scale:10}).then(canvas => {

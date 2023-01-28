@@ -18,82 +18,81 @@ const userController = {
         let recordar = req.cookies.last_account;
         let session = req.session;
 
-        res.render(path.join(__dirname, '../views/users/login.ejs'), {session,recordar,errors: {}})
+        res.render(path.join(__dirname, '../views/users/login.ejs'), { session, recordar, errors: {} })
     },
 
-    loginPost: async (req,res) => {
+    loginPost: async (req, res) => {
         let errors = validationResult(req)
 
-        if(!errors.isEmpty()){
-            console.log(errors.mapped())
+        if (!errors.isEmpty()) {
             res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: errors.mapped(), session: req.session })
-        }else{
-    
-        try{
-            let inputName = req.body.email
-            let inputPass = req.body.password
-            
-            let search = await db.Users.findOne({
-                where: {
-                    user_email: inputName
-                    /* [Op.or]: [
-                        {
-                            user_email:{
-                                [Op.eq]:inputName
+        } else {
+
+            try {
+                let inputName = req.body.email
+                let inputPass = req.body.password
+
+                let search = await db.Users.findOne({
+                    where: {
+                        user_email: inputName
+                        /* [Op.or]: [
+                            {
+                                user_email:{
+                                    [Op.eq]:inputName
+                                }
+                            },
+                            {
+                                user_nick:{
+                                    [Op.eq]:inputName
+                                }
                             }
-                        },
-                        {
-                            user_nick:{
-                                [Op.eq]:inputName
-                            }
-                        }
-                    ] */
-                }
-            })
-            if (search){
-                
-                if (bcrypt.compareSync(inputPass, search.user_pass)){
-                    req.session.loginStatus = true;
-                    req.session.username = search.user_nick;
-                    req.session.profile = search.user_pic;
-                    req.session.email = search.user_email;
-                    req.session.userid = search.user_id;
-                    req.session.admin = search.user_admin;
-                    if (req.body.recordar){
-                        res.cookie('last_account', search.user_email, {maxAge: 60000 })
+                        ] */
                     }
-                }else{
+                })
+                if (search) {
+
+                    if (bcrypt.compareSync(inputPass, search.user_pass)) {
+                        req.session.loginStatus = true;
+                        req.session.username = search.user_nick;
+                        req.session.profile = search.user_pic;
+                        req.session.email = search.user_email;
+                        req.session.userid = search.user_id;
+                        req.session.admin = search.user_admin;
+                        if (req.body.recordar) {
+                            res.cookie('last_account', search.user_email, { maxAge: 60000 })
+                        }
+                    } else {
+                        req.session.loginStatus = false;
+                    }
+                } else {
                     req.session.loginStatus = false;
                 }
-            }else{
-                req.session.loginStatus = false;
-            }
+                console.log(req.header('Referer'))
+                req.session.loginStatus && req.header('Referer') ? res.redirect(req.header('Referer')) :
+                    req.session.loginStatus ? res.redirect('/') : res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: { err: { msg: 'Credenciales invalidas' } }, session: req.session });
 
-            req.session.loginStatus ? res.redirect('/'): res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: {err:{msg:'Credenciales invalidas'}}, session: req.session }); 
-        
-        }catch(error){
-            console.log(error)
+            } catch (error) {
+                console.log(error)
+            }
         }
-    }
     },
 
 
     register: (req, res) => {
         let session = req.session;
-        
+
         res.render(path.join(__dirname, '../views/users/register.ejs'), { session, errors: undefined })
     },
 
     registerPost: (req, res) => {
         let errors = validationResult(req)
-        console.log(errors)
-        if(!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             res.render(path.join(__dirname, '../views/users/register.ejs'), { errors: errors.mapped(), session: req.session })
-        }else{
+        } else {
             if (req.file) {
                 var prof = req.file.filename
             } else { var prof = 'default.png' }
-    
+
             db.Users.create({
                 user_name: req.body.name,
                 user_nick: req.body.username,
@@ -101,7 +100,7 @@ const userController = {
                 user_pass: bcrypt.hashSync(req.body.password, 10),
                 user_pic: prof
             })
-            console.log("USUARIO REGISTRADO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
             res.redirect('/user/list');
         }
 
@@ -110,23 +109,23 @@ const userController = {
     list: (req, res) => {
         let session = req.session;
         /* let listado = userController.usersObj().users; */
-        db.Users.findAll().then((listado)=>{
+        db.Users.findAll().then((listado) => {
             res.render(path.join(__dirname, '../views/users/list.ejs'), { listado, session })
         })
-        
-        
+
+
     },
 
     profile: (req, res) => {
         let session = req.session;
-        
-        res.render(path.join(__dirname, '../views/users/profile.ejs'), {session})
-    }, 
+
+        res.render(path.join(__dirname, '../views/users/profile.ejs'), { session })
+    },
 
     logout: (req, res) => {
         req.session.destroy();
         res.redirect('/')
-    }    
+    }
 }
 
 module.exports = userController;
