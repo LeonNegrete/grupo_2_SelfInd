@@ -34,7 +34,7 @@ function Chart (){
                                 <th>Nombre</th>
                                 <th>Descripcion</th>
                                 <th>Creado por</th>
-                                <th>Detalle</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>

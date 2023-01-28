@@ -28,13 +28,13 @@
                         <input class="number-input" id="precio" type="number" name="price" placeholder="Precio" min="0"
                             step=".01" required>
 
-                        <input class="number-input" id="descuento" type="number" name="descuento" placeholder="Descuento" min="0"
-                            step=".01" required>
+                        <input class="number-input" id="descuento" type="number" name="descuento"
+                            placeholder="Descuento" min="0" step=".01" required>
 
                         <textarea name="description" id="descripcion" placeholder="Descripción del producto"
                             required></textarea>
 
-                        
+
                     </fieldset>
 
                     <fieldset class="fieldCreate">
@@ -68,11 +68,13 @@
                     <button class="cargar-prod" type="submit">CARGAR PRODUCTO</button>
 
                 </form>
-                <% if (errors !== {}) { %>
+                <% if (errors !=={}) { %>
                     <%for (let err in errors){%>
-                        <p><%= errors[err].msg %> </p>
-                     <%}%>   
-                <% } %> 
+                        <p>
+                            <%= errors[err].msg %>
+                        </p>
+                        <%}%>
+                            <% } %>
             </section>
 
         </main>

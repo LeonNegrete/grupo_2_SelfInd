@@ -1,12 +1,10 @@
 import React from 'react';
 import image from '../assets/images/logo.png';
 import ContentWrapper from './ContentWrapper';
-import GenresInDb from './GenresInDb';
-import LastMovieInDb from './LastMovieInDb';
-import ContentRowMovies from './ContentRowMovies';
+import Chart from './Chart'
 import NotFound from './NotFound';
 import { Link, Route, Switch } from 'react-router-dom';
-import SearchMovies from './SearchMovies';
+import SearchProduct from './SearchProduct';
 
 function    SideBar() {
     return (
@@ -36,28 +34,13 @@ function    SideBar() {
                 <hr className="sidebar-divider border-dark" />
 
                 {/*<!-- Heading -->*/}
-                <div className="sidebar-heading text-dark">Actions</div>
-
-                {/*<!-- Nav Item - Pages -->*/}
-                <li className="nav-item">
-                    <Link className="nav-link" to="/GenresInDb">
-                        <i className="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
-                    </Link>
-                </li>
-
-                {/*<!-- Nav Item - Charts -->*/}
-                <li className="nav-item">
-                    <Link className="nav-link" to="/LastMovieInDb">
-                        <i className="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span></Link>
-                </li>
+                <div className="sidebar-heading text-dark">Menu</div>
 
                 {/*<!-- Nav Item - Tables -->*/}
                 <li className="nav-item">
-                    <Link className="nav-link" to="/ContentRowMovies">
+                    <Link className="nav-link" to="/table">
                         <i className="fas fa-fw fa-table"></i>
-                        <span>Tables</span></Link>
+                        <span>Product table</span></Link>
                 </li>
 
                 {/*<!-- Buscador -->*/}
@@ -94,17 +77,11 @@ function    SideBar() {
                 <Route exact path="/">
                     <ContentWrapper />
                 </Route>
-                <Route path="/GenresInDb">
-                    <GenresInDb />
+                <Route path="/SearchProduct">
+                    <SearchProduct />
                 </Route>
-                <Route path="/LastMovieInDb">
-                    <LastMovieInDb />
-                </Route>
-                <Route path="/ContentRowMovies">
-                    <ContentRowMovies />
-                </Route>
-                <Route path="/SearchMovies">
-                    <SearchMovies />
+                <Route path="/table">
+                    <Chart/>
                 </Route>
                 <Route component={NotFound} ></Route>
             </Switch>
