@@ -1,3 +1,4 @@
+import { Solver, Color, hexToRgb } from './hexToFilter.js'
 const image_input = document.querySelector("#image_input");
 var uploaded_image = ''
 var reader = new FileReader();
@@ -22,21 +23,34 @@ var x = 0, y = 0, painting = false, colorSelect = 'black', girthSelect = 1;
 var btn = document.getElementById('preview-btn');
 var canvasPlace = document.querySelector("#diseno-div-canvas");
 const downloadBtn = document.querySelector('#download-btn');
-const screenshot = document.querySelector('#screenshot');
 const normal = document.getElementById('normal');
 const liner = document.getElementById('liner');
 const circle = document.getElementById('circle');
-
-let contextScreenshot = screenshot.getContext('2d');
+const clearBtn = document.querySelector('#clear-btn');
+const remeraPNG2 = document.querySelector('#remeraPNG2')
 let remera = document.getElementById('remera-div');
 
 
-function color(c) {
-    colorSelect = c;
-}
-function girth(g) {
-    girthSelect = g;
-}
+const colorPick = document.getElementById('color');
+colorPick.addEventListener('input' ,()=>{
+    console.log(colorPick.value)
+    colorSelect = colorPick.value;
+})
+
+const girthPick = document.getElementById('girth');
+girthPick.addEventListener('input',()=>{
+    girthSelect = girthPick.value
+})
+
+const colorShirtPick = document.getElementById('colorShirt');
+colorShirtPick.addEventListener('input',()=>{
+    const rgb = hexToRgb(colorShirtPick.value);
+    const colorer = new Color(rgb[0], rgb[1], rgb[2]);
+    const solver = new Solver(colorer);
+    const result = solver.solve();
+    remeraPNG2.style.filter = result.filter
+})
+
 function paint(x1, y1, x2, y2) {
     ctx.beginPath();
     ctx.strokeStyle = colorSelect;
@@ -49,12 +63,14 @@ function paint(x1, y1, x2, y2) {
 
 
 canvas.addEventListener('mousedown', (place) => {
+    rect = canvas.getBoundingClientRect();
     x = place.clientX - rect.left;
     y = place.clientY - rect.top;
     painting = true;
 })
 
 canvas.addEventListener('mousemove', (place) => {
+    rect = canvas.getBoundingClientRect();
     if (normal.checked) {
         if (painting) {
             paint(x, y, place.clientX - rect.left, place.clientY - rect.top)
@@ -79,7 +95,6 @@ canvas.addEventListener('mousemove', (place) => {
 
     }
 });
-
 canvas.addEventListener('mouseup', (place) => {
     if (painting) {
         paint(x, y, place.clientX - rect.left, place.clientY - rect.top);
@@ -93,15 +108,7 @@ btn.addEventListener('click', () => {
     const dataURL = canvas.toDataURL()
     document.querySelector("#diseno-div-canvas").style.backgroundImage = `url(${dataURL})`
 })
-/* function takeScreenshot() {
-    html2canvas(remera,{scale:10}).then(canvas => {
-        var link = document.createElement('a');
-        link.download = "screenshot.png";
-        link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
-        link.click();
-    }
-    )
-} */
+
 function takeScreenshot() {
     var node = remera
     domtoimage.toPng(node)
@@ -111,7 +118,23 @@ function takeScreenshot() {
             link.href = dataUrl;
             link.click();
         });
-  }
+}
 downloadBtn.addEventListener('click', () => {
     takeScreenshot();
 })
+
+function erase() {
+    colorSelect = 'white';
+    girthSelect = 10;
+}
+
+document.getElementById('erase-btn').addEventListener('click', erase);
+
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+
+clearBtn.addEventListener('click', () => {
+    clearCanvas();
+});

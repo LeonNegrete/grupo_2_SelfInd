@@ -25,7 +25,14 @@ main .remera-div img{
   z-index: 2;
 
 }
-
+#remeraPNG2{
+  position: absolute;
+  top: 0;
+  left:0;
+  z-index:3;
+  filter: opacity(0%);
+  mix-blend-mode: multiply;
+}
 .mover-diseno-div{
   height: 40%;
   width: 50%;
