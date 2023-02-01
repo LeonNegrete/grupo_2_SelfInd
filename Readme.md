@@ -4,8 +4,10 @@
   <a href="#" target="_blank">
     <img alt="License: ISC" src="https://img.shields.io/badge/License-ISC-yellow.svg" />
   </a>
+  <a href="https://github.com/LeonNegrete/grupo_2_SelfInd/blob/master/README.esp.md">Para el readme en español click aqui!</a>
 </p>
-<a href="https://github.com/LeonNegrete/grupo_2_SelfInd/blob/master/README.esp.md">Para el readme en español click aqui!</a>
+
+
 > Self ind proposal is to let your clothing business take an extra step into creativity, being not only a complete eCommerce, with MySQL database, and admin dashboard running on React.js but also adding the 'Make it yours' functionality, which allows the user to take the design into their own hands, making it unique and truly their own, being able also to share it with other users, once an admin approves it in the dashboard. The canvas allows the upload of an image and the basic functionalities of paint, in addition to this it has built-in some extra brush tools that are really fun to use
 
 ## About Us

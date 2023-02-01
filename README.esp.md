@@ -4,8 +4,9 @@
   <a href="#" target="_blank">
     <img alt="License: ISC" src="https://img.shields.io/badge/License-ISC-yellow.svg" />
   </a>
+  <a href="https://github.com/LeonNegrete/grupo_2_SelfInd/blob/master/Readme.md">For the english readme click here!</a>
 </p>
-<a href="https://github.com/LeonNegrete/grupo_2_SelfInd/blob/master/Readme.md">For the english readme click here!</a>
+
 > La propuesta de Self ind es permitir que su negocio de indumentaria dé un paso más hacia la creatividad, siendo no solo un eCommerce completo, con una base de datos MySQL y un panel de administrador corriendo en React.js, sino también agregando la funcionalidad 'Make it yours', que permite al usuario diseñar la estampa, haciéndolo único y verdaderamente propio, pudiendo también compartirlo con otros usuarios, una vez que un administrador lo aprueba en el panel. El canvas permite cargar una imagen y las funcionalidades básicas del paint, además de esto, tiene incorporadas algunas herramientas de pincel adicionales que son realmente divertidas de usar.
 
 ## Sobre nosotros
