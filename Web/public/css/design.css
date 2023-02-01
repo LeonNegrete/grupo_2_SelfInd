@@ -22,7 +22,7 @@ main .remera-div{
 main .remera-div img{
   height: 100%;
   filter: drop-shadow(5px 1px 3px black);
-  z-index: 2;
+  z-index: 4;
 
 }
 #remeraPNG2{
@@ -33,15 +33,22 @@ main .remera-div img{
   filter: opacity(0%);
   mix-blend-mode: multiply;
 }
+#detailsPNG{
+  position: absolute;
+  top: 0;
+  left:0;
+  z-index:5;
+  filter: opacity(60%);
+  mix-blend-mode: multiply;
+}
 .mover-diseno-div{
   height: 40%;
   width: 50%;
   position: absolute;
   top: 15%;
   right: 0%;
-  left: 25%;
+  left: 29%;
   bottom: 0%;
-  mix-blend-mode:multiply;
   opacity: 90%;
 }
 .paint{
@@ -52,7 +59,7 @@ main .remera-div img{
 .diseno-div{
   
   height: 100%;
-  width:  100%;
+  width:  85%;
   background-position:center;
   background-size:100% ;
   background-repeat: no-repeat;
