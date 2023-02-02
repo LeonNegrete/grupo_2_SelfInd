@@ -50,6 +50,12 @@ main .remera-div img{
   left: 29%;
   bottom: 0%;
   opacity: 90%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .paint{
   mix-blend-mode:none;
@@ -63,6 +69,11 @@ main .remera-div img{
   background-position:center;
   background-size:100% ;
   background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   z-index: 3;
 }
 canvas{

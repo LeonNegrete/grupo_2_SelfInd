@@ -3,20 +3,43 @@ const image_input = document.querySelector("#image_input");
 var uploaded_image = ''
 var reader = new FileReader();
 
+var canvas = document.getElementById('canvas');
+
 image_input.addEventListener("change", function () {
     reader.addEventListener("load", () => {
         uploaded_image = new Image();
         uploaded_image.src = reader.result;
-        uploaded_image.onload = function () {
+        uploaded_image.onload = function() {
+            var imgAspectRatio = uploaded_image.width / uploaded_image.height;
+            var canvasAspectRatio = canvas.width / canvas.height;
+            var scaleFactor;
+            if (imgAspectRatio > canvasAspectRatio) {
+              scaleFactor = canvas.width / uploaded_image.width;
+            } else {
+              scaleFactor = canvas.height / uploaded_image.height;
+            }
+            var x = (canvas.width - uploaded_image.width * scaleFactor) / 2;
+            var y = (canvas.height - uploaded_image.height * scaleFactor) / 2;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(uploaded_image, x, y);
-        }
+            ctx.drawImage(uploaded_image, x, y, uploaded_image.width * scaleFactor, uploaded_image.height * scaleFactor);
+          };
     });
     reader.readAsDataURL(this.files[0]);
 });
 
+// Create the uploaded image sprite
+const image = new PIXI.Sprite.from(uploaded_image.src);
 
-var canvas = document.getElementById('canvas');
+// Load the displacement map
+const displacementMap = new PIXI.Sprite.from('./Design/Desplazamiento.png');
+
+// Apply the displacement effect to the uploaded image sprite
+const displacementFilter = new PIXI.filters.DisplacementFilter(displacementMap);
+image.filters = [displacementFilter];
+
+// Add both sprites to the stage
+stage.addChild(image);
+
 var ctx = canvas.getContext('2d');
 var rect = canvas.getBoundingClientRect();
 var x = 0, y = 0, painting = false, colorSelect = 'black', girthSelect = 1;
