@@ -9,43 +9,48 @@
 
 <body>
 
-    <%- include('../partials/header')%> 
-    <main>
-        <h1>Es momento de hacer lo tuyo, de hacerlo tuyo...</h1>
-        <input type="file" name="image_input" id="image_input" accept="image/png, image/jpg, image/jpeg">
-        <div id="remera-div"class="remera-div">
-            <img id="detailsPNG" src="images/Design/details_shirt.png" alt="Remera">
-            <img id="remeraPNG" src="images/Design/t-shirt-1976334_1280.webp" alt="Remera">
-            <img id="remeraPNG2" src="images/Design/black_shirt.png" alt="Remera">
+    <%- include('../partials/header')%>
+        <main id="main">
+            <h1>Es momento de hacer lo tuyo, de hacerlo tuyo...</h1>
 
-            <div class="mover-diseno-div">
-                <div id="diseno-div" class="diseno-div"></div>
+            <div id="remera-div" class="remera-div">
+                <img id="detailsPNG" src="images/Design/details_shirt.png" alt="Remera">
+                <img id="remeraPNG" src="images/Design/t-shirt-1976334_1280.webp" alt="Remera">
+                <img id="remeraPNG2" src="images/Design/black_shirt.png" alt="Remera">
+
+                <div class="mover-diseno-div">
+                    <div id="diseno-div" class="diseno-div"></div>
+                </div>
+                <div class="mover-diseno-div paint">
+                    <div id="diseno-div-canvas" class="diseno-div paint"></div>
+                </div>
             </div>
-            <div class="mover-diseno-div paint">
-                <div id="diseno-div-canvas" class="diseno-div paint"></div>
-            </div>
+            <form action="/userSubmit" method="post" enctype="multipart/form-data">
+                <input type="text" name="product_name" id="product_name">
+                <input type="file" name="image_input" id="image_input" accept="image/png, image/jpg, image/jpeg">
+                <button type="submit" id="submit-btn">Submit</button>
+            </form>
+        </main>
+        <canvas id="canvas" width="300px" height="300px"></canvas>
+        <br>
+        <input type="color" name="color" id="color">
+        <input type="range" name="girth" id="girth" min="1" max="5" value="1">
+        <input type="radio" checked name="style" id="normal">
+        <input type="radio" name="style" id="circle">
+        <input type="radio" name="style" id="liner">
+        <button id="preview-btn">Preview</button>
+        <button id="download-btn">Download</button>
+        <button id="erase-btn">Erase</button>
+        <button id="clear-btn">Clear</button>
+        <input type="color" name="colorShirt" id="colorShirt">
 
-        </div>
-    </main>
-    <canvas id="canvas" width="300px" height="300px"></canvas>
-    <br>
-    <input type="color" name="color" id="color">
-    <input type="range" name="girth" id="girth" min="1" max="5" value="1">
-    <input type="radio" checked name="style" id="normal">
-    <input type="radio" name="style" id="circle">
-    <input type="radio" name="style" id="liner">
-    <button id="preview-btn">Preview</button>
-    <button id="download-btn">Download</button>
-    <button id="erase-btn">Erase</button>
-    <button id="clear-btn">Clear</button>
-    <input type="color" name="colorShirt" id="colorShirt">
-    
-    <%- include('../partials/footer') %> 
 
-    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-    <script src="https://unpkg.com/dom-to-image"></script>
-    <script type="module" src="/design.js"></script>
+        <%- include('../partials/footer') %>
+
+            <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+            <script src="https://unpkg.com/dom-to-image"></script>
+            <script type="module" src="./javascript/design.js"></script>
 </body>
 
 </html>

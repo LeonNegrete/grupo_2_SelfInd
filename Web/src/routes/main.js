@@ -42,6 +42,9 @@ router.get('/products/edit/:id',sessionUserMD, productController.admEdit);
 router.put('/products/:id',upload.single('image'),validateCreate, productController.putEdit);
 router.delete('/products/:id', productController.deleteItem )
 
+//User
+router.post('/userSubmit', upload.single('image_input'),productController.userSubmit);
+
 //PRODUCTOS (PARA ENTRAR LOGUEADO O NO)
 router.get('/design', productController.design)
 router.get('/carrito', productController.carrito)

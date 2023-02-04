@@ -198,8 +198,9 @@ const productController = {
                 }, {
                     where: {
                         shirt_id: idShirt,
-                    }});
-            }else{
+                    }
+                });
+            } else {
                 fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToEdit.shirt_img)));
                 await db.Shirts.update(
                     {
@@ -209,9 +210,9 @@ const productController = {
                         shirt_desc: req.body.description,
                         shirt_img: req.file.filename,
                     }, {
-                        where: {
-                            shirt_id: idShirt,
-                        }
+                    where: {
+                        shirt_id: idShirt,
+                    }
                 });
 
             }
@@ -282,6 +283,38 @@ const productController = {
     nosotros: (req, res) => {
         let session = req.session;
         res.render(path.join(__dirname, '../views/users/about.ejs'), { session });
+    },
+
+    userSubmit: async (req, res) => {
+        try {
+/*             let node = document.getElementById('remera-div')
+            domtoimage.toPng(node)
+                .then(function (dataUrl) {
+                    var link = document.createElement('input');
+                    link.download = 'screenshot.png';
+                    link.href = dataUrl;
+                    link.click();
+                });
+ */ 
+            console.log(req.file.filename)
+            await db.Shirts.create({
+                shirt_name: req.body.name_product,
+                shirt_price: 5000,
+                shirt_discount: 0,
+                shirt_desc: 'desc',
+                shirt_img: req.file.filename,
+                shirt_custom: 1,
+                user_id: req.session.userid
+            })
+
+            let shirtCreated = await db.Shirts.findOne({ where: { shirt_name: req.body.name_product } })
+            res.redirect(`/products/${shirtCreated.shirt_id}`);
+        }
+
+        catch (err) {
+            console.log(err)
+            res.redirect('/');
+        }
     }
 }
 

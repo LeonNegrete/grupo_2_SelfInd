@@ -10,6 +10,7 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
 
 //const pruebasMD = require('./src/middleware/pruebasMD')
 
@@ -21,14 +22,15 @@ const PORT = 3030;
 app.set("view engine", "ejs");
 
 //MIDDLEWARES
+app.use(express.json());
 app.use(cookieParser())
 app.use(session({
     secret: "SelfInd",
     resave: false, 
     saveUninitialized: true}));
 app.use(methodOverride('_method'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 //MIDDLEWARES CUSTOM
 //app.use(pruebasMD);
@@ -41,6 +43,14 @@ app.use('/api', APIRoutes);
 app.get('/draw', (req,res)=>{
     res.render(path.join(__dirname, './src/views/products/draw.ejs'))
 })
+
+
+//RECIBIR IMAGEN CUSTOM
+app.post('/save-screenshot', function (req, res) {
+    const image = new Buffer.from(req.body.image, 'base64');
+    fs.writeFileSync('/SCREENSHOTS/image.png', image);
+    res.send('screenshot saved');
+  });
 
 //CONFIG PUERTO
 app.listen(PORT, () => { console.log(`Servidor corriendo en ${PORT}...`) });
