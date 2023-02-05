@@ -1,10 +1,17 @@
+.wraper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 main{
   height: 90vh;
   width: 100%;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row;
   justify-content: center;
   align-items: center;
+  gap: 5em;
 }
 main h1{
   margin-top: 5%;
@@ -14,7 +21,6 @@ main input{
 }
 
 main .remera-div{
-  margin-top: 10%;
   height: 50%;
   position: relative;
   z-index: 2;
@@ -78,4 +84,162 @@ main .remera-div img{
 }
 canvas{
   border: black solid 2px;
+}
+.canvas{
+  display: flex;
+  justify-content: center;
+}
+input[type=color]{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border:none;
+  width: 1.6em;
+  height: 1.6em;
+}
+input[type=color]::-webkit-color-swatch{
+  border-radius: 50%;
+}
+input[type=color]::-moz-color-swatch{
+  border-radius: 50%;
+}
+.boton-canvas{
+  width: 1.6em;
+  height: 1.6em;
+  border: none;
+  background-color: transparent;
+  cursor:pointer;
+}
+.hide-canvas{
+  display: none;
+}
+.canvas-ui{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 1em;
+/*   gap:1em */
+}
+
+.div-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form{
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+}
+.form-fields{
+  margin-bottom: 0.5em;
+  display: flex;
+
+}
+
+#submit-btn{
+  border: none;
+  border-radius: 7em ;
+  width: 7em;
+  height: 2em;
+  background-color: #731963;
+  color:white
+}
+
+/* Input range generated in https://www.cssportal.com/style-input-range/ */
+
+input[type=range] {
+  height: 25px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 300px;
+  margin-right: 2.6em;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 2px #000000;
+  background: #FFFFFF;
+  border-radius: 50px;
+  border: 0px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #731963;
+  height: 18px;
+  width: 18px;
+  border-radius: 18px;
+  background: #731963;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #FFFFFF;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 2px #000000;
+  background: #FFFFFF;
+  border-radius: 50px;
+  border: 0px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #731963;
+  height: 18px;
+  width: 18px;
+  border-radius: 18px;
+  background: #731963;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #FFFFFF;
+  border: 0px solid #000000;
+  border-radius: 100px;
+  box-shadow: 0px 0px 2px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #FFFFFF;
+  border: 0px solid #000000;
+  border-radius: 100px;
+  box-shadow: 0px 0px 2px #000000;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #731963;
+  height: 18px;
+  width: 18px;
+  border-radius: 18px;
+  background: #731963;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #FFFFFF;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #FFFFFF;
 }

@@ -10,45 +10,76 @@
 <body>
 
     <%- include('../partials/header')%>
-        <main id="main">
-            <h1>Es momento de hacer lo tuyo, de hacerlo tuyo...</h1>
+    <div class="wraper">
 
+        <main id="main">
             <div id="remera-div" class="remera-div">
                 <img id="detailsPNG" src="images/Design/details_shirt.png" alt="Remera">
                 <img id="remeraPNG" src="images/Design/t-shirt-1976334_1280.webp" alt="Remera">
                 <img id="remeraPNG2" src="images/Design/black_shirt.png" alt="Remera">
-
-                <div class="mover-diseno-div">
-                    <div id="diseno-div" class="diseno-div"></div>
+                
+                    <div class="mover-diseno-div">
+                        <div id="diseno-div" class="diseno-div"></div>
+                    </div>
+                    <div class="mover-diseno-div paint">
+                        <div id="diseno-div-canvas" class="diseno-div paint"></div>
+                    </div>
                 </div>
-                <div class="mover-diseno-div paint">
-                    <div id="diseno-div-canvas" class="diseno-div paint"></div>
+                <div class="editor">
+                    <div class="canvas">
+                        <canvas id="canvas" width="300px" height="300px"></canvas>
+                        <br>
+                        <div class="canvas-ui">
+                            <input class="hide-canvas" type="radio" checked name="style" id="normal">
+                            <label for="normal"><img class="boton-canvas" id="normalImg" src="images/botones/normal.png"></label>
+                            
+                            <input class="hide-canvas" type="radio" name="style" id="circle">
+                            <label for="circle"><img class="boton-canvas" id="circleImg" src="images/botones/circle.png"></label>
+                            
+                            <input class="hide-canvas" type="radio" name="style" id="liner">
+                            <label for="liner"><img class="boton-canvas" id="linerImg" src="images/botones/liner.png"></label>
+                            
+                            <input class="boton-canvas" type="color" name="color" id="color">
+                            
+                            <input class="hide-canvas" type="color" name="colorShirt" id="colorShirt">
+                            <label class="colorShirtContainer" for="colorShirt">
+                                <img class="boton-canvas" id="colorShirtBtn" src="images/botones/shirt.png">
+                            </label>
+                            
+                            
+                            
+                            <button class="boton-canvas" id="erase-btn"><img class="boton-canvas"
+                                src="images/botones/erase.png"></button>
+                                
+                                <button class="boton-canvas" id="clear-btn"><img class="boton-canvas"
+                                    src="images/botones/clear.png"></button>
+                                    
+                                    <button class="boton-canvas" id="preview-btn"><img class="boton-canvas"
+                                        src="images/botones/preview.png"></button>
+                                        
+                                        <button class="boton-canvas" id="download-btn"><img class="boton-canvas"
+                                            src="images/botones/download.png"></button>
+                                        </div>
+                                    </div>
+                                    <div class="div-container">
+                        <input type="range" name="girth" id="girth" min="1" max="5" value="1">
+                    </div>
                 </div>
-            </div>
+            </main>
             <form action="/userSubmit" method="post" enctype="multipart/form-data">
-                <input type="text" name="product_name" id="product_name">
-                <input type="file" name="image_input" id="image_input" accept="image/png, image/jpg, image/jpeg">
+                <div class="form-fields">
+                    <input type="text" name="product_name" id="product_name">
+                    <label for="image_input"><img class=" boton-canvas" src="images/botones/upload.png" alt="" srcset=""></label>
+                    <input class="hide-canvas" type="file" name="image_input" id="image_input" accept="image/png, image/jpg, image/jpeg">
+                </div>
                 <button type="submit" id="submit-btn">Submit</button>
             </form>
-        </main>
-        <canvas id="canvas" width="300px" height="300px"></canvas>
-        <br>
-        <input type="color" name="color" id="color">
-        <input type="range" name="girth" id="girth" min="1" max="5" value="1">
-        <input type="radio" checked name="style" id="normal">
-        <input type="radio" name="style" id="circle">
-        <input type="radio" name="style" id="liner">
-        <button id="preview-btn">Preview</button>
-        <button id="download-btn">Download</button>
-        <button id="erase-btn">Erase</button>
-        <button id="clear-btn">Clear</button>
-        <input type="color" name="colorShirt" id="colorShirt">
-
-
+            
+            
+        </div>
         <%- include('../partials/footer') %>
-
-            <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
             <script src="https://unpkg.com/dom-to-image"></script>
             <script type="module" src="./javascript/design.js"></script>
 </body>
