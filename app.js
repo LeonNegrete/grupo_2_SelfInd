@@ -16,7 +16,7 @@ const fs = require('fs');
 
 //CONFIG EXPRESS
 const app = express();
-const PORT = require('./config')
+const PORT = require('./config');
 
 //CONFIG EJS
 app.set("view engine", "ejs");
@@ -51,6 +51,6 @@ app.post('/save-screenshot', function (req, res) {
     fs.writeFileSync('/SCREENSHOTS/image.png', image);
     res.send('screenshot saved');
   });
-
+console.log(PORT)
 //CONFIG PUERTO
 app.listen(PORT, () => { console.log(`Servidor corriendo en ${PORT}...`) });
