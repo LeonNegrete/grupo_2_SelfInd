@@ -16,7 +16,7 @@ const fs = require('fs');
 
 //CONFIG EXPRESS
 const app = express();
-const PORT = 3030;
+const PORT = require('./config')
 
 //CONFIG EJS
 app.set("view engine", "ejs");
