@@ -10,6 +10,10 @@
 
 > Self ind proposal is to let your clothing business take an extra step into creativity, being not only a complete eCommerce, with MySQL database, and admin dashboard running on React.js but also adding the 'Make it yours' functionality, which allows the user to take the design into their own hands, making it unique and truly their own, being able also to share it with other users, once an admin approves it in the dashboard. The canvas allows the upload of an image and the basic functionalities of paint, in addition to this it has built-in some extra brush tools that are really fun to use
 
+## Make it yours DEMO
+
+https://user-images.githubusercontent.com/111160636/216838628-42f692f8-2bf5-40d8-9d8d-14f15689b723.mp4
+
 ## About Us
 We are a team of 3 developers located in latin america, students and workers with the ambition of self-improvement through collective cooperation, *and fundamentally united by the code*
 
