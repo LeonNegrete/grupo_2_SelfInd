@@ -1,5 +1,5 @@
 const path = require('path');
-const products = require('../data/products.json');
+
 const fs = require('fs');
 const db = require('../database/models');
 /* const { removeTicks } = require('sequelize/types/utils'); */ // me pa que esto no tiene que estar aca

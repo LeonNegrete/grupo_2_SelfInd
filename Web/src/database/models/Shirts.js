@@ -24,37 +24,40 @@ module.exports = (sequelize, dataTypes) => {
         },
         shirt_custom: {
             type: dataTypes.INTEGER,
-            default:0
-        }/* ,
-        shirt_created_time:{
-            type: dataTypes.DATATIME
-        } */
-    };
-    let config = {
-        tableName: 'Shirts',
-        timestamps: false,
-/*         createdAt: "shirt_created_time" */
-    };
-    const Shirts = sequelize.define(alias, cols, config)
-
-    Shirts.associate =  (models) => {
-        Shirts.belongsTo(models.Users, { 
-            as: "Users",
-            foreignKey: "user_id"
-        }),
-
-        Shirts.hasMany(models.Details_shirt, { 
-            as: "Details_shirt", 
-            foreignKey: "shirt_id",
-            
-        }),
-
-        Shirts.hasMany(models.Cart_items),{
-            as: "Cart_items",
-            foreignKey: "shirt_id",
-        
+            default: 0
+        },
+        shirt_created_time: {
+            type: dataTypes.DATE,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         }
+    
+};
+
+let config = {
+    tableName: 'Shirts',
+    timestamps: false,
+    /*         createdAt: "shirt_created_time" */
+};
+const Shirts = sequelize.define(alias, cols, config)
+
+Shirts.associate = (models) => {
+    Shirts.belongsTo(models.Users, {
+        as: "Users",
+        foreignKey: "user_id"
+    }),
+
+        Shirts.hasMany(models.Details_shirt, {
+            as: "Details_shirt",
+            foreignKey: "shirt_id",
+
+        }),
+
+        Shirts.hasMany(models.Cart_items), {
+        as: "Cart_items",
+        foreignKey: "shirt_id",
 
     }
-    return Shirts
+
+}
+return Shirts
 }
