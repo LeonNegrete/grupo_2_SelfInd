@@ -46,24 +46,10 @@ header {
     align-items: center;
     position: sticky;
     top: 0px;
-    z-index: 3;
+    z-index: 99;
     /* el z-index de los indicadores del carousel de bootstrap es 2 */
 }
 
-.burguer-div {
-    height: 10vh;
-    width: 33%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-grow: 0.33;
-}
-
-#burguer {
-    font-weight: bolder;
-    margin-left: 10%;
-
-}
 
 .logo-div {
     height: 95%;
@@ -98,18 +84,18 @@ header {
 
 .material-symbols-outlined {
     font-variation-settings:
-        'FILL' 1,
+    'FILL' 1,
         'wght' 300,
         'GRAD' 200,
         'opsz' 40;
-    margin-right: 10%;
-    transition: all .4s;
-}
-
-.material-symbols-outlined:hover {
-    color: var(--main-emphasis);
-}
-
+        margin-right: 10%;
+        transition: all .4s;
+    }
+    
+    .material-symbols-outlined:hover {
+        color: var(--main-emphasis);
+    }
+    
 /* /////////////MAIN/////////////// */
 /* Carrousel */
 
@@ -175,7 +161,7 @@ main {
 .img-articulo {
     width: 100%;
     margin-bottom: 3%;
-/*     transform: scale(1.5); */
+    /*     transform: scale(1.5); */
     /* imagen de producto */
 }
 
@@ -234,7 +220,7 @@ footer {
 
 p {
     margin-bottom: 0px;
-
+    
 }
 
 footer a {
@@ -258,6 +244,60 @@ footer a {
     margin: 5% 10%;
     font-size: 1rem;
 }
+/* ///////////////////BURGUER///////////////// */
+.burguer-div {
+    height: 10vh;
+    padding-left: 3%;
+    padding-right: 30%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-grow: 0.33;
+}
+
+.burguer {
+    font-weight: bolder;
+    margin-left: 10%;   
+    cursor: pointer;
+
+}
+
+.burguer-nav{
+    width: 100vw;
+    height: 100vh;
+    z-index: 98;
+    display: flex;
+    flex-direction: column;
+    top: 0px;
+    right: 100%;
+    position: fixed;
+    background-color: #731963;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+}
+.burguer-nav.is-active{
+
+    right: 0%;
+
+}
+.burguer-nav a{
+    color: #ffffff;
+    display: block;
+    margin: 40px 0px 
+
+}
+.burguer-nav a :hover{
+    color: #fc7ee5;
+}
+.divider{
+height:1px;
+width: 80%;
+background-color: #ffffff;
+margin: 10px 0px 
+}
+
 
 /* /////////////TRANSITIONS Y ANIMACIONES/////////////// */
 
@@ -267,9 +307,9 @@ a:hover {
 
 
 @media(min-width: 361px) {
-
+    
     /* MAIN */
-
+    
     .productos h4 {
         align-self: center;
         text-align: center;
