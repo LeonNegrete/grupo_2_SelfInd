@@ -177,25 +177,27 @@ main {
 
 /*Boton*/
 
-.make-btn {
+.mainBtn {
     color: #ffffff !important;
     background-color: var(--main-emphasis) !important;
     border: solid 1px var(--main-emphasis) !important;
+    border-radius: 25px;
+    padding: 0.65em;
+    margin: 0.5em;
 }
 
-.make-btn a{
+.mainBtn a{
     color:#ffffff
 }
 
-.make-btn:hover {
+.mainBtn:hover {
     color: var(--main-emphasis) !important;
     border: solid 1px var(--main-emphasis) !important;
     background-color: #ffffff !important;
 }
-.make-btn:hover a{
+.mainBtn:hover a{
     color:var(--main-emphasis) !important;
 }
-
 
 
 

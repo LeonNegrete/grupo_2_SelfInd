@@ -32,12 +32,13 @@ body {
 }
 
 main{
+    margin-top: 8%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: auto;
 }
 .carousel-boot{
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,6 +90,7 @@ footer{
 .btn-space{
     margin: .2rem;
 }
+
 
 @media(min-width: 769px){
     .carousel-boot{

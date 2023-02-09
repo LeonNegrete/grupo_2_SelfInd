@@ -82,7 +82,7 @@ const userController = {
         res.render(path.join(__dirname, '../views/users/register.ejs'), { session, errors: undefined })
     },
 
-    registerPost: (req, res) => {
+    registerPost: async (req, res) => {
         let errors = validationResult(req)
         if (!errors.isEmpty()) {
             res.render(path.join(__dirname, '../views/users/register.ejs'), { errors: errors.mapped(), session: req.session })
@@ -91,15 +91,29 @@ const userController = {
                 var prof = req.file.filename
             } else { var prof = 'default.png' }
 
-            db.Users.create({
+            await db.Users.create({
                 user_name: req.body.name,
                 user_nick: req.body.username,
                 user_email: req.body.email,
                 user_pass: bcrypt.hashSync(req.body.password, 10),
                 user_pic: prof
             })
-
-            res.redirect('/user/list');
+            try{
+                let inputEmail = req.body.email
+                let userCreated = await db.Users.findOne({
+                    where: {
+                        user_email: inputEmail
+                    }
+                })
+                db.Cart.create({
+                    cart_total: 0,
+                    user_id: userCreated.user_id
+                })
+    
+                res.redirect('/user/list');
+            }catch(err){
+                console.log(err)
+            }
         }
 
     },
