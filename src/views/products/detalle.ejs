@@ -76,7 +76,9 @@
 
                     <div class="botones">
                         <button class="mainBtn" type="submit">Comprar</button>
-                        <button class="mainBtn" type="submit">Agregar al carrito</button>
+                        <form action="/addCart/<%- shirtShow.dataValues.shirt_id %>" method="post">
+                            <button class="mainBtn" type="submit">Agregar al carrito</button>
+                        </form>
                         <% if (session.admin == 1) { %>
                             <form class="form-bt-edit" action="/products/edit/<%- shirtShow.dataValues.shirt_id %>" method="get">
                                 <button class="mainBtn" type="submit">&#128221 Editar</button>

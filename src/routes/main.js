@@ -43,6 +43,7 @@ router.delete('/products/:id', productController.deleteItem )
 
 //User
 router.post('/userSubmit', upload.single('image_input'),productController.userSubmit);
+router.post('/addCart/:id', productController.addCart)
 
 //PRODUCTOS (PARA ENTRAR LOGUEADO O NO)
 router.get('/design', productController.design)

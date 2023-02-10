@@ -122,4 +122,9 @@ footer{
     .botones{
         justify-content: center;
     }
+    .detalle-producto{
+        width: 50%;
+        margin: 0%;
+        padding-right: 5%;
+     }
 }

@@ -18,10 +18,8 @@ section.create-form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     margin-top: 2%;
     width: 90%;
-
     border-top: 40px solid #581845;
     border-radius: 10px;
     background: black;

@@ -79,9 +79,24 @@ const productController = {
         res.render(path.join(__dirname, '../views/products/design.ejs'), { session })
     },
 
-    carrito: (req, res) => {
+    carrito: async(req, res) => {
         let session = req.session;
-        res.render(path.join(__dirname, '../views/products/shop-car.ejs'), { session })
+        console.log(req.session.userId)
+        try {
+            let userCart = await db.Cart.findOne({
+                where:{
+                    user_id : req.session.userid
+                }
+            })
+            let allItems = await db.Cart_Items.findAll({
+                where :{
+                    cart_id : userCart.cart_id
+                }
+            })
+            res.render(path.join(__dirname, '../views/products/shop-car.ejs'), { session, allItems })
+        } catch (error) {
+            console.log(error)
+        }
     },
 
     admCreate: (req, res) => {
@@ -315,6 +330,30 @@ const productController = {
             console.log(err)
             res.redirect('/');
         }
+    },
+    addCart: async(req, res)=>{
+        let userId = req.session.userid
+        if (!(userId)){
+            return res.send('FUCKOFF')
+
+        } 
+        try{
+            let userCart = await db.Cart.findOne({
+                where:{
+                    user_id : userId
+                }
+            })
+            
+            return db.Cart_Items.create({
+                cart_item_quantity: 1,
+                shirt_id: req.params.id,
+                cart_id: userCart.cart_id
+            })
+            
+        }catch(err){
+            console.log(err);
+        }
+
     }
 }
 

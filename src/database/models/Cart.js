@@ -20,20 +20,18 @@ module.exports = (sequelize, dataTypes) => {
     let config = {
         tableName: 'Cart',
         timestamps: false,
-        createdAt: "cart_created_time"
+/*         createdAt: "cart_created_time" */
     };
     const Cart = sequelize.define(alias, cols, config)
 
     Cart.associate =  (models) => {
-        Cart.belongsTo(models.Users, { 
-            as: "Users",
+/*         Cart.belongsTo(models.Users), { 
             foreignKey: "user_id"
-        }),
-
-        Cart.hasMany(models.Cart_items),{
-            as: "Cart_items",
+        } */
+/* 
+        Cart.hasMany(models.Cart_Items),{
             foreignKey: "cart_id"
-        },
+        } */
 
         Cart.hasMany(models.Orders_shipping),{
             as: "Orders_shipping",

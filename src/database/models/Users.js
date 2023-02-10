@@ -28,30 +28,36 @@ module.exports = (sequelize, dataTypes) => {
     };
     let config = {
         tableName: 'Users',
-        timestamps: false
+        timestamps: false,
+        underscored: true
     };
     const Users = sequelize.define(alias, cols, config)
 
     Users.associate = (models)=> {
-        Users.hasMany(models.Shirts, { 
-            as: "Shirts", 
+/*         Users.hasMany(models.Shirts), { 
+            as: "Shirts",                                //SE ESTABA DEFINIENDO DOS VECES LA ASOCIACION
             foreignKey: "user_id"
-        }),
+        } */
 
         Users.hasMany(models.Adresses),{
             as: "Adresses",
             foreignKey: "user_id"
-        },
+        }
 
         Users.hasMany(models.Cards),{
             as: "Cards",
             foreignKey: "user_id"
-        },
+        }
 
         Users.hasMany(models.Orders_shipping),{
             as: "Orders_shipping",
             foreignKey: "user_id"
         }
+
+/*         Users.hasOne(models.Cart),{
+            as: "Cart",
+            foreignKey: "user_id"
+        } */
     }
     return Users
 }

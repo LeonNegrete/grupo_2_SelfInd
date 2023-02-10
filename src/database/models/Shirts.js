@@ -30,34 +30,33 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.DATE,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         }
-    
-};
 
-let config = {
-    tableName: 'Shirts',
-    timestamps: false,
-    /*         createdAt: "shirt_created_time" */
-};
-const Shirts = sequelize.define(alias, cols, config)
+    };
 
-Shirts.associate = (models) => {
-    Shirts.belongsTo(models.Users, {
-        as: "Users",
-        foreignKey: "user_id"
-    }),
+    let config = {
+        tableName: 'Shirts',
+        timestamps: false,
+        underscored: true
 
+        /*         createdAt: "shirt_created_time" */
+    };
+    const Shirts = sequelize.define(alias, cols, config)
+
+    Shirts.associate = (models) => {
         Shirts.hasMany(models.Details_shirt, {
             as: "Details_shirt",
             foreignKey: "shirt_id",
 
-        }),
+        })
+        Shirts.hasMany(models.Cart_Items, {
+            as:'Cart_Items',
+            foreignKey: "shirt_id",
 
-        Shirts.hasMany(models.Cart_items), {
-        as: "Cart_items",
-        foreignKey: "shirt_id",
-
+        })
+        Shirts.belongsTo(models.Users, {
+            as: "Users",
+            foreignKey: "user_id"
+        })
     }
-
-}
-return Shirts
+    return Shirts
 }

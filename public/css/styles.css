@@ -19,6 +19,9 @@
 body {
     overflow: visible;
     font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 a{
@@ -203,7 +206,7 @@ main {
 
 /* /////////////FOOTER/////////////// */
 footer {
-    margin-top: 4vw
+    margin-top: auto
 }
 
 
