@@ -21,8 +21,7 @@ const userController = {
     },
 
     loginPost: async (req, res) => {
-        let errors = validationResult(req)
-        console.log(req.query.redirect);    
+        let errors = validationResult(req) 
         if (!errors.isEmpty()) {
             res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: errors.mapped(), session: req.session, urlForPost:req.originalUrl })
         } else {
@@ -57,6 +56,7 @@ const userController = {
                         req.session.email = search.user_email;
                         req.session.userid = search.user_id;
                         req.session.admin = search.user_admin;
+                        console.log(req)
                         if (req.body.recordar) {
                             res.cookie('last_account', search.user_email, { maxAge: 60000 })
                         }

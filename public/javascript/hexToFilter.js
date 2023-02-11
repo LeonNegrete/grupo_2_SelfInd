@@ -296,10 +296,3 @@ function hexToRgb(hex) {
 
 
 export {Solver,Color,hexToRgb};
-
-//Probando como funciona
-/* const rgb = hexToRgb('#00a4d6');
-const color = new Color(rgb[0], rgb[1], rgb[2]);
-const solver = new Solver(color);
-const result = solver.solve();
-console.log(typeof result.filter) */

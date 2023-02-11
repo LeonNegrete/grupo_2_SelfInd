@@ -14,136 +14,53 @@
 
         <section class="carrito">
             <div class="header-boxes">
-                <h3 class="titulos-boxes">Shopping Cart</h3>
-                <button class="remove-all">Remove all</button>
+                <h3 class="titulos-boxes">Carrito</h3>
+                <button class="remove-all">Borrar todo</button>
             </div>
 
             <div class="box-car-articles">
+                <% for( let i = 0; i < allShirts.length; i++ ) { %>
+                    <article id="car-article">
 
-                <article id="car-article">
+                        <div class="header-article">
+                            <p class="title-prod"><%- allShirts[i].shirt_name %></p>
+    
+                            <a class="btn-del-article" href="#"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+    
+                        <div class="preview-article">
+                            <img class="img-article" src="<%-" ../images/Remeras/" + allShirts[i].shirt_img %> " />
+                        </div>
+    
+                        
 
-                    <div class="header-article">
-                        <p class="title-prod">TITLE Producto</p>
+    
+                        <div class="detail-article">
+                            <label class="title-detail">Precio</label>
+                            <p class="data-detail"><%- '$' + allShirts[i].shirt_price  %></p>
+                        </div>
 
-                        <a class="btn-del-article" href="#"><i class="fas fa-trash-alt"></i></a>
-                    </div>
-
-                    <div class="preview-article">
-                        <img class="img-article" src="images/Remeras/colombia-rem2.webp" />
-                    </div>
-
-
-                    <div class="detail-article">
-                        <label for="talla" class="title-detail">Talla</label>
-                        <select id="talla" name="talla" class="data-detail">
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </select>
-                    </div>
-
-                    <div class="detail-article">
-                        <label class="title-detail">Precio</label>
-                        <p class="data-detail">$100.00</p>
-                    </div>
-
-                    <div class="detail-article cant-div">
-                        <label for="cantidad" class="title-detail">Cantidad</label>
-                        <input name="cantidad" id="cantidad" type="number" class="data-detail cant">
-                    </div>
-
-                    <div class="detail-article">
-                        <label class="title-detail">Total</label>
-                        <p class="data-detail">$000.00</p>
-                    </div>
-
-                </article>
-
-                <article id="car-article">
-
-                    <div class="header-article">
-                        <p class="title-prod">TITLE Producto</p>
-
-                        <a class="btn-del-article" href="#"><i class="fas fa-trash-alt"></i></a>
-                    </div>
-
-                    <div class="preview-article">
-                        <img class="img-article" src="images/Remeras/colombia-rem2.webp" />
-                    </div>
-
-
-                    <div class="detail-article">
-                        <label for="talla" class="title-detail">Talla</label>
-                        <select id="talla" name="talla" class="data-detail">
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </select>
-                    </div>
-
-                    <div class="detail-article">
-                        <label class="title-detail">Precio</label>
-                        <p class="data-detail">$100.00</p>
-                    </div>
-
-                    <div class="detail-article cant-div">
-                        <label for="cantidad" class="title-detail">Cantidad</label>
-                        <input name="cantidad" id="cantidad" type="number" class="data-detail cant">
-                    </div>
-
-                    <div class="detail-article">
-                        <label class="title-detail">Total</label>
-                        <p class="data-detail">$000.00</p>
-                    </div>
-
-                </article>
-
-                <article id="car-article">
-
-                    <div class="header-article">
-                        <p class="title-prod">TITLE Producto</p>
-
-                        <a class="btn-del-article" href="#"><i class="fas fa-trash-alt"></i></a>
-                    </div>
-
-                    <div class="preview-article">
-                        <img class="img-article" src="images/Remeras/colombia-rem2.webp" />
-                    </div>
-
-
-                    <div class="detail-article">
-                        <label for="talla" class="title-detail">Talla</label>
-                        <select id="talla" name="talla" class="data-detail">
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </select>
-                    </div>
-
-                    <div class="detail-article">
-                        <label class="title-detail">Precio</label>
-                        <p class="data-detail">$100.00</p>
-                    </div>
-
-                    <div class="detail-article cant-div">
-                        <label for="cantidad" class="title-detail">Cantidad</label>
-                        <input name="cantidad" id="cantidad" type="number" class="data-detail cant">
-
-
-                    </div>
-
-                    <div class="detail-article">
-                        <label class="title-detail">Total</label>
-                        <p class="data-detail">$000.00</p>
-                    </div>
-
-                </article>
+                        <div class="detail-article">
+                            <label for="talle" class="title-detail">Talle</label>
+                            <select id="talle" name="talle">
+                                <% for( let e=0; e < allData[i].length; e++ ) { %>
+                                <option value="<%-allData[i][e]%>"> <%-allData[i][e]%> </option>
+                                <% } %>
+                            </select>
+                        </div>
+    
+                        <div class="detail-article cant-div">
+                            <label for="cantidad" class="title-detail">Cantidad</label>
+                            <input name="cantidad" id="cantidad" type="number" class="data-detail cant">
+                        </div>
+    
+                        <div class="detail-article">
+                            <label class="title-detail">Total</label>
+                            <p class="data-detail">$000.00</p>
+                        </div>
+    
+                    </article>
+                <% } %>
             </div>
 
         </section>

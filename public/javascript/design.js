@@ -45,7 +45,6 @@ let submitBtn = document.getElementById('submit-btn')
 
 const colorPick = document.getElementById('color');
 colorPick.addEventListener('input', () => {
-    console.log(colorPick.value)
     colorSelect = colorPick.value;
 })
 

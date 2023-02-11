@@ -81,7 +81,6 @@ const productController = {
 
     carrito: async(req, res) => {
         let session = req.session;
-        console.log(req.session.userId)
         try {
             let userCart = await db.Cart.findOne({
                 where:{
@@ -93,18 +92,70 @@ const productController = {
                     cart_id : userCart.cart_id
                 }
             })
-            res.render(path.join(__dirname, '../views/products/shop-car.ejs'), { session, allItems })
+
+            let allShirts = await Promise.all(allItems.map(async(item)=>{
+                try {
+                    return await db.Shirts.findByPk(item.shirt_id);
+                } catch (error) {
+                    console.log(error)
+                }
+            }))
+            
+            let allData = await Promise.all(allShirts.map (async(shirt) => {
+                try{
+                    let detailsInStock =  await productController.hayStock(shirt)
+                    let sizesInStock = detailsInStock.map(detail => detail.dataValues.shirt_size)
+
+                    return sizesInStock
+                }catch(err){
+                    console.log(err)
+                }
+            }));
+            console.log(allData);
+
+
+
+
+            res.render(path.join(__dirname, '../views/products/shop-car.ejs'), { session, allShirts, allData })
         } catch (error) {
             console.log(error)
         }
     },
 
-    admCreate: (req, res) => {
-        let session = req.session;
-        //console.log(path.join(__dirname, '../views/products/admCreate'))
-        res.render(path.join(__dirname, '../views/products/admCreate'), { session, errors: 'undefined' })
+    
+    addCart: async(req, res)=>{
+        let userId = req.session.userid
+        console.log(userId)
+        if (!(userId)){
+            return res.send('FUCKOFF')
+    
+        } 
+        try{
+            let userCart = await db.Cart.findOne({
+                where:{
+                    user_id : userId
+                }
+            })
+            
+            await db.Cart_Items.create({
+                cart_item_quantity: 1,
+                shirt_id: req.params.id,
+                cart_id: userCart.cart_id
+            })
+    
+            res.redirect('back');
+            
+        }catch(err){
+            console.log(err);
+        }
+    
     },
 
+    admCreate: (req, res) => {
+        let session = req.session;
+        res.render(path.join(__dirname, '../views/products/admCreate'), { session, errors: 'undefined' })
+    },
+    
     admCreatePost: async (req, res) => {
         let errors = validationResult(req)
         if (errors.isEmpty()) {
@@ -176,7 +227,6 @@ const productController = {
         let idShirt = req.params.id;
         try {
             let shirtShow = await db.Shirts.findByPk(idShirt);
-            //console.log(shirtShow)
             if (shirtShow == null) {
                 res.redirect('/')
                 console.log("No existe la camisa") //Hay que poner los errores con un render errors...
@@ -302,16 +352,6 @@ const productController = {
 
     userSubmit: async (req, res) => {
         try {
-/*             let node = document.getElementById('remera-div')
-            domtoimage.toPng(node)
-                .then(function (dataUrl) {
-                    var link = document.createElement('input');
-                    link.download = 'screenshot.png';
-                    link.href = dataUrl;
-                    link.click();
-                });
- */ 
-            console.log(req.file.filename)
             await db.Shirts.create({
                 shirt_name: req.body.name_product,
                 shirt_price: 5000,
@@ -331,30 +371,6 @@ const productController = {
             res.redirect('/');
         }
     },
-    addCart: async(req, res)=>{
-        let userId = req.session.userid
-        if (!(userId)){
-            return res.send('FUCKOFF')
-
-        } 
-        try{
-            let userCart = await db.Cart.findOne({
-                where:{
-                    user_id : userId
-                }
-            })
-            
-            return db.Cart_Items.create({
-                cart_item_quantity: 1,
-                shirt_id: req.params.id,
-                cart_id: userCart.cart_id
-            })
-            
-        }catch(err){
-            console.log(err);
-        }
-
-    }
 }
 
 module.exports = productController;
