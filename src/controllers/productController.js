@@ -6,10 +6,17 @@ const db = require('../database/models');
 const sequelize = db.sequelize;
 const { validationResult } = require('express-validator');
 const productController = {
-    //Funcion destinada a traer el JSON 'Products' y transformarlo en un objeto literal
-    productsArr: () => {
-        let readed = fs.readFileSync(path.resolve(__dirname, '../data/products.json'), 'utf-8'); //Se le asigna el JSON a la variable readed
-        return JSON.parse(readed); //Se transforma de JSON a objeto literal
+
+    getSession: async (req, res) => {
+        return req.session.data
+
+        /* try {
+          let session = await db.Sessions.findOne({ where: { sid: req.sessionID } });
+          return session ? JSON.parse(session.data) : {};
+        } catch (error) {
+          console.log(error);
+          return {};
+        } */
     },
 
     editExistingProduct: (producto, newData) => {
@@ -35,21 +42,27 @@ const productController = {
     },
 
     home: async (req, res) => {
-        let session = req.session;
-        let productsArray = await db.Shirts.findAll()
-        let soldOut = [];
-        let onSale = [];
-
-        for (const remera of productsArray) {
-
-            let aux = await productController.hayStock(remera)
-            if (aux.length !== 0) {
-                onSale.push(remera)
-            } else {
-                soldOut.push(remera)
+        console.log(req.sessionID)
+        try {
+            let session = productController.getSession(req, res)
+            let productsArray = await db.Shirts.findAll()
+            let soldOut = [];
+            let onSale = [];
+    
+            for (const remera of productsArray) {
+    
+                let aux = await productController.hayStock(remera)
+                if (aux.length !== 0) {
+                    onSale.push(remera)
+                } else {
+                    soldOut.push(remera)
+                }
             }
+            res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut, session }) //Se exportan los arrays de vendidos y disponibles
+            
+        } catch (error) {
+            console.log(error)
         }
-        res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut, session }) //Se exportan los arrays de vendidos y disponibles
     },
 
     detalle: async (req, res) => {
@@ -79,35 +92,35 @@ const productController = {
         res.render(path.join(__dirname, '../views/products/design.ejs'), { session })
     },
 
-    carrito: async(req, res) => {
+    carrito: async (req, res) => {
         let session = req.session;
         try {
             let userCart = await db.Cart.findOne({
-                where:{
-                    user_id : req.session.userid
+                where: {
+                    user_id: req.session.userid
                 }
             })
             let allItems = await db.Cart_Items.findAll({
-                where :{
-                    cart_id : userCart.cart_id
+                where: {
+                    cart_id: userCart.cart_id
                 }
             })
 
-            let allShirts = await Promise.all(allItems.map(async(item)=>{
+            let allShirts = await Promise.all(allItems.map(async (item) => {
                 try {
                     return await db.Shirts.findByPk(item.shirt_id);
                 } catch (error) {
                     console.log(error)
                 }
             }))
-            
-            let allData = await Promise.all(allShirts.map (async(shirt) => {
-                try{
-                    let detailsInStock =  await productController.hayStock(shirt)
+
+            let allData = await Promise.all(allShirts.map(async (shirt) => {
+                try {
+                    let detailsInStock = await productController.hayStock(shirt)
                     let sizesInStock = detailsInStock.map(detail => detail.dataValues.shirt_size)
 
                     return sizesInStock
-                }catch(err){
+                } catch (err) {
                     console.log(err)
                 }
             }));
@@ -122,40 +135,40 @@ const productController = {
         }
     },
 
-    
-    addCart: async(req, res)=>{
+
+    addCart: async (req, res) => {
         let userId = req.session.userid
         console.log(userId)
-        if (!(userId)){
+        if (!(userId)) {
             return res.send('FUCKOFF')
-    
-        } 
-        try{
+
+        }
+        try {
             let userCart = await db.Cart.findOne({
-                where:{
-                    user_id : userId
+                where: {
+                    user_id: userId
                 }
             })
-            
+
             await db.Cart_Items.create({
                 cart_item_quantity: 1,
                 shirt_id: req.params.id,
                 cart_id: userCart.cart_id
             })
-    
+
             res.redirect('back');
-            
-        }catch(err){
+
+        } catch (err) {
             console.log(err);
         }
-    
+
     },
 
     admCreate: (req, res) => {
         let session = req.session;
         res.render(path.join(__dirname, '../views/products/admCreate'), { session, errors: 'undefined' })
     },
-    
+
     admCreatePost: async (req, res) => {
         let errors = validationResult(req)
         if (errors.isEmpty()) {

@@ -84,6 +84,12 @@ CREATE TABLE `Orders_shipping` (
    PRIMARY KEY (`order_id`)
 );
 
+CREATE TABLE `Sessions` (
+  sid VARCHAR(36) NOT NULL,
+  expires BIGINT NOT NULL,
+  data TEXT NOT NULL,
+  PRIMARY KEY (sid)
+);
 
 ALTER TABLE `Adresses` ADD CONSTRAINT `FK_c73a4386-435d-4fed-a46d-382561f5bf2e` FOREIGN KEY (`user_id`) REFERENCES `Users`(`user_id`)  ;
 

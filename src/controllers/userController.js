@@ -8,22 +8,32 @@ const sequelize = db.sequelize;
 
 const userController = {
 
-    usersObj: () => {
-        let readed = fs.readFileSync(path.resolve(__dirname, '../data/users.json'), 'utf-8'); //Se le asigna el JSON a la variable readed
-        let obj = JSON.parse(readed); //Se transforma de JSON a objeto literal        
-        return obj; //se retorna la lista
+    getSession: async (req, res) => {
+        return req.session.data
+       /*  try {
+            let session = await db.Sessions.findOne({ where: { sid: req.sessionID } });
+            return session ? JSON.parse(session.data) : {};
+        } catch (error) {
+            console.log(error);
+            return {};
+        } */
     },
 
-    login: (req, res) => {
+
+    login: async (req, res) => {
         let recordar = req.cookies.last_account;
-        let session = req.session; 
-        res.render(path.join(__dirname, '../views/users/login.ejs'), { session, recordar, errors: {} , urlForPost:req.originalUrl})
+        try {
+            let session = userController.getSession(req, res)
+            res.render(path.join(__dirname, '../views/users/login.ejs'), { session, recordar, errors: {}, urlForPost: req.originalUrl })
+        } catch (error) {
+            console.log(error)
+        }
     },
 
     loginPost: async (req, res) => {
-        let errors = validationResult(req) 
+        let errors = validationResult(req)
         if (!errors.isEmpty()) {
-            res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: errors.mapped(), session: req.session, urlForPost:req.originalUrl })
+            res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: errors.mapped(), session: userController.getSession(req, res), urlForPost: req.originalUrl })
         } else {
 
             try {
@@ -47,28 +57,29 @@ const userController = {
                         ] */
                     }
                 })
-                if (search) {
-
-                    if (bcrypt.compareSync(inputPass, search.user_pass)) {
-                        req.session.loginStatus = true;
-                        req.session.username = search.user_nick;
-                        req.session.profile = search.user_pic;
-                        req.session.email = search.user_email;
-                        req.session.userid = search.user_id;
-                        req.session.admin = search.user_admin;
-                        console.log(req)
-                        if (req.body.recordar) {
-                            res.cookie('last_account', search.user_email, { maxAge: 60000 })
+                if ((search && bcrypt.compareSync(inputPass, search.user_pass))) {
+                    let data = {
+                        cookies: {
+                            expires: new Date(Date.now() + 48 * 60 * 60 * 1000),
+                            loginStatus: true,
+                            username: search.user_nick,
+                            profile: search.user_pic,
+                            email: search.user_email,
+                            userid: search.user_id,
+                            admin: search.user_admin,
                         }
-                    } else {
-                        req.session.loginStatus = false;
+                    };
+                    const session = await db.Sessions.findOne({ where: { sid: req.sessionID } });
+                    if (!session) {
+                        throw new Error(`Session with id ${req.sessionID} not found`);
                     }
-                } else {
-                    req.session.loginStatus = false;
+                    session.data = JSON.stringify({ ...JSON.parse(session.data), ...data });
+                    await session.save();
+                    if (req.body.recordar) {
+                        res.cookie('last_account', search.user_email, { maxAge: 60000 })
+                    }
+                    req.query.redirect ? res.redirect(req.query.redirect) : res.redirect('/')
                 }
-                req.session.loginStatus && req.query.redirect ? res.redirect(req.query.redirect) :
-                    req.session.loginStatus ? res.redirect('/') : res.render(path.join(__dirname, '../views/users/login.ejs'), { errors: { err: { msg: 'Credenciales invalidas' } }, session: req.session });
-
             } catch (error) {
                 console.log(error)
             }
@@ -76,67 +87,78 @@ const userController = {
     },
 
 
-    register: (req, res) => {
-        let session = req.session;
+    register: async (req, res) => {
+        let session = userController.getSession(req, res);
 
         res.render(path.join(__dirname, '../views/users/register.ejs'), { session, errors: undefined })
     },
 
     registerPost: async (req, res) => {
         let errors = validationResult(req)
-        if (!errors.isEmpty()) {
-            res.render(path.join(__dirname, '../views/users/register.ejs'), { errors: errors.mapped(), session: req.session })
-        } else {
-            if (req.file) {
-                var prof = req.file.filename
-            } else { var prof = 'default.png' }
+        let session = userController.getSession(req, res);
 
-            await db.Users.create({
-                user_name: req.body.name,
-                user_nick: req.body.username,
-                user_email: req.body.email,
-                user_pass: bcrypt.hashSync(req.body.password, 10),
-                user_pic: prof
-            })
-            try{
-                let inputEmail = req.body.email
-                let userCreated = await db.Users.findOne({
-                    where: {
-                        user_email: inputEmail
-                    }
+        if (!errors.isEmpty()) {
+            res.render(path.join(__dirname, '../views/users/register.ejs'), { errors: errors.mapped(), session })
+        } else {
+            try {
+                if (req.file) {
+                    var prof = req.file.filename
+                } else { var prof = 'default.png' }
+
+                let createdUser = await db.Users.create({
+                    user_name: req.body.name,
+                    user_nick: req.body.username,
+                    user_email: req.body.email,
+                    user_pass: bcrypt.hashSync(req.body.password, 10),
+                    user_pic: prof
                 })
                 db.Cart.create({
                     cart_total: 0,
-                    user_id: userCreated.user_id
+                    user_id: createdUser.user_id
                 })
-    
+
                 res.redirect('/user/list');
-            }catch(err){
+            } catch (err) {
                 console.log(err)
             }
         }
 
     },
 
-    list: (req, res) => {
-        let session = req.session;
-        /* let listado = userController.usersObj().users; */
-        db.Users.findAll().then((listado) => {
-            res.render(path.join(__dirname, '../views/users/list.ejs'), { listado, session })
-        })
-
-
+    list: async (req, res) => {
+        try {
+            let session = userController.getSession(req, res);
+            db.Users.findAll().then((listado) => {
+                res.render(path.join(__dirname, '../views/users/list.ejs'), { listado, session })
+            })
+        } catch (error) {
+            console.log(error)
+        }
     },
 
-    profile: (req, res) => {
-        let session = req.session;
+    profile: async (req, res) => {
+        try {
+            let session = userController.getSession(req, res)
+            res.render(path.join(__dirname, '../views/users/profile.ejs'), { session })
 
-        res.render(path.join(__dirname, '../views/users/profile.ejs'), { session })
+        } catch (error) {
+            console.log(error)
+        }
     },
 
-    logout: (req, res) => {
-        req.session.destroy();
-        res.redirect('/')
+    logout: async (req, res) => {
+        try {
+            let session = userController.getSession(req, res)
+            await db.Session.destroy({
+                where: {
+                    id: session.sid
+                }
+            });
+            res.redirect('/')
+
+        } catch (error) {
+            console.log('no se pudo borrar la sesion', error)
+        }
     }
 }
 

@@ -17,6 +17,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "connect-session-sequelize": "^7.1.5",
     "cookie-parser": "^1.4.6",
     "css-filter-converter": "^1.0.109",
     "ejs": "^3.1.8",

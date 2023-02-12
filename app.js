@@ -11,6 +11,7 @@ const path = require('path');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 //const pruebasMD = require('./src/middleware/pruebasMD')
 
@@ -24,16 +25,33 @@ app.set("view engine", "ejs");
 //MIDDLEWARES
 app.use(express.json());
 app.use(cookieParser())
-app.use(session({
-    secret: "SelfInd",
-    resave: false, 
-    saveUninitialized: true}));
+
 app.use(methodOverride('_method'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
-//MIDDLEWARES CUSTOM
-//app.use(pruebasMD);
+
+
+let {sequelize} = require('./src/database/models/index')
+
+const store = new SequelizeStore({
+    db: sequelize
+  });
+
+app.use(session({
+    secret: 'SelfInd',
+    store: store,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.HTTPS === 'true',
+        expires: new Date(Date.now() + 48 * 60 * 60 * 1000)
+    }
+}));
+
+
+  
+store.sync(); 
 
 
 //CONFIG RUTAS
