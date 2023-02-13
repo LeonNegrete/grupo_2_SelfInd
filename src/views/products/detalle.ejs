@@ -54,19 +54,13 @@
                 <p class="descripcion-producto"><%- shirtShow.dataValues.shirt_desc %> </p>
 
 
-                <div class="envios-talle">
-
+                <p class="TallesDisponibles">Talles disponibles</p>
                     <div class="talle-div">
-                        <label for="talle">Talle</label>
-                        
-                            <select id="talle" name="talle">
                                 <% for( let i=0; i < inStock.length; i++ ) { %>
-                                <option value="<%-i%>"> <%-inStock[i].dataValues.shirt_size%> </option>
+                                <input type="radio" name="talle" id="<%-inStock[i].dataValues.shirt_size%>" value="<%-inStock[i].dataValues.shirt_size%>" class="talleRadio">
+                                <label class="talleCard" for="<%-inStock[i].dataValues.shirt_size%>"><%-inStock[i].dataValues.shirt_size%></label>
                                 <% } %>
-                            </select>
-                            
                     </div>
-                </div>
 
 
                 <div class="botones">
