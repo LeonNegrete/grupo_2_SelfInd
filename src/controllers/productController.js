@@ -370,7 +370,7 @@ const productController = {
     
             let shirtToDelete = await db.Shirts.findByPk(idShirt);
     
-            fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)));
+           
     
             await db.Details_shirt.destroy(
                 {
@@ -381,7 +381,10 @@ const productController = {
                 {
                     where: { shirt_id: idShirt, }
                 });
-    
+            
+            if (fs.existsSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)))){
+                fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)));
+            }    
             res.redirect('/products')
             
         } catch (error) {
