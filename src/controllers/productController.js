@@ -87,7 +87,7 @@ const productController = {
     },
 
     design: (req, res) => {
-        let session = req.session;
+        let session = req.session.data;
         res.render(path.join(__dirname, '../views/products/design.ejs'), { session })
     },
 
@@ -193,7 +193,7 @@ const productController = {
     },
 
     admCreate: (req, res) => {
-        let session = req.session;
+        let session = req.session.data;
         res.render(path.join(__dirname, '../views/products/admCreate'), { session, errors: 'undefined' })
     },
 
@@ -349,7 +349,7 @@ const productController = {
     },
 
     productList: async (req, res) => {
-        let session = req.session;
+        let session = req.session.data;
 
         try {
             listado = await db.Shirts.findAll();
@@ -396,7 +396,7 @@ const productController = {
     },
 
     nosotros: (req, res) => {
-        let session = req.session;
+        let session = req.session.data;
         res.render(path.join(__dirname, '../views/users/about.ejs'), { session });
     },
 

@@ -66,29 +66,23 @@
                             </select>
                             
                     </div>
-
-                    <div class="envios-div">
-                        <input type="checkbox" name="envio" id="envio">
-                        <label for="envio">Envio a domicilio</label>
-                    </div>
                 </div>
 
 
-                    <div class="botones">
-                        <button class="mainBtn" type="submit">Comprar</button>
-                        <form action="/addCart/<%- shirtShow.dataValues.shirt_id %>" method="post">
-                            <button class="mainBtn" type="submit">Agregar al carrito</button>
+                <div class="botones">
+                    <form action="/addCart/<%- shirtShow.dataValues.shirt_id %>" method="post">
+                        <button class="mainBtn" type="submit">Agregar al carrito</button>
+                    </form>
+                    <% if (session.admin == 1) { %>
+                        <form class="form-bt-edit" action="/products/edit/<%- shirtShow.dataValues.shirt_id %>" method="get">
+                            <button class="mainBtn" type="submit">&#128221 Editar</button>
                         </form>
-                        <% if (session.admin == 1) { %>
-                            <form class="form-bt-edit" action="/products/edit/<%- shirtShow.dataValues.shirt_id %>" method="get">
-                                <button class="mainBtn" type="submit">&#128221 Editar</button>
-                            </form>
-                        <% } %>
-                    </div>
-                    
+                    <% } %>
+                </div>
+                
             </div>
             <% }else{ %> 
-                <div class="detalle-producto">
+                <div class="detalle-producto soldout">
                     <h1><%- shirtShow.dataValues.shirt_name %> </h1>
                     <p class="descripcion-producto"><%- shirtShow.dataValues.shirt_desc %> </p>
 

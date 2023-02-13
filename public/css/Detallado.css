@@ -38,7 +38,7 @@ main{
     align-items: center;
 }
 .carousel-boot{
-
+    max-width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +55,16 @@ main{
 
 .detalle-producto{
    margin:10%;
+   display: flex;
+   flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+h1,h5{
+    margin-top: 18%;
+}
+
 .precio-producto{
     font-weight: bold;
     color: black;
@@ -91,8 +100,27 @@ footer{
     margin: .2rem;
 }
 
+.mainBtn{
+    margin: 0%; /* Reseteando */
+    width: 85vw;
+    margin-bottom: 20%;
+    margin-top: 8%;
+}
 
 @media(min-width: 769px){
+
+
+    header{
+        
+    }
+    .detalle-producto{
+        margin:10%;
+        display: block;
+    }
+    h1,h5{
+        margin: auto;
+    }
+
     .carousel-boot{
         width: 50%;
     }
@@ -102,9 +130,15 @@ footer{
         padding-right: 5%;
      }
     main{
+        margin-top:auto ;
         flex-direction: row;
     }
     
+    .mainBtn{
+        width: auto;
+        margin-bottom: auto;
+    }
+
     .carousel{
 
         height: 70%;
