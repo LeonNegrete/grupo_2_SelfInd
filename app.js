@@ -27,48 +27,62 @@ app.use(express.json());
 app.use(cookieParser())
 
 app.use(methodOverride('_method'));
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static(path.join(__dirname, '/public')));
 
 
-let {sequelize} = require('./src/database/models/index')
+let { sequelize } = require('./src/database/models/index')
 
 const store = new SequelizeStore({
-    db: sequelize
-  });
+  db: sequelize
+});
 
 app.use(session({
-    secret: 'SelfInd',
-    store: store,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: process.env.HTTPS === 'true',
-        expires: new Date(Date.now() + 48 * 60 * 60 * 1000)
-    }
+  secret: 'SelfInd',
+  store: store,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.HTTPS === 'true',
+    expires: new Date(Date.now() + 48 * 60 * 60 * 1000)
+  }
 }));
+store.sync();
 
-
-  
-store.sync(); 
+const generateSession = (req, res, next) => {
+  const data = {
+    expires: new Date(Date.now() + 48 * 60 * 60 * 1000),
+    loginStatus: false,
+    username: null,
+    profile: null,
+    email: null,
+    userid: null,
+    admin: null,
+  }
+if (!(req.session.data)) {
+  req.session.data = data
+}
+next();
+}
+app.use(generateSession);
 
 
 //CONFIG RUTAS
 app.use('/', mainRoutes);
 app.use('/user', userRoutes);
 app.use('/api', APIRoutes);
-app.get('/draw', (req,res)=>{
-    res.render(path.join(__dirname, './src/views/products/draw.ejs'))
+app.get('/draw', (req, res) => {
+  res.render(path.join(__dirname, './src/views/products/draw.ejs'))
 })
 
 
 //RECIBIR IMAGEN CUSTOM
 app.post('/save-screenshot', function (req, res) {
-    const image = new Buffer.from(req.body.image, 'base64');
-    fs.writeFileSync('/SCREENSHOTS/image.png', image);
-    res.send('screenshot saved');
-  });
+  const image = new Buffer.from(req.body.image, 'base64');
+  fs.writeFileSync('/SCREENSHOTS/image.png', image);
+  res.send('screenshot saved');
+});
 console.log(PORT)
 //CONFIG PUERTO
 app.listen(PORT, () => { console.log(`Servidor corriendo en ${PORT}...`) });

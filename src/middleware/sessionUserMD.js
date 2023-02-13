@@ -1,6 +1,6 @@
 const sessionUserMD = (req,res,next) => {
     
-    if (typeof(req.session.username) !== 'undefined') {
+    if ((req.session.data)&&(req.session.data.loginStatus)) {
         next();
     } else {
         res.redirect('/user/login?redirect='+req.originalUrl);

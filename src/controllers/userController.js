@@ -10,13 +10,6 @@ const userController = {
 
     getSession: async (req, res) => {
         return req.session.data
-       /*  try {
-            let session = await db.Sessions.findOne({ where: { sid: req.sessionID } });
-            return session ? JSON.parse(session.data) : {};
-        } catch (error) {
-            console.log(error);
-            return {};
-        } */
     },
 
 
@@ -59,21 +52,22 @@ const userController = {
                 })
                 if ((search && bcrypt.compareSync(inputPass, search.user_pass))) {
                     let data = {
-                        cookies: {
-                            expires: new Date(Date.now() + 48 * 60 * 60 * 1000),
-                            loginStatus: true,
-                            username: search.user_nick,
-                            profile: search.user_pic,
-                            email: search.user_email,
-                            userid: search.user_id,
-                            admin: search.user_admin,
-                        }
-                    };
+                        expires: new Date(Date.now() + 48 * 60 * 60 * 1000),
+                        loginStatus: true,
+                        username: search.user_nick,
+                        profile: search.user_pic,
+                        email: search.user_email,
+                        userid: search.user_id,
+                        admin: search.user_admin,
+                    }
                     const session = await db.Sessions.findOne({ where: { sid: req.sessionID } });
                     if (!session) {
                         throw new Error(`Session with id ${req.sessionID} not found`);
                     }
-                    session.data = JSON.stringify({ ...JSON.parse(session.data), ...data });
+                    let updatedData = JSON.parse(session.data)
+                    updatedData.data = data
+                    console.log(updatedData)
+                    session.data = JSON.stringify(updatedData)
                     await session.save();
                     if (req.body.recordar) {
                         res.cookie('last_account', search.user_email, { maxAge: 60000 })
@@ -95,7 +89,7 @@ const userController = {
 
     registerPost: async (req, res) => {
         let errors = validationResult(req)
-        let session = userController.getSession(req, res);
+        let session = await userController.getSession(req, res);
 
         if (!errors.isEmpty()) {
             res.render(path.join(__dirname, '../views/users/register.ejs'), { errors: errors.mapped(), session })
@@ -105,16 +99,22 @@ const userController = {
                     var prof = req.file.filename
                 } else { var prof = 'default.png' }
 
-                let createdUser = await db.Users.create({
+                await db.Users.create({
                     user_name: req.body.name,
                     user_nick: req.body.username,
                     user_email: req.body.email,
                     user_pass: bcrypt.hashSync(req.body.password, 10),
                     user_pic: prof
                 })
-                db.Cart.create({
+
+                let createdUser = await db.Users.findOne({
+                    where: {user_email: req.body.email,}
+                })
+
+                console.log( createdUser.dataValues.user_id)
+                await db.Cart.create({
                     cart_total: 0,
-                    user_id: createdUser.user_id
+                    user_id: createdUser.dataValues.user_id
                 })
 
                 res.redirect('/user/list');
@@ -138,7 +138,8 @@ const userController = {
 
     profile: async (req, res) => {
         try {
-            let session = userController.getSession(req, res)
+            let session = await userController.getSession(req, res)
+            console.log(session)
             res.render(path.join(__dirname, '../views/users/profile.ejs'), { session })
 
         } catch (error) {
@@ -148,10 +149,10 @@ const userController = {
 
     logout: async (req, res) => {
         try {
-            let session = userController.getSession(req, res)
-            await db.Session.destroy({
+            let session = await userController.getSession(req, res)
+            await db.Sessions.destroy({
                 where: {
-                    id: session.sid
+                    sid: req.sessionID
                 }
             });
             res.redirect('/')

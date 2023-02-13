@@ -24,8 +24,9 @@
 
                         <div class="header-article">
                             <p class="title-prod"><%- allShirts[i].shirt_name %></p>
-    
-                            <a class="btn-del-article" href="#"><i class="fas fa-trash-alt"></i></a>
+                            <form action="/deleteItem/<%- allShirts[i].shirt_id %>" method="post">
+                                <a class="btn-del-article" href="#"><button></button><i class="fas fa-trash-alt"></i></a>
+                            </form>
                         </div>
     
                         <div class="preview-article">
@@ -51,7 +52,9 @@
     
                         <div class="detail-article cant-div">
                             <label for="cantidad" class="title-detail">Cantidad</label>
-                            <input name="cantidad" id="cantidad" type="number" class="data-detail cant">
+
+                            <input value="<%-allItems[i].cart_item_quantity%>" name="cantidad" id="cantidad" type="number" class="data-detail cant">
+
                         </div>
     
                         <div class="detail-article">

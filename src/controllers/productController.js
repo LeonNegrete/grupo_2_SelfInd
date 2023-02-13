@@ -7,7 +7,7 @@ const sequelize = db.sequelize;
 const { validationResult } = require('express-validator');
 const productController = {
 
-    getSession: async (req, res) => {
+    getSession: (req, res) => {
         return req.session.data
 
         /* try {
@@ -42,7 +42,6 @@ const productController = {
     },
 
     home: async (req, res) => {
-        console.log(req.sessionID)
         try {
             let session = productController.getSession(req, res)
             let productsArray = await db.Shirts.findAll()
@@ -67,7 +66,7 @@ const productController = {
 
     detalle: async (req, res) => {
 
-        let session = req.session;
+        let session = req.session.data;
         let idShirt = req.params.id;
         try {
             let shirtShow = await db.Shirts.findByPk(idShirt);
@@ -93,11 +92,11 @@ const productController = {
     },
 
     carrito: async (req, res) => {
-        let session = req.session;
+        let session = req.session.data;
         try {
             let userCart = await db.Cart.findOne({
                 where: {
-                    user_id: req.session.userid
+                    user_id: req.session.data.userid
                 }
             })
             let allItems = await db.Cart_Items.findAll({
@@ -124,12 +123,11 @@ const productController = {
                     console.log(err)
                 }
             }));
-            console.log(allData);
 
 
 
 
-            res.render(path.join(__dirname, '../views/products/shop-car.ejs'), { session, allShirts, allData })
+            res.render(path.join(__dirname, '../views/products/shop-car.ejs'), { session, allShirts, allData, allItems })
         } catch (error) {
             console.log(error)
         }
@@ -137,8 +135,7 @@ const productController = {
 
 
     addCart: async (req, res) => {
-        let userId = req.session.userid
-        console.log(userId)
+        let userId = req.session.data.userid
         if (!(userId)) {
             return res.send('FUCKOFF')
 
@@ -149,19 +146,50 @@ const productController = {
                     user_id: userId
                 }
             })
-
-            await db.Cart_Items.create({
-                cart_item_quantity: 1,
-                shirt_id: req.params.id,
-                cart_id: userCart.cart_id
+            let sameProduct = await db.Cart_Items.findOne({
+                where:{
+                    shirt_id : req.params.id,
+                    cart_id: userCart.cart_id
+                }
             })
-
+            if (sameProduct){
+                sameProduct.cart_item_quantity = sameProduct.cart_item_quantity + 1
+                await sameProduct.save()
+            }else{
+                await db.Cart_Items.create({
+                    cart_item_quantity: 1,
+                    shirt_id: req.params.id,
+                    cart_id: userCart.cart_id
+                })
+            }
+            
             res.redirect('back');
 
         } catch (err) {
             console.log(err);
         }
 
+    },
+
+    deleteCart: async(req,res) =>{
+        let userId = req.session.data.userid
+        console.log(userId)
+        if (!(userId)) {
+            return res.send('FUCKOFF')
+
+        }
+        try {
+
+            await db.Cart_Items.destroy({
+                where:{
+                    cart_item_id : req.params.id
+                }
+            })
+            res.redirect('back');
+
+        } catch (err) {
+            console.log(err);
+        }
     },
 
     admCreate: (req, res) => {
@@ -172,8 +200,6 @@ const productController = {
     admCreatePost: async (req, res) => {
         let errors = validationResult(req)
         if (errors.isEmpty()) {
-
-
             try {
                 let shirtToCreate = await db.Shirts.findOne({ where: { shirt_name: req.body.name_product } })
 
@@ -181,7 +207,7 @@ const productController = {
                     res.redirect('/products/create')
                     console.log("CAMISA YA EXISTENTE") //Hay que poner los errores con un render errors...
                 } else {
-                    if (req.session.admin == 1) {
+                    if (req.session.data.admin == 1) {
                         await db.Shirts.create({
                             shirt_name: req.body.name_product,
                             shirt_price: req.body.price,
@@ -189,7 +215,7 @@ const productController = {
                             shirt_desc: req.body.description,
                             shirt_img: req.file.filename,
                             shirt_custom: 0,
-                            user_id: req.session.userid
+                            user_id: req.session.data.userid
                         })
                     } else {
                         await db.Shirts.create({
@@ -199,7 +225,7 @@ const productController = {
                             shirt_desc: req.body.description,
                             shirt_img: req.file.filename,
                             shirt_custom: 1,
-                            user_id: req.session.userid
+                            user_id: req.session.data.userid
                         })
                     }
 
@@ -230,12 +256,12 @@ const productController = {
             }
         } else {
             /* res.send(errors) */
-            res.render(path.join(__dirname, '../views/products/admCreate.ejs'), { errors: errors.mapped(), session: req.session })
+            res.render(path.join(__dirname, '../views/products/admCreate.ejs'), { errors: errors.mapped(), session: req.session.data })
         }
     },
 
     admEdit: async (req, res) => {
-        let session = req.session;
+        let session = req.session.data;
 
         let idShirt = req.params.id;
         try {

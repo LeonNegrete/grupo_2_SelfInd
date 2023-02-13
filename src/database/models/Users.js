@@ -34,14 +34,17 @@ module.exports = (sequelize, dataTypes) => {
     const Users = sequelize.define(alias, cols, config)
 
     Users.associate = (models)=> {
-/*         Users.hasMany(models.Shirts), { 
-            as: "Shirts",                                //SE ESTABA DEFINIENDO DOS VECES LA ASOCIACION
-            foreignKey: "user_id"
-        } */
+        Users.hasMany(models.Shirts,{
+            foreignKey:{
+                name:"user_id",
+                allowNull:false
+            }
+        })
 
         Users.hasMany(models.Adresses),{
             as: "Adresses",
-            foreignKey: "user_id"
+            foreignKey: "user_id",
+            allowNull: false
         }
 
         Users.hasMany(models.Cards),{
@@ -54,10 +57,12 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: "user_id"
         }
 
-/*         Users.hasOne(models.Cart),{
-            as: "Cart",
-            foreignKey: "user_id"
-        } */
+        Users.hasOne(models.Cart,{
+            foreignKey: {
+                name: "user_id",
+                allowNull: false
+            }
+        })
     }
     return Users
 }

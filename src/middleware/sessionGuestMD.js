@@ -1,6 +1,6 @@
 const sessionGuestMD = (req,res,next) => {
     
-    if (typeof(req.session.username) !== 'undefined') {
+    if ((req.session.data)&&(req.session.data.loginStatus)) {
         res.redirect('/user/profile');
     } else {
         next();

@@ -25,13 +25,14 @@ module.exports = (sequelize, dataTypes) => {
     const Cart = sequelize.define(alias, cols, config)
 
     Cart.associate =  (models) => {
-/*         Cart.belongsTo(models.Users), { 
-            foreignKey: "user_id"
-        } */
-/* 
-        Cart.hasMany(models.Cart_Items),{
-            foreignKey: "cart_id"
-        } */
+/*         Cart.belongsTo(models.Users) */
+
+        Cart.hasMany(models.Cart_Items,{
+            foreignKey: {
+                name: "cart_id",
+                allowNull: false
+            }
+        })
 
         Cart.hasMany(models.Orders_shipping),{
             as: "Orders_shipping",

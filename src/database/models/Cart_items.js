@@ -18,12 +18,10 @@ module.exports = (sequelize, dataTypes) => {
 
     Cart_Items.associate =  (models) => {
         Cart_Items.hasOne(models.Cart, { 
-
             foreignKey: "cart_id"
         })
 
         Cart_Items.hasOne(models.Shirts, { 
-
             foreignKey: "shirt_id"
         })
 

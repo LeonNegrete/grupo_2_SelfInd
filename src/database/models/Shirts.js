@@ -54,8 +54,10 @@ module.exports = (sequelize, dataTypes) => {
 
         })
         Shirts.belongsTo(models.Users, {
-            as: "Users",
-            foreignKey: "user_id"
+            foreignKey: {
+                name:"user_id",
+                allowNull: false
+            }
         })
     }
     return Shirts

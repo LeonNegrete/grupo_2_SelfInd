@@ -14,7 +14,7 @@
         </ul>
     </div>
     <div class="header-nav-credentials">
-        <% if (typeof(session.username) == 'undefined') { %>
+        <% if (!(session.loginStatus)) { %>
             <ul>
                 <li class="nav-text-element"><a href="/user/login">Log in</a></li>
                 <li class="nav-text-element"><a href="/user/register">Sing in</a></li>
@@ -29,7 +29,7 @@
     </div>
     <div class="cart-div">
         <a href="/carrito" class="cart-div">
-            <span class="material-symbols-outlined">
+            <span id="cartIcon" class="material-symbols-outlined">
                 shopping_cart
             </span>
         </a>
