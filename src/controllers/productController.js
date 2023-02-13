@@ -365,23 +365,28 @@ const productController = {
     },
 
     deleteItem: async (req, res) => {
-        let idShirt = req.params.id;
-
-        let shirtToDelete = await db.Shirts.findByPk(idShirt);
-
-        fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)));
-
-        await db.Details_shirt.destroy(
-            {
-                where: { shirt_id: idShirt, }
-            });
-
-        await db.Shirts.destroy(
-            {
-                where: { shirt_id: idShirt, }
-            });
-
-        res.redirect('/products')
+        try {
+            let idShirt = req.params.id;
+    
+            let shirtToDelete = await db.Shirts.findByPk(idShirt);
+    
+            fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)));
+    
+            await db.Details_shirt.destroy(
+                {
+                    where: { shirt_id: idShirt, }
+                });
+    
+            await db.Shirts.destroy(
+                {
+                    where: { shirt_id: idShirt, }
+                });
+    
+            res.redirect('/products')
+            
+        } catch (error) {
+            console.log(error)
+        }
     },
 
     nosotros: (req, res) => {
