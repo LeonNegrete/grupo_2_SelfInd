@@ -47,9 +47,9 @@ const productController = {
             let productsArray = await db.Shirts.findAll()
             let soldOut = [];
             let onSale = [];
-    
+
             for (const remera of productsArray) {
-    
+
                 let aux = await productController.hayStock(remera)
                 if (aux.length !== 0) {
                     onSale.push(remera)
@@ -58,7 +58,7 @@ const productController = {
                 }
             }
             res.render(path.join(__dirname, '../views/products/home.ejs'), { onSale, soldOut, session }) //Se exportan los arrays de vendidos y disponibles
-            
+
         } catch (error) {
             console.log(error)
         }
@@ -147,22 +147,22 @@ const productController = {
                 }
             })
             let sameProduct = await db.Cart_Items.findOne({
-                where:{
-                    shirt_id : req.params.id,
+                where: {
+                    shirt_id: req.params.id,
                     cart_id: userCart.cart_id
                 }
             })
-            if (sameProduct){
+            if (sameProduct) {
                 sameProduct.cart_item_quantity = sameProduct.cart_item_quantity + 1
                 await sameProduct.save()
-            }else{
+            } else {
                 await db.Cart_Items.create({
                     cart_item_quantity: 1,
                     shirt_id: req.params.id,
                     cart_id: userCart.cart_id
                 })
             }
-            
+
             res.redirect('back');
 
         } catch (err) {
@@ -171,7 +171,7 @@ const productController = {
 
     },
 
-    deleteCart: async(req,res) =>{
+    deleteCart: async (req, res) => {
         let userId = req.session.data.userid
         console.log(userId)
         if (!(userId)) {
@@ -181,8 +181,8 @@ const productController = {
         try {
 
             await db.Cart_Items.destroy({
-                where:{
-                    cart_item_id : req.params.id
+                where: {
+                    cart_item_id: req.params.id
                 }
             })
             res.redirect('back');
@@ -367,26 +367,29 @@ const productController = {
     deleteItem: async (req, res) => {
         try {
             let idShirt = req.params.id;
-    
+
             let shirtToDelete = await db.Shirts.findByPk(idShirt);
-    
-           
-    
+
+
+            await db.Cart_Items.destroy(
+                {
+                    where: { shirt_id: idShirt, }
+                });
             await db.Details_shirt.destroy(
                 {
                     where: { shirt_id: idShirt, }
                 });
-    
+
             await db.Shirts.destroy(
                 {
                     where: { shirt_id: idShirt, }
                 });
-            
-            if (fs.existsSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)))){
+
+            if (fs.existsSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)))) {
                 fs.unlinkSync(path.join(__dirname, ('../../public/images/Remeras/' + shirtToDelete.shirt_img)));
-            }    
+            }
             res.redirect('/products')
-            
+
         } catch (error) {
             console.log(error)
         }
