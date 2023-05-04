@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
-let sequelize = new Sequelize('railway', 'root', 'mxeR9a6KOSRU39y0tKlS', {
+let sequelize = new Sequelize('railway', 'root', 'NOf35xOuwu1pHLw6brVd', {
   host: 'containers-us-west-168.railway.app',
   dialect: 'mysql',
   port: 6122,
