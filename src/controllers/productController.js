@@ -146,7 +146,7 @@ const productController = {
                     user_id: userId
                 }
             })
-            let sameProduct = await db.Cart_Items.findOne({
+            /* let sameProduct = await db.Cart_Items.findOne({
                 where: {
                     shirt_id: req.params.id,
                     cart_id: userCart.cart_id
@@ -155,13 +155,13 @@ const productController = {
             if (sameProduct) {
                 sameProduct.cart_item_quantity = sameProduct.cart_item_quantity + 1
                 await sameProduct.save()
-            } else {
+            } else { */
                 await db.Cart_Items.create({
                     cart_item_quantity: 1,
                     shirt_id: req.params.id,
                     cart_id: userCart.cart_id
                 })
-            }
+            /* } */
 
             res.redirect('back');
 
