@@ -136,17 +136,17 @@ const productController = {
 
     addCart: async (req, res) => {
         let userId = req.session.data.userid
-        if (!(userId)) {
+        if (!userId) {
             return res.send('FUCKOFF')
-
         }
+    
         try {
             let userCart = await db.Cart.findOne({
                 where: {
                     user_id: userId
                 }
             })
-            /* let sameProduct = await db.Cart_Items.findOne({
+            let sameProduct = await db.Cart_Items.findOne({
                 where: {
                     shirt_id: req.params.id,
                     cart_id: userCart.cart_id
@@ -155,20 +155,19 @@ const productController = {
             if (sameProduct) {
                 sameProduct.cart_item_quantity = sameProduct.cart_item_quantity + 1
                 await sameProduct.save()
-            } else { */
-                db.Cart_Items.create({
+            } else {
+                await db.Cart_Items.create({
                     cart_item_quantity: 1,
                     shirt_id: req.params.id,
                     cart_id: userCart.cart_id
                 })
-            /* } */
-
-            /* res.redirect('back'); */
-
+            }
+    
+            res.json({ message: 'Producto agregado al carrito correctamente' })
         } catch (err) {
             console.log(err);
+            res.status(500).json({ error: 'No se pudo agregar el producto al carrito' })
         }
-
     },
 
     deleteCart: async (req, res) => {
