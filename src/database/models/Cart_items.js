@@ -8,8 +8,11 @@ module.exports = (sequelize, dataTypes) => {
         },
         cart_item_quantity: {
             type: dataTypes.INTEGER
+        },
+        size: {
+            type: dataTypes.STRING
         }
-    };
+        };
     let config = {
         tableName: 'Cart_Items',
         timestamps: false
