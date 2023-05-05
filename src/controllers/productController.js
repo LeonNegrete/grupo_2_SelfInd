@@ -163,7 +163,7 @@ const productController = {
                 })
             /* } */
 
-            res.redirect('back');
+            /* res.redirect('back'); */
 
         } catch (err) {
             console.log(err);
