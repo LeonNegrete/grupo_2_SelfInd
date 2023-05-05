@@ -166,7 +166,7 @@ const productController = {
             res.json({ message: 'Producto agregado al carrito correctamente' })
         } catch (err) {
             console.log(err);
-            res.status(500).json({ error: 'No se pudo agregar el producto al carrito' })
+            res.status(500).json({ error: 'No se pudo agregar el producto al carrito', message: err.message, stack: err.stack })
         }
     },
 
