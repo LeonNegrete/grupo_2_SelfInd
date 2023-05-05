@@ -159,7 +159,8 @@ const productController = {
                 await db.Cart_Items.create({
                     cart_item_quantity: 1,
                     shirt_id: req.params.id,
-                    cart_id: userCart.cart_id
+                    cart_id: userCart.cart_id,
+                    size:'XL'
                 })
             }
     
