@@ -156,7 +156,7 @@ const productController = {
                 sameProduct.cart_item_quantity = sameProduct.cart_item_quantity + 1
                 await sameProduct.save()
             } else { */
-                await db.Cart_Items.create({
+                db.Cart_Items.create({
                     cart_item_quantity: 1,
                     shirt_id: req.params.id,
                     cart_id: userCart.cart_id
